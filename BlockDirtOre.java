@@ -17,7 +17,7 @@ public class BlockDirtOre extends CustomBlock
     @Override
 	public int quantityDropped(int meta, int fortune, Random random)
     {
-    	return 2 + random.nextInt(2);
+    	return 2 + random.nextInt(2 + fortune);
     }
 
     @Override

@@ -4,6 +4,7 @@ import cpw.mods.fml.common.network.FMLNetworkHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
+import java.util.List;
 import java.util.Random;
 
 import clashsoft.mods.moreminerals.orecrusher.TileEntityOreCrusher;
@@ -12,6 +13,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -346,5 +348,10 @@ public class BlockOreCrusher extends BlockContainer
     public int damageDropped(int par1)
     {
         return 3;
+    }
+    
+    public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List par3List)
+    {
+        par3List.add(new ItemStack(par1, 1, 3));
     }
 }

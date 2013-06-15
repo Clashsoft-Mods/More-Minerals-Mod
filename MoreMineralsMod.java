@@ -13,6 +13,12 @@ import net.minecraft.src.ModLoader;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
 import clashsoft.clashsoftapi.*;
+import clashsoft.clashsoftapi.datatools.ItemDataAxe;
+import clashsoft.clashsoftapi.datatools.ItemDataHoe;
+import clashsoft.clashsoftapi.datatools.ItemDataPickaxe;
+import clashsoft.clashsoftapi.datatools.ItemDataSpade;
+import clashsoft.clashsoftapi.datatools.ItemDataSword;
+import clashsoft.clashsoftapi.datatools.ItemDataTool;
 import clashsoft.clashsoftapi.util.CSArray;
 import clashsoft.clashsoftapi.util.CSCrafting;
 import clashsoft.clashsoftapi.util.CSItems;
@@ -41,8 +47,13 @@ public class MoreMineralsMod
 	@SidedProxy(clientSide = "clashsoft.mods.moreminerals.ClientProxy", serverSide = "clashsoft.mods.moreminerals.CommonProxy")
 	public static CommonProxy proxy;
 
-	public static CustomCreativeTab minerals = new CustomCreativeTab("moreminerals", null);
-	public static CustomCreativeTab tools = new CustomCreativeTab("moreminerals", null);
+	public static CustomCreativeTab stoneOresTab = new CustomCreativeTab("stoneores", null);
+	public static CustomCreativeTab netherOresTab = new CustomCreativeTab("netherores", null);
+	public static CustomCreativeTab endOresTab = new CustomCreativeTab("endores", null);
+	public static CustomCreativeTab dirtOresTab = new CustomCreativeTab("dirtores", null);
+	public static CustomCreativeTab sandOresTab = new CustomCreativeTab("sandores", null);
+	public static CustomCreativeTab rawMaterialsTab = new CustomCreativeTab("stoneores", null);
+	public static CustomCreativeTab toolsTab = new CustomCreativeTab("moremineralstools", null);
 	
 	public static int OreCrusher_TEID = 15;
 
@@ -86,6 +97,18 @@ public class MoreMineralsMod
 	public static int dataPickaxe_ID = 11007;
 	public static int dataAxe_ID = 11008;
 	public static int dataHoe_ID = 11009;
+	
+	public static int[] gentypes = new int[] //maxGenHeight
+		{
+		12, 14, 20, 16, 32, 32, 16, 64,
+		12, 48, 32, 28, 24, 16, 32, 32,
+		64, 12, 16, 24, 32,
+		24, 24, 24, 24, 16, 16
+		};
+	public static int[] vanillagentypes = new int[]
+		{
+		128, 16, 32, 32, 64, 32, 16
+		};
 
 	public static String[] allnames = new String[]
 		{
@@ -138,6 +161,19 @@ public class MoreMineralsMod
 	public static ItemDataHoe dataHoe;
 	
 	public static EnumToolMaterial adamantite = CSItems.addToolMaterial("Adamantite", 3, 2048, 14F, 12, 20, 0x000000, null, true);
+	public static EnumToolMaterial cobalt = CSItems.addToolMaterial("Cobalt", 2, 1536, 10F, 10, 10, 0x000000, null, true);
+	public static EnumToolMaterial demonite = CSItems.addToolMaterial("Demonite", 2, 800, 6F, 6, 30, 0x000000, null, true);
+	public static EnumToolMaterial mythril = CSItems.addToolMaterial("Mythril", 1, 1024, 8F, 7, 12, 0x000000, null, true);
+	
+	public static EnumToolMaterial aluminium = CSItems.addToolMaterial("Aluminium", 2, 512, 8F, 8, 10, 0x000000, null, true);
+	public static EnumToolMaterial chrome = CSItems.addToolMaterial("Chrome", 2, 256, 10F, 9, 12, 0x000000, null, true);
+	public static EnumToolMaterial copper = CSItems.addToolMaterial("Copper", 1, 128, 4F, 5, 8, 0x000000, null, true);
+	public static EnumToolMaterial silver = CSItems.addToolMaterial("Silver", 2, 512, 6F, 6, 16, 0x000000, null, true);
+	public static EnumToolMaterial tin = CSItems.addToolMaterial("Tin", 2, 182, 5F, 5, 9, 0x000000, null, true);
+	public static EnumToolMaterial titanium = CSItems.addToolMaterial("Titanium", 3, 2048, 16F, 10, 13, 0x000000, null, true);
+	public static EnumToolMaterial emerald = CSItems.addToolMaterial("Emerald", 3, 1200, 8F, 10, 17, 0x000000, new ItemStack(Item.emerald), true);
+	public static EnumToolMaterial ruby = CSItems.addToolMaterial("Ruby", 3, 1200, 8F, 9, 17, 0x000000, null, true);
+	public static EnumToolMaterial sapphire = CSItems.addToolMaterial("Sapphire", 3, 1200, 8F, 9, 17, 0x000000, null, true);
 
 	@PreInit
 	public void preInit(FMLPreInitializationEvent event)
@@ -194,25 +230,38 @@ public class MoreMineralsMod
 	@Init
 	public void load(FMLInitializationEvent event)
 	{	
-		vanillaSpecialItems = (CustomItem) new CustomItem(vanillaSpecialItems_ID, CSArray.combine(CSArray.combine(CSArray.addToAll(vanillanames, "", " Ingot"), CSArray.addToAll(vanillanames, "", " Dust")), CSArray.addToAll(vanillanames, "", " Nugget")), CSArray.combine(CSArray.combine(CSArray.addToAll(vanillaoverlays, "ingot", ""), CSArray.addToAll(vanillaoverlays, "dust", "")), CSArray.addToAll(vanillaoverlays, "nugget", ""))).disableMetadata(3, 4, 13, 17).setUnlocalizedName("MM_VanillaSpecialItems").setCreativeTab(minerals);
-		ingots = (CustomItem) new CustomItem(ingots_ID, CSArray.addToAll(allnames, "", " Ingot"), CSArray.addToAll(alloverlays, "ingot", "")).disableMetadata(gemids).setUnlocalizedName("MM_Ingots").setCreativeTab(minerals);
-		dusts = (CustomItem) new CustomItem(dusts_ID, CSArray.addToAll(allnames, "", " Dust"), CSArray.addToAll(alloverlays, "dust", "")).setUnlocalizedName("MM_Dusts").setCreativeTab(minerals);
-		nuggets = (CustomItem) new CustomItem(nuggets_ID, CSArray.addToAll(allnames, "", " Nugget"), CSArray.addToAll(alloverlays, "nugget", "")).setUnlocalizedName("MM_Nuggets").setCreativeTab(minerals);
-		gems = (CustomItem) new CustomItem(gems_ID, gemnames, CSArray.addToAll(gemoverlays, "gem", "")).setUnlocalizedName("MM_Gems").setCreativeTab(minerals);
+		vanillaSpecialItems = (CustomItem) new CustomItem(vanillaSpecialItems_ID, CSArray.combine(CSArray.combine(CSArray.addToAll(vanillanames, "", " Ingot"), CSArray.addToAll(vanillanames, "", " Dust")), CSArray.addToAll(vanillanames, "", " Nugget")), CSArray.combine(CSArray.combine(CSArray.addToAll(vanillaoverlays, "ingot", ""), CSArray.addToAll(vanillaoverlays, "dust", "")), CSArray.addToAll(vanillaoverlays, "nugget", ""))).disableMetadata(3, 4, 13, 17).setUnlocalizedName("MM_VanillaSpecialItems").setCreativeTab(rawMaterialsTab);
+		ingots = (CustomItem) new CustomItem(ingots_ID, CSArray.addToAll(allnames, "", " Ingot"), CSArray.addToAll(alloverlays, "ingot", "")).disableMetadata(gemids).setUnlocalizedName("MM_Ingots").setCreativeTab(rawMaterialsTab);
+		dusts = (CustomItem) new CustomItem(dusts_ID, CSArray.addToAll(allnames, "", " Dust"), CSArray.addToAll(alloverlays, "dust", "")).setUnlocalizedName("MM_Dusts").setCreativeTab(rawMaterialsTab);
+		nuggets = (CustomItem) new CustomItem(nuggets_ID, CSArray.addToAll(allnames, "", " Nugget"), CSArray.addToAll(alloverlays, "nugget", "")).setUnlocalizedName("MM_Nuggets").setCreativeTab(rawMaterialsTab);
+		gems = (CustomItem) new CustomItem(gems_ID, gemnames, CSArray.addToAll(gemoverlays, "gem", "")).setUnlocalizedName("MM_Gems").setCreativeTab(rawMaterialsTab);
+		
+		dataSword = (ItemDataSword) new ItemDataSword(dataSword_ID, EnumToolMaterial.IRON).setCreativeTab(toolsTab).setUnlocalizedName("MM_Swords");
+		dataSpade = (ItemDataSpade) new ItemDataSpade(dataSpade_ID, EnumToolMaterial.IRON).setCreativeTab(toolsTab).setUnlocalizedName("MM_Spades");
+		dataPickaxe = (ItemDataPickaxe) new ItemDataPickaxe(dataPickaxe_ID, EnumToolMaterial.IRON).setCreativeTab(toolsTab).setUnlocalizedName("MM_Pickaxes");
+		dataAxe = (ItemDataAxe) new ItemDataAxe(dataAxe_ID, EnumToolMaterial.IRON).setCreativeTab(toolsTab).setUnlocalizedName("MM_Axes");
+		dataHoe = (ItemDataHoe) new ItemDataHoe(dataHoe_ID, EnumToolMaterial.IRON).setCreativeTab(toolsTab).setUnlocalizedName("MM_Hoes");
+		
+		proxy.registerBlockRenderers();
+		proxy.registerItemRenderers();
 		
 		String[] vanillaNames = CSArray.combine(CSArray.addToAll(vanillanames, "Nether ", " Ore"), CSArray.addToAll(vanillanames, "End ", " Ore"));
 		String[] vanillaNames2 = CSArray.combine(CSArray.addToAll(vanillanames, "Dirt-Based ", " Ore"), CSArray.addToAll(vanillanames, "Sand-Based ", " Ore"));
-		vanillaSpecialOres = (CustomBlock) new CustomBlock(vanillaOres_ID, Material.rock, vanillaNames, CSArray.addToAll(CSArray.combine(vanillaoverlays, vanillaoverlays), "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] {minerals}).setUnlocalizedName("MM_VanillaSpecialOres").setHardness(2.15F);
-		vanillaSpecialOres2 = (CustomBlock) new BlockVanillaSpecialOre(vanillaOres_ID2, Material.ground, vanillaNames2, CSArray.addToAll(CSArray.combine(vanillaoverlays, vanillaoverlays), "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] {minerals}).setUnlocalizedName("MM_VanillaSpecialOres2").setHardness(1.7F);
+		vanillaSpecialOres = (CustomBlock) new CustomBlock(vanillaOres_ID, Material.rock, vanillaNames, CSArray.addToAll(CSArray.combine(vanillaoverlays, vanillaoverlays), "", "overlay"), true, ClientProxy.oreRenderer,
+				new CreativeTabs[] {netherOresTab, netherOresTab, netherOresTab, netherOresTab, netherOresTab, netherOresTab, netherOresTab, endOresTab, endOresTab, endOresTab, endOresTab, endOresTab, endOresTab, endOresTab, endOresTab})
+				.setUnlocalizedName("MM_VanillaSpecialOres").setHardness(2.15F);
+		vanillaSpecialOres2 = (CustomBlock) new BlockVanillaSpecialOre(vanillaOres_ID2, Material.ground, vanillaNames2, CSArray.addToAll(CSArray.combine(vanillaoverlays, vanillaoverlays), "", "overlay"), true, ClientProxy.oreRenderer,
+				new CreativeTabs[] {dirtOresTab, dirtOresTab, dirtOresTab, dirtOresTab, dirtOresTab, dirtOresTab, dirtOresTab, dirtOresTab, sandOresTab, sandOresTab, sandOresTab, sandOresTab, sandOresTab, sandOresTab, sandOresTab})
+				.setUnlocalizedName("MM_VanillaSpecialOres2").setHardness(1.7F);
 		
-		stoneOres = (CustomBlock) new CustomBlock(stoneOres_ID, Material.rock, CSArray.addToAll(names1, "", " Ore"), CSArray.addToAll(overlays1, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] {minerals}).setUnlocalizedName("MM_StoneOres").setHardness(2.3F);
-		stoneOres2 = (CustomBlock) new CustomBlock(stoneOres_ID2, Material.rock, CSArray.addToAll(names2, "", " Ore"), CSArray.addToAll(overlays2, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] {minerals}).setUnlocalizedName("MM_StoneOres2").setHardness(2.3F);
+		stoneOres = (CustomBlock) new CustomBlock(stoneOres_ID, Material.rock, CSArray.addToAll(names1, "", " Ore"), CSArray.addToAll(overlays1, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] {stoneOresTab}).setUnlocalizedName("MM_StoneOres").setHardness(2.3F);
+		stoneOres2 = (CustomBlock) new CustomBlock(stoneOres_ID2, Material.rock, CSArray.addToAll(names2, "", " Ore"), CSArray.addToAll(overlays2, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] {stoneOresTab}).setUnlocalizedName("MM_StoneOres2").setHardness(2.3F);
 		
-		netherOres = (CustomBlock) new CustomBlock(netherOres_ID, Material.rock, CSArray.addToAll(names1, "Nether ", " Ore"), CSArray.addToAll(overlays1, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] {minerals}).setUnlocalizedName("MM_NetherOres").setHardness(2.1F);
-		netherOres2 = (CustomBlock) new CustomBlock(netherOres_ID2, Material.rock, CSArray.addToAll(names2, "Nether ", " Ore"), CSArray.addToAll(overlays2, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] {minerals}).setUnlocalizedName("MM_NetherOres2").setHardness(2.1F);
+		netherOres = (CustomBlock) new CustomBlock(netherOres_ID, Material.rock, CSArray.addToAll(names1, "Nether ", " Ore"), CSArray.addToAll(overlays1, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] {netherOresTab}).setUnlocalizedName("MM_NetherOres").setHardness(2.1F);
+		netherOres2 = (CustomBlock) new CustomBlock(netherOres_ID2, Material.rock, CSArray.addToAll(names2, "Nether ", " Ore"), CSArray.addToAll(overlays2, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] {netherOresTab}).setUnlocalizedName("MM_NetherOres2").setHardness(2.1F);
 		
-		endOres = (CustomBlock) new CustomBlock(endOres_ID, Material.rock, CSArray.addToAll(names1, "End ", " Ore"), CSArray.addToAll(overlays1, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] {minerals}).setUnlocalizedName("MM_EndOres").setHardness(2.2F);
-		endOres2 = (CustomBlock) new CustomBlock(endOres_ID2, Material.rock, CSArray.addToAll(names2, "End ", " Ore"), CSArray.addToAll(overlays2, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] {minerals}).setUnlocalizedName("MM_EndOres2").setHardness(2.2F);
+		endOres = (CustomBlock) new CustomBlock(endOres_ID, Material.rock, CSArray.addToAll(names1, "End ", " Ore"), CSArray.addToAll(overlays1, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] {endOresTab}).setUnlocalizedName("MM_EndOres").setHardness(2.2F);
+		endOres2 = (CustomBlock) new CustomBlock(endOres_ID2, Material.rock, CSArray.addToAll(names2, "End ", " Ore"), CSArray.addToAll(overlays2, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] {endOresTab}).setUnlocalizedName("MM_EndOres2").setHardness(2.2F);
 
 		for (int i = 0; i < gemids.length; i++)
 		{
@@ -221,23 +270,17 @@ public class MoreMineralsMod
 			endOres2.setDrops(gemids[i] - 16, new ItemStack(gems, 2, i));
 		};
 		
-		dirtOres = (CustomBlock) new BlockDirtOre(dirtOres_ID, Material.ground, CSArray.addToAll(names1, "Dirt-Based ", " Ore"), CSArray.addToAll(overlays1, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] {minerals}).setUnlocalizedName("MM_DirtOres").setHardness(1.7F);
-		dirtOres2 = (CustomBlock) new BlockDirtOre(dirtOres_ID2, Material.ground, CSArray.addToAll(names2, "Dirt-Based ", " Ore"), CSArray.addToAll(overlays2, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] {minerals}).setUnlocalizedName("MM_DirtOres2").setHardness(1.7F);
+		dirtOres = (CustomBlock) new BlockDirtOre(dirtOres_ID, Material.ground, CSArray.addToAll(names1, "Dirt-Based ", " Ore"), CSArray.addToAll(overlays1, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] {dirtOresTab}).setUnlocalizedName("MM_DirtOres").setHardness(1.7F);
+		dirtOres2 = (CustomBlock) new BlockDirtOre(dirtOres_ID2, Material.ground, CSArray.addToAll(names2, "Dirt-Based ", " Ore"), CSArray.addToAll(overlays2, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] {dirtOresTab}).setUnlocalizedName("MM_DirtOres2").setHardness(1.7F);
 
-		sandOres = (CustomBlock) new BlockSandOre(sandOres_ID, Material.ground, CSArray.addToAll(names1, "Sand-Based ", " Ore"), CSArray.addToAll(overlays1, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] {minerals}).setUnlocalizedName("MM_SandOres").setHardness(1.7F);
-		sandOres2 = (CustomBlock) new BlockSandOre(sandOres_ID2, Material.ground, CSArray.addToAll(names2, "Sand-Based ", " Ore"), CSArray.addToAll(overlays2, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] {minerals}).setUnlocalizedName("MM_SandOres2").setHardness(1.7F);
+		sandOres = (CustomBlock) new BlockSandOre(sandOres_ID, Material.ground, CSArray.addToAll(names1, "Sand-Based ", " Ore"), CSArray.addToAll(overlays1, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] {sandOresTab}).setUnlocalizedName("MM_SandOres").setHardness(1.7F);
+		sandOres2 = (CustomBlock) new BlockSandOre(sandOres_ID2, Material.ground, CSArray.addToAll(names2, "Sand-Based ", " Ore"), CSArray.addToAll(overlays2, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] {sandOresTab}).setUnlocalizedName("MM_SandOres2").setHardness(1.7F);
 
-		storageBlocks = (CustomBlock) new CustomBlock(storageBlocks_ID, Material.iron, CSArray.addToAll(names1, "Block of ", ""), CSArray.addToAll(overlays1, "", "block"), new CreativeTabs[] {minerals}).setUnlocalizedName("MM_StorageBlocks").setHardness(2.5F);
-		storageBlocks2 = (CustomBlock) new CustomBlock(storageBlocks_ID2, Material.iron, CSArray.addToAll(names2, "Block of ", ""), CSArray.addToAll(overlays2, "", "block"), new CreativeTabs[] {minerals}).setUnlocalizedName("MM_StorageBlocks2").setHardness(2.5F);
+		storageBlocks = (CustomBlock) new CustomBlock(storageBlocks_ID, Material.iron, CSArray.addToAll(names1, "Block of ", ""), CSArray.addToAll(overlays1, "", "block"), new CreativeTabs[] {rawMaterialsTab}).setUnlocalizedName("MM_StorageBlocks").setHardness(2.5F);
+		storageBlocks2 = (CustomBlock) new CustomBlock(storageBlocks_ID2, Material.iron, CSArray.addToAll(names2, "Block of ", ""), CSArray.addToAll(overlays2, "", "block"), new CreativeTabs[] {rawMaterialsTab}).setUnlocalizedName("MM_StorageBlocks2").setHardness(2.5F);
 
-		oreCrusher = (BlockOreCrusher) new BlockOreCrusher(oreCrusher_ID, false).setHardness(2.0F).setStepSound(Block.soundMetalFootstep).setCreativeTab(minerals).setUnlocalizedName("MMOreCrusher");
+		oreCrusher = (BlockOreCrusher) new BlockOreCrusher(oreCrusher_ID, false).setHardness(2.0F).setStepSound(Block.soundMetalFootstep).setCreativeTab(rawMaterialsTab).setUnlocalizedName("MMOreCrusher");
 		oreCrusherActive = (BlockOreCrusher) new BlockOreCrusher(oreCrusherActive_ID, false).setHardness(2.0F).setStepSound(Block.soundMetalFootstep).setUnlocalizedName("MMOreCrusher");
-		
-		dataSword = (ItemDataSword) new ItemDataSword(dataSword_ID, EnumToolMaterial.IRON).setCreativeTab(tools).setUnlocalizedName("MM_Swords");
-		dataSpade = (ItemDataSpade) new ItemDataSpade(dataSpade_ID, EnumToolMaterial.IRON).setCreativeTab(tools).setUnlocalizedName("MM_Spades");
-		dataPickaxe = (ItemDataPickaxe) new ItemDataPickaxe(dataPickaxe_ID, EnumToolMaterial.IRON).setCreativeTab(tools).setUnlocalizedName("MM_Pickaxes");
-		dataAxe = (ItemDataAxe) new ItemDataAxe(dataAxe_ID, EnumToolMaterial.IRON).setCreativeTab(tools).setUnlocalizedName("MM_Axes");
-		dataHoe = (ItemDataHoe) new ItemDataHoe(dataHoe_ID, EnumToolMaterial.IRON).setCreativeTab(tools).setUnlocalizedName("MM_Hoes");
 		
 		registerBlocks();
 		addCraftingRecipes();
@@ -246,10 +289,16 @@ public class MoreMineralsMod
 		addOreDictionaryEntrys();
 		addToolEfficiencys();
 
-		minerals.setIconItemStack(new ItemStack(stoneOres, 1, 3));
+		stoneOresTab.setIconItemStack(new ItemStack(stoneOres2, 1, CSArray.valueOf(names2, "Tin")));
+		netherOresTab.setIconItemStack(new ItemStack(netherOres2, 1, CSArray.valueOf(names2, "Uranium")));
+		endOresTab.setIconItemStack(new ItemStack(endOres, 1, CSArray.valueOf(names1, "Lithium")));
+		dirtOresTab.setIconItemStack(new ItemStack(dirtOres, 1, CSArray.valueOf(names2, "Titanium")));
+		sandOresTab.setIconItemStack(new ItemStack(sandOres, 1, CSArray.valueOf(names2, "Tungsten")));
+		rawMaterialsTab.setIconItemStack(new ItemStack(ingots, 1, CSArray.valueOf(allnames, "Silver")));
+		toolsTab.setIconItemStack(ItemDataTool.setToolMaterial(new ItemStack(dataPickaxe), adamantite));
 		
-		proxy.registerRenderers();
 		GameRegistry.registerTileEntity(TileEntityOreCrusher.class, "OreCrusher");
+		GameRegistry.registerWorldGenerator(new MoreMineralsOreGenerator());
 		NetworkRegistry.instance().registerGuiHandler(INSTANCE, proxy);
 		
 		addLocalizations();
@@ -430,7 +479,24 @@ public class MoreMineralsMod
 	
 	public void addToolCraftingRecipes()
 	{
-		CSCrafting.addToolRecipe(ItemDataTool.setToolMaterial(new ItemStack(dataSword), adamantite, "Adamantite"), new ItemStack(ingots, 1, CSArray.valueOf(allnames, "Adamantite")), 0);
+		for (int i = 0; i < 5; i++)
+		{
+			Item tool = i == 0 ? dataSword : (i == 1 ? dataSpade : (i == 2 ? dataPickaxe : (i == 3 ? dataAxe : dataHoe)));
+			
+			CSCrafting.addToolRecipe(ItemDataTool.setToolMaterial(new ItemStack(tool), adamantite), new ItemStack(ingots, 1, CSArray.valueOf(allnames, "Adamantite")), i);
+			CSCrafting.addToolRecipe(ItemDataTool.setToolMaterial(new ItemStack(tool), cobalt), new ItemStack(ingots, 1, CSArray.valueOf(allnames, "Cobalt")), i);
+			CSCrafting.addToolRecipe(ItemDataTool.setToolMaterial(new ItemStack(tool), demonite), new ItemStack(ingots, 1, CSArray.valueOf(allnames, "Demonite")), i);
+			CSCrafting.addToolRecipe(ItemDataTool.setToolMaterial(new ItemStack(tool), mythril), new ItemStack(ingots, 1, CSArray.valueOf(allnames, "Mythril")), i);
+			CSCrafting.addToolRecipe(ItemDataTool.setToolMaterial(new ItemStack(tool), aluminium), new ItemStack(ingots, 1, CSArray.valueOf(allnames, "Aluminium")), i);
+			CSCrafting.addToolRecipe(ItemDataTool.setToolMaterial(new ItemStack(tool), chrome), new ItemStack(ingots, 1, CSArray.valueOf(allnames, "Chrome")), i);
+			CSCrafting.addToolRecipe(ItemDataTool.setToolMaterial(new ItemStack(tool), copper), new ItemStack(ingots, 1, CSArray.valueOf(allnames, "Copper")), i);
+			CSCrafting.addToolRecipe(ItemDataTool.setToolMaterial(new ItemStack(tool), silver), new ItemStack(ingots, 1, CSArray.valueOf(allnames, "Silver")), i);
+			CSCrafting.addToolRecipe(ItemDataTool.setToolMaterial(new ItemStack(tool), tin), new ItemStack(ingots, 1, CSArray.valueOf(allnames, "Tin")), i);
+			CSCrafting.addToolRecipe(ItemDataTool.setToolMaterial(new ItemStack(tool), titanium), new ItemStack(ingots, 1, CSArray.valueOf(allnames, "Titanium")), i);
+			CSCrafting.addToolRecipe(ItemDataTool.setToolMaterial(new ItemStack(tool), emerald), new ItemStack(vanillaSpecialItems, 1, CSArray.valueOf(vanillanames, "Emerald")), i);
+			CSCrafting.addToolRecipe(ItemDataTool.setToolMaterial(new ItemStack(tool), ruby), new ItemStack(ingots, 1, CSArray.valueOf(allnames, "Ruby")), i);
+			CSCrafting.addToolRecipe(ItemDataTool.setToolMaterial(new ItemStack(tool), sapphire), new ItemStack(ingots, 1, CSArray.valueOf(allnames, "Sapphire")), i);
+		}
 	}
 	
 	public void addFurnaceRecipes()
@@ -438,10 +504,11 @@ public class MoreMineralsMod
 		for (int i = 0; i < names1.length; i++)
 		{
 			ItemStack is = (CSArray.contains(gemids, i) ? new ItemStack(gems, 1, CSArray.valueOf(gemids, i)) : new ItemStack(ingots, 1, i));
+			ItemStack is2 = new ItemStack(is.getItem(), 2, is.getItemDamage());
 			
-			CSCrafting.addSmelting(new ItemStack(stoneOres, 1, i), new ItemStack(ingots, 1, i), 0.1F);
-			CSCrafting.addSmelting(new ItemStack(netherOres, 1, i), new ItemStack(ingots, 2, i), 0.2F);
-			CSCrafting.addSmelting(new ItemStack(endOres, 1, i), new ItemStack(ingots, 2, i), 0.2F);
+			CSCrafting.addSmelting(new ItemStack(stoneOres, 1, i), is, 0.1F);
+			CSCrafting.addSmelting(new ItemStack(netherOres, 1, i), is2, 0.2F);
+			CSCrafting.addSmelting(new ItemStack(endOres, 1, i), is2, 0.2F);
 			CSCrafting.addSmelting(new ItemStack(dirtOres, 1, i), new ItemStack(nuggets, 2, i), 0.01F);
 			CSCrafting.addSmelting(new ItemStack(sandOres, 1, i), new ItemStack(nuggets, 3, i), 0.015F);
 			
@@ -450,10 +517,11 @@ public class MoreMineralsMod
 		for (int i = 0; i < names2.length; i++)
 		{
 			ItemStack is = (CSArray.contains(gemids, i + 16) ? new ItemStack(gems, 1, CSArray.valueOf(gemids, i + 16)) : new ItemStack(ingots, 1, i + 16));
+			ItemStack is2 = new ItemStack(is.getItem(), 2, is.getItemDamage());
 			
-			CSCrafting.addSmelting(new ItemStack(stoneOres2, 1, i), new ItemStack(ingots, 1, i + 16), 0.1F);
-			CSCrafting.addSmelting(new ItemStack(netherOres2, 1, i), new ItemStack(ingots, 2, i + 16), 0.2F);
-			CSCrafting.addSmelting(new ItemStack(endOres2, 1, i), new ItemStack(ingots, 2, i + 16), 0.2F);
+			CSCrafting.addSmelting(new ItemStack(stoneOres2, 1, i), is, 0.1F);
+			CSCrafting.addSmelting(new ItemStack(netherOres2, 1, i), is2, 0.2F);
+			CSCrafting.addSmelting(new ItemStack(endOres2, 1, i), is2, 0.2F);
 			CSCrafting.addSmelting(new ItemStack(dirtOres2, 1, i), new ItemStack(nuggets, 2, i + 16), 0.01F);
 			CSCrafting.addSmelting(new ItemStack(sandOres2, 1, i), new ItemStack(nuggets, 3, i + 16), 0.015F);
 			
@@ -463,18 +531,27 @@ public class MoreMineralsMod
 		{
 			if (i < 7) //Nether Ores
 			{
-				CSCrafting.addSmelting(new ItemStack(vanillaSpecialOres, 1, i), new ItemStack(vanillaSpecialItems, 2, i), 0.1F);
-				CSCrafting.addSmelting(new ItemStack(vanillaSpecialItems, 1, i + 7), new ItemStack(vanillaSpecialItems, 1, i), 0.1F);
+				ItemStack is = i == 3 ? new ItemStack(Item.ingotGold, 2) : (i == 4 ? new ItemStack(Item.ingotIron, 2) : new ItemStack(vanillaSpecialItems, 2, i));
+				CSCrafting.addSmelting(new ItemStack(vanillaSpecialOres, 1, i), is, 0.1F);
+				CSCrafting.addSmelting(new ItemStack(vanillaSpecialItems, 1, i + 7), is, 0.1F);
 			}
 			else if (i < 14) //End Ores
+			{
+				ItemStack is = i % 7 == 3 ? new ItemStack(Item.ingotGold, 2) : (i % 7 == 4 ? new ItemStack(Item.ingotIron, 2) : new ItemStack(vanillaSpecialItems, 2, i - 7));
 				CSCrafting.addSmelting(new ItemStack(vanillaSpecialOres, 1, i), new ItemStack(vanillaSpecialItems, 2, i - 7), 0.1F);
+			}
 			else if (i < 21) //Dirt Ores
+			{
+				ItemStack is = i % 7 == 3 ? new ItemStack(Item.ingotGold, 2) : (i % 7 == 4 ? new ItemStack(Item.ingotIron, 2) : new ItemStack(vanillaSpecialItems, 2, i - 7));
 				CSCrafting.addSmelting(new ItemStack(vanillaSpecialOres2, 1, i - 14), new ItemStack(vanillaSpecialItems, 2, i), 0.01F);
+			}
 			else if (i < 28) //Sand Ores
+			{
+				ItemStack is = i % 7 == 3 ? new ItemStack(Item.goldNugget, 3) : new ItemStack(vanillaSpecialItems, 3, i - 7);
 				CSCrafting.addSmelting(new ItemStack(vanillaSpecialOres2, 1, i - 14), new ItemStack(vanillaSpecialItems, 3, i - 7), 0.015F);
+			}
 		}
 	}
-	
 	
 	public void addCrusherRecipes()
 	{

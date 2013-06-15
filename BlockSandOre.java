@@ -21,7 +21,7 @@ public class BlockSandOre extends BlockDirtOre
 	@Override
 	public int quantityDropped(int meta, int fortune, Random random)
     {
-    	return 3 + random.nextInt(2);
+    	return 3 + random.nextInt(2 + fortune);
     }
 
 	@Override
