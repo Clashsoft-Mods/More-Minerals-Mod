@@ -1,12 +1,16 @@
 package clashsoft.mods.moreminerals;
 
+import java.util.List;
 import java.util.Random;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import clashsoft.clashsoftapi.CustomBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.item.EntityFallingSand;
+import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 public class BlockVanillaSpecialOre extends CustomBlock
@@ -131,4 +135,21 @@ public class BlockVanillaSpecialOre extends CustomBlock
             return material == Material.water ? true : material == Material.lava;
         }
     }
+    
+    @Override
+	@SideOnly(Side.CLIENT)
+	public void getSubBlocks(int par1, CreativeTabs tab, List subItems)
+	{
+		for (int i = 0; i < 14; i++)
+		{
+			if (i < 7 && tab == MoreMineralsMod.dirtOresTab)
+			{
+				subItems.add(new ItemStack(this, 1, i));
+			}
+			else if (i < 14 && i >= 7 && tab == MoreMineralsMod.sandOresTab)
+			{
+				subItems.add(new ItemStack(this, 1, i));
+			}
+		}
+	}
 }

@@ -18,10 +18,10 @@ public class ClientProxy extends CommonProxy
 	@Override
 	public void registerItemRenderers()
 	{
-		MinecraftForgeClient.registerItemRenderer(MoreMineralsMod.dataSword.itemID, ClashsoftMod.csItemRenderer);
-		MinecraftForgeClient.registerItemRenderer(MoreMineralsMod.dataSpade.itemID, ClashsoftMod.csItemRenderer);
-		MinecraftForgeClient.registerItemRenderer(MoreMineralsMod.dataPickaxe.itemID, ClashsoftMod.csItemRenderer);
-		MinecraftForgeClient.registerItemRenderer(MoreMineralsMod.dataAxe.itemID, ClashsoftMod.csItemRenderer);
-		MinecraftForgeClient.registerItemRenderer(MoreMineralsMod.dataHoe.itemID, ClashsoftMod.csItemRenderer);
+		MinecraftForgeClient.registerItemRenderer(MoreMineralsMod.dataSword.itemID, clashsoft.clashsoftapi.ClientProxy.csItemRenderer);
+		MinecraftForgeClient.registerItemRenderer(MoreMineralsMod.dataSpade.itemID, clashsoft.clashsoftapi.ClientProxy.csItemRenderer);
+		MinecraftForgeClient.registerItemRenderer(MoreMineralsMod.dataPickaxe.itemID, clashsoft.clashsoftapi.ClientProxy.csItemRenderer);
+		MinecraftForgeClient.registerItemRenderer(MoreMineralsMod.dataAxe.itemID, clashsoft.clashsoftapi.ClientProxy.csItemRenderer);
+		MinecraftForgeClient.registerItemRenderer(MoreMineralsMod.dataHoe.itemID, clashsoft.clashsoftapi.ClientProxy.csItemRenderer);
 	}
 }

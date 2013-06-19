@@ -29,7 +29,7 @@ public class BlockDirtOre extends CustomBlock
     @Override
     public int damageDropped(int par1)
     {
-    	if (this.blockID == MoreMineralsMod.dirtOres_ID)
+    	if (this.blockID == MoreMineralsMod.dirtOres_ID1)
     		return par1;
     	else if (this.blockID == MoreMineralsMod.dirtOres_ID2)
     		return par1 + 16;
@@ -37,6 +37,14 @@ public class BlockDirtOre extends CustomBlock
     		return par1 + 32;
     	else if (this.blockID == MoreMineralsMod.dirtOres_ID4)
     		return par1 + 48;
+    	else if (this.blockID == MoreMineralsMod.dirtOres_ID5)
+    		return par1 + 64;
+    	else if (this.blockID == MoreMineralsMod.dirtOres_ID6)
+    		return par1 + 80;
+    	else if (this.blockID == MoreMineralsMod.dirtOres_ID7)
+    		return par1 + 96;
+    	else if (this.blockID == MoreMineralsMod.dirtOres_ID8)
+    		return par1 + 112;
     	return 0;
     }
     
@@ -47,5 +55,4 @@ public class BlockDirtOre extends CustomBlock
     {
         return par1World.getBlockMetadata(par2, par3, par4);
     }
-
 }

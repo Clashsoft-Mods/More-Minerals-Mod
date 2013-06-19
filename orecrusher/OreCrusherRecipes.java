@@ -26,11 +26,6 @@ public class OreCrusherRecipes
         return crushingBase;
     }
 
-    private OreCrusherRecipes()
-    {
-        
-    }
-
     /**
      * Adds a smelting recipe.
      */
@@ -82,7 +77,7 @@ public class OreCrusherRecipes
             return null;
         }
         ItemStack ret = (ItemStack)metaCrushingList.get(Arrays.asList(item.itemID, item.getItemDamage()));
-        if (ret != null) 
+        if (ret != null)
         {
             return ret;
         }

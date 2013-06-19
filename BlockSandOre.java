@@ -30,7 +30,7 @@ public class BlockSandOre extends BlockDirtOre
      */
     public int damageDropped(int par1)
     {
-    	if (this.blockID == MoreMineralsMod.sandOres_ID)
+		if (this.blockID == MoreMineralsMod.sandOres_ID1)
     		return par1;
     	else if (this.blockID == MoreMineralsMod.sandOres_ID2)
     		return par1 + 16;
@@ -38,6 +38,14 @@ public class BlockSandOre extends BlockDirtOre
     		return par1 + 32;
     	else if (this.blockID == MoreMineralsMod.sandOres_ID4)
     		return par1 + 48;
+    	else if (this.blockID == MoreMineralsMod.sandOres_ID5)
+    		return par1 + 64;
+    	else if (this.blockID == MoreMineralsMod.sandOres_ID6)
+    		return par1 + 80;
+    	else if (this.blockID == MoreMineralsMod.sandOres_ID7)
+    		return par1 + 96;
+    	else if (this.blockID == MoreMineralsMod.sandOres_ID8)
+    		return par1 + 112;
     	return 0;
     }
 	

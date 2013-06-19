@@ -2,7 +2,9 @@ package clashsoft.mods.moreminerals;
 
 import java.util.Random;
 
+import clashsoft.clashsoftapi.util.CSArray;
 import clashsoft.clashsoftapi.util.CSRandom;
+import clashsoft.clashsoftapi.util.CSUtil;
 import clashsoft.mods.moretools.MoreToolsMod_Tools;
 import net.minecraft.block.Block;
 import net.minecraft.util.MathHelper;
@@ -31,31 +33,35 @@ public class MoreMineralsOreGenerator implements IWorldGenerator
 		for (int i = 0; i < MoreMineralsMod.gentypes.length; i++)
 		{
 			int maxHeight = MoreMineralsMod.gentypes[i]; //height
-			int amountPerChunk = (int)(MoreMineralsMod.gentypes[i] / 2);
-			int amountPerVeign = (int)(MathHelper.sqrt_double(MoreMineralsMod.gentypes[i]) * 1.5D);
-			int stoneID = i < 16 ? MoreMineralsMod.stoneOres.blockID : MoreMineralsMod.stoneOres2.blockID;
-			int dirtID = i < 16 ? MoreMineralsMod.dirtOres.blockID : MoreMineralsMod.dirtOres2.blockID;
-			int sandID = i < 16 ? MoreMineralsMod.sandOres.blockID : MoreMineralsMod.sandOres2.blockID;
-			int meta = i < 16 ? i : i - 16;
-
-			for(int j = 0; j < amountPerChunk; j++)
+			if (maxHeight > 0 && !MoreMineralsMod.allnames[i].contains("%&"))
 			{
-				int randPosX = chunkX * 16 + random.nextInt(16);
-				int randPosY = random.nextInt(maxHeight);
-				int randPosZ = chunkZ * 16 + random.nextInt(16);
-				(new WorldGenMinable(stoneID, meta, amountPerVeign, Block.stone.blockID)).generate(world, random, randPosX, randPosY, randPosZ);
-			}
-			for (int j = 0; j < amountPerChunk / 4; j++)
-			{
-				int randPosX = chunkX * 16 + random.nextInt(16);
-				int randPosY = random.nextInt(maxHeight);
-				int randPosY2 = CSRandom.nextInt(random, 48, 80); //Sand wont generate lower than that.
-				int randPosZ = chunkZ * 16 + random.nextInt(16);
-				if (maxHeight >= 36) //Only common ores generate as dirt and sand ores.
-					(new WorldGenMinable(sandID, meta, amountPerVeign / 3, Block.sand.blockID)).generate(world, random, randPosX, randPosY2, randPosZ);
+				int amountPerChunk = (int)(MoreMineralsMod.gentypes[i] / 2);
+				int amountPerVeign = (int)(MathHelper.sqrt_double(MoreMineralsMod.gentypes[i]) * 1.5D);
+				int stoneID = MoreMineralsHelper.getOreFromMetadata(i, "stone").blockID;
+				int dirtID = MoreMineralsHelper.getOreFromMetadata(i, "dirt").blockID;
+				int sandID = MoreMineralsHelper.getOreFromMetadata(i, "sand").blockID;
+				int meta = i < 16 ? i : i - 16;
 
-				if (maxHeight >= 42)
-					(new WorldGenMinable(dirtID, meta, amountPerVeign / 2, Block.dirt.blockID)).generate(world, random, randPosX, randPosY, randPosZ);
+				for(int j = 0; j < amountPerChunk; j++)
+				{
+					int randPosX = chunkX * 16 + random.nextInt(16);
+					int randPosY = random.nextInt(maxHeight);
+					int randPosZ = chunkZ * 16 + random.nextInt(16);
+					(new WorldGenMinable(stoneID, meta, amountPerVeign, Block.stone.blockID)).generate(world, random, randPosX, randPosY, randPosZ);
+				}
+				for (int j = 0; j < amountPerChunk / 4; j++)
+				{
+					int randPosX = chunkX * 16 + random.nextInt(16);
+					int randPosY = random.nextInt(maxHeight);
+					int randPosY2 = CSRandom.nextInt(random, 48, 80); //Sand wont generate lower than that.
+					int randPosY3 = CSRandom.nextInt(random, 5, 128);
+					int randPosZ = chunkZ * 16 + random.nextInt(16);
+					if (maxHeight >= 36) //Only common ores generate as dirt and sand ores.
+						(new WorldGenMinable(sandID, meta, amountPerVeign / 3, Block.sand.blockID)).generate(world, random, randPosX, randPosY2, randPosZ);
+
+					if (maxHeight >= 42)
+						(new WorldGenMinable(dirtID, meta, amountPerVeign / 2, Block.dirt.blockID)).generate(world, random, randPosX, randPosY3, randPosZ);
+				}
 			}
 		}
 
@@ -87,10 +93,12 @@ public class MoreMineralsOreGenerator implements IWorldGenerator
 	{
 		for (int i = 0; i < MoreMineralsMod.gentypes.length; i++)
 		{
+			if (MoreMineralsMod.gentypes[i] > 0 && !MoreMineralsMod.allnames[i].contains("%&"))
+			{
 			int maxHeight = MoreMineralsMod.gentypes[i] / 2 + 4; //height
 			int amountPerChunk = (int)(MoreMineralsMod.gentypes[i] / 3);
 			int amountPerVeign = (int)(MathHelper.sqrt_double(MoreMineralsMod.gentypes[i]) * 1.75D);
-			int netheroreID = i < 16 ? MoreMineralsMod.netherOres.blockID : MoreMineralsMod.netherOres2.blockID;
+			int netheroreID = i < 16 ? MoreMineralsMod.netherOres1.blockID : MoreMineralsMod.netherOres2.blockID;
 			int meta = i < 16 ? i : i - 16;
 
 			for(int j = 0; j < amountPerChunk; j++)
@@ -100,6 +108,7 @@ public class MoreMineralsOreGenerator implements IWorldGenerator
 				int randPosZ = chunkZ * 16 + random.nextInt(16);
 				(new WorldGenMinable(netheroreID, meta, amountPerVeign, Block.netherrack.blockID)).generate(world, random, randPosX, randPosY, randPosZ);	
 			}
+			}
 		}
 
 		//Vanilla Nether Ores
@@ -108,7 +117,7 @@ public class MoreMineralsOreGenerator implements IWorldGenerator
 			int maxHeight = MoreMineralsMod.vanillagentypes[i] / 2 + 4; //height
 			int amountPerChunk = (int)(MoreMineralsMod.gentypes[i] / 3);
 			int amountPerVeign = (int)(MathHelper.sqrt_double(MoreMineralsMod.gentypes[i]) * 1.8D);
-			int blockID = MoreMineralsMod.vanillaSpecialOres.blockID;
+			int blockID = MoreMineralsMod.vanillaSpecialOres1.blockID;
 			int meta = i;
 
 			for(int j = 0; j < amountPerChunk; j++)
@@ -126,12 +135,12 @@ public class MoreMineralsOreGenerator implements IWorldGenerator
 		//More Minerals End Ores
 		for (int i = 0; i < MoreMineralsMod.gentypes.length; i++)
 		{
-			if (MoreMineralsMod.gentypes[i] <= 32)
+			if (MoreMineralsMod.gentypes[i] > 0 && !MoreMineralsMod.allnames[i].contains("%&") && MoreMineralsMod.gentypes[i] <= 32)
 			{
-				int maxHeight = MoreMineralsMod.gentypes[i] * 2 + 20; //height
+				int maxHeight = MoreMineralsMod.gentypes[i] * 2 + 5; //height
 				int amountPerChunk = (int)(MoreMineralsMod.gentypes[i] / 2);
 				int amountPerVeign = (int)(MathHelper.sqrt_double(MoreMineralsMod.gentypes[i]) * 0.8D);
-				int endoreID = i < 16 ? MoreMineralsMod.endOres.blockID : MoreMineralsMod.endOres2.blockID;
+				int endoreID = i < 16 ? MoreMineralsMod.endOres1.blockID : MoreMineralsMod.endOres2.blockID;
 				int meta = i < 16 ? i : i - 16;
 
 				for(int j = 0; j < amountPerChunk; j++)
@@ -152,7 +161,7 @@ public class MoreMineralsOreGenerator implements IWorldGenerator
 				int maxHeight = MoreMineralsMod.gentypes[i] * 2 + 20; //height
 				int amountPerChunk = (int)(MoreMineralsMod.gentypes[i] / 2);
 				int amountPerVeign = (int)(MathHelper.sqrt_double(MoreMineralsMod.gentypes[i]));
-				int blockID = MoreMineralsMod.vanillaSpecialOres.blockID;
+				int blockID = MoreMineralsMod.vanillaSpecialOres1.blockID;
 				int meta = i + 7;
 
 				for(int j = 0; j < amountPerChunk; j++)

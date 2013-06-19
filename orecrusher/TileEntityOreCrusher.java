@@ -1,5 +1,6 @@
 package clashsoft.mods.moreminerals.orecrusher;
 
+import clashsoft.clashsoftapi.util.CSArray;
 import clashsoft.mods.moreminerals.BlockOreCrusher;
 import clashsoft.mods.moreminerals.MoreMineralsMod;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -379,7 +380,7 @@ public class TileEntityOreCrusher extends TileEntity implements ISidedInventory,
             Item item = par0ItemStack.getItem();
             int metadata = par0ItemStack.getItemDamage();
             
-            boolean isMagnesiumMetadata = metadata == 11;
+            boolean isMagnesiumMetadata = metadata == CSArray.valueOf(MoreMineralsMod.allnames, "Magnesium");
 
             if ((item.itemID == MoreMineralsMod.ingots.itemID || item.itemID == MoreMineralsMod.dusts.itemID) && isMagnesiumMetadata)
             	return 1800;

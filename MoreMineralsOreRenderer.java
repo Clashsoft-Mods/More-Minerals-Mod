@@ -14,25 +14,10 @@ public class MoreMineralsOreRenderer implements ISimpleBlockRenderingHandler
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer)
 	{
+		boolean flag = renderer.useInventoryTint;
 		renderer.useInventoryTint = false;
 		
-		int i = block.blockID;
-		Block bgBlock = Block.stone;
-		if (i == MoreMineralsMod.stoneOres_ID || i == MoreMineralsMod.stoneOres_ID2) { bgBlock = Block.stone; }
-		else if (i == MoreMineralsMod.netherOres_ID || i == MoreMineralsMod.netherOres_ID2) { bgBlock = Block.netherrack; }
-		else if (i == MoreMineralsMod.endOres_ID || i == MoreMineralsMod.endOres_ID2) { bgBlock = Block.whiteStone; }
-		else if (i == MoreMineralsMod.dirtOres_ID || i == MoreMineralsMod.dirtOres_ID2) { bgBlock = Block.dirt; }
-		else if (i == MoreMineralsMod.sandOres_ID || i == MoreMineralsMod.sandOres_ID2) { bgBlock = Block.sand; }
-		else if (i == MoreMineralsMod.vanillaOres_ID)
-		{
-			if (metadata < 7) { bgBlock = Block.netherrack; }
-			else if (metadata < 14) { bgBlock = Block.whiteStone; }
-		}
-		else if (i == MoreMineralsMod.vanillaOres_ID2)
-		{
-			if (metadata < 7) { bgBlock = Block.dirt; }
-			else if (metadata < 14) { bgBlock = Block.sand; }
-		}
+		Block bgBlock = getBackgroundBlock(block.blockID, metadata);
 		
 		renderer.renderBlockAsItem(bgBlock, metadata, modelID);
 		
@@ -93,6 +78,8 @@ public class MoreMineralsOreRenderer implements ISimpleBlockRenderingHandler
 		renderer.renderFaceXPos(block, 0.0001D, 0.0D, 0.0D, renderer.getBlockIconFromSideAndMetadata(block, 5, metadata));
 		tessellator.draw();
 		GL11.glTranslatef(0.5F, 0.5F, 0.5F);
+		
+		renderer.useInventoryTint = true;
 	}
 
 	@Override
@@ -100,27 +87,34 @@ public class MoreMineralsOreRenderer implements ISimpleBlockRenderingHandler
 	{
 		int i = block.blockID;
 		int metadata = world.getBlockMetadata(x, y, z);
-		Block bgBlock = Block.stone;
-		if (i == MoreMineralsMod.stoneOres_ID || i == MoreMineralsMod.stoneOres_ID2) { bgBlock = Block.stone; }
-		else if (i == MoreMineralsMod.netherOres_ID || i == MoreMineralsMod.netherOres_ID2) { bgBlock = Block.netherrack; }
-		else if (i == MoreMineralsMod.endOres_ID || i == MoreMineralsMod.endOres_ID2) { bgBlock = Block.whiteStone; }
-		else if (i == MoreMineralsMod.dirtOres_ID || i == MoreMineralsMod.dirtOres_ID2) { bgBlock = Block.dirt; }
-		else if (i == MoreMineralsMod.sandOres_ID || i == MoreMineralsMod.sandOres_ID2) { bgBlock = Block.sand; }
-		else if (i == MoreMineralsMod.vanillaOres_ID)
-		{
-			if (metadata < 7) { bgBlock = Block.netherrack; }
-			else if (metadata < 14) { bgBlock = Block.whiteStone; }
-		}
-		else if (i == MoreMineralsMod.vanillaOres_ID2)
-		{
-			if (metadata < 7) { bgBlock = Block.dirt; }
-			else if (metadata < 14) { bgBlock = Block.sand; }
-		}
-
+		Block bgBlock = getBackgroundBlock(i, metadata);
+		
+		Icon icon = block.getBlockTexture(world, x, y, z, 0);
+		
 		renderer.renderStandardBlock(bgBlock, x, y, z);
 		renderer.renderStandardBlock(block, x, y, z);
 		
 		return true;
+	}
+	
+	private static Block getBackgroundBlock(int blockID, int metadata)
+	{
+		if (MoreMineralsHelper.isOreType(blockID, "stone")) { return Block.stone; }
+		else if (MoreMineralsHelper.isOreType(blockID, "nether")) { return Block.netherrack; }
+		else if (MoreMineralsHelper.isOreType(blockID, "end")) { return Block.whiteStone; }
+		else if (MoreMineralsHelper.isOreType(blockID, "dirt")) { return Block.dirt; }
+		else if (MoreMineralsHelper.isOreType(blockID, "sand")) { return Block.sand; }
+		else if (blockID == MoreMineralsMod.vanillaOres_ID)
+		{
+			if (metadata < 7) { return Block.netherrack; }
+			else if (metadata < 14) { return Block.whiteStone; }
+		}
+		else if (blockID == MoreMineralsMod.vanillaOres_ID2)
+		{
+			if (metadata < 7) { return Block.dirt; }
+			else if (metadata < 14) { return Block.sand; }
+		}
+		return Block.stone;
 	}
 
 	@Override
