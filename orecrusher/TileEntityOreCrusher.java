@@ -1,8 +1,8 @@
 package clashsoft.mods.moreminerals.orecrusher;
 
 import clashsoft.clashsoftapi.util.CSArray;
-import clashsoft.mods.moreminerals.BlockOreCrusher;
 import clashsoft.mods.moreminerals.MoreMineralsMod;
+import clashsoft.mods.moreminerals.block.BlockOreCrusher;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

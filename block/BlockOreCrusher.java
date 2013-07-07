@@ -1,4 +1,4 @@
-package clashsoft.mods.moreminerals;
+package clashsoft.mods.moreminerals.block;
 
 import cpw.mods.fml.common.network.FMLNetworkHandler;
 import cpw.mods.fml.relauncher.Side;
@@ -7,6 +7,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import java.util.List;
 import java.util.Random;
 
+import clashsoft.mods.moreminerals.MoreMineralsMod;
 import clashsoft.mods.moreminerals.orecrusher.TileEntityOreCrusher;
 import clashsoft.mods.morepotions.MorePotionsMod;
 import net.minecraft.block.Block;
@@ -46,7 +47,7 @@ public class BlockOreCrusher extends BlockContainer
     @SideOnly(Side.CLIENT)
     private Icon crusherIconFront;
 
-    protected BlockOreCrusher(int par1, boolean par2)
+    public BlockOreCrusher(int par1, boolean par2)
     {
         super(par1, Material.rock);
         this.isActive = par2;

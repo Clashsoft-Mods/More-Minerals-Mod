@@ -3,6 +3,7 @@ package clashsoft.mods.moreminerals.orecrusher;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.resources.ResourceLocation;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.ContainerFurnace;
 import net.minecraft.util.StatCollector;
@@ -13,7 +14,8 @@ import org.lwjgl.opengl.GL11;
 public class GuiOreCrusher extends GuiContainer
 {
     private TileEntityOreCrusher crusherInventory;
-
+    private ResourceLocation orecrusher_gui = new ResourceLocation("gui/orecrusher.png");
+    
     public GuiOreCrusher(InventoryPlayer par1InventoryPlayer, TileEntityOreCrusher par2TileEntityOreCrusher)
     {
         super(new ContainerOreCrusher(par1InventoryPlayer, par2TileEntityOreCrusher));
@@ -36,7 +38,7 @@ public class GuiOreCrusher extends GuiContainer
     protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3)
     {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        this.mc.renderEngine.bindTexture("/gui/orecrusher.png");
+        this.mc.func_110434_K().func_110577_a(this.orecrusher_gui);
         int k = (this.width - this.xSize) / 2;
         int l = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(k, l, 0, 0, this.xSize, this.ySize);

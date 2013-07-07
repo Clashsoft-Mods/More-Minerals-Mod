@@ -1,4 +1,4 @@
-package clashsoft.mods.moreminerals;
+package clashsoft.mods.moreminerals.block;
 
 import java.util.Random;
 
@@ -6,6 +6,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.world.World;
 import clashsoft.clashsoftapi.CustomBlock;
+import clashsoft.mods.moreminerals.MoreMineralsMod;
 
 public class BlockDirtOre extends CustomBlock
 {

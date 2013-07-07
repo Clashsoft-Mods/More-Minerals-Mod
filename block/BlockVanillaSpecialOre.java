@@ -1,17 +1,18 @@
-package clashsoft.mods.moreminerals;
+package clashsoft.mods.moreminerals.block;
 
 import java.util.List;
 import java.util.Random;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import clashsoft.clashsoftapi.CustomBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.item.EntityFallingSand;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import clashsoft.clashsoftapi.CustomBlock;
+import clashsoft.mods.moreminerals.MoreMineralsMod;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockVanillaSpecialOre extends CustomBlock
 {
@@ -21,6 +22,12 @@ public class BlockVanillaSpecialOre extends CustomBlock
 	public BlockVanillaSpecialOre(int par1, Material par2Material, String[] par3, String[] par4, boolean par5, int par6, CreativeTabs[] par7)
 	{
 		super(par1, par2Material, par3, par4, par5, par6, par7);
+	}
+	
+	@Override
+	public int idDropped(int par1, Random par2Random, int par3)
+	{
+		return MoreMineralsMod.vanillaSpecialItems.itemID;
 	}
 	
 	@Override
@@ -41,7 +48,8 @@ public class BlockVanillaSpecialOre extends CustomBlock
 	/**
      * Called whenever the block is added into the world. Args: world, x, y, z
      */
-    public void onBlockAdded(World par1World, int par2, int par3, int par4)
+    @Override
+	public void onBlockAdded(World par1World, int par2, int par3, int par4)
     {
         par1World.scheduleBlockUpdate(par2, par3, par4, this.blockID, this.tickRate(par1World));
     }
@@ -50,7 +58,8 @@ public class BlockVanillaSpecialOre extends CustomBlock
      * Lets the block know when one of its neighbor changes. Doesn't know which neighbor changed (coordinates passed are
      * their own) Args: x, y, z, neighbor blockID
      */
-    public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5)
+    @Override
+	public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5)
     {
         par1World.scheduleBlockUpdate(par2, par3, par4, this.blockID, this.tickRate(par1World));
     }
@@ -58,7 +67,8 @@ public class BlockVanillaSpecialOre extends CustomBlock
     /**
      * Ticks the block if it's been scheduled
      */
-    public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random)
+    @Override
+	public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random)
     {
         if (!par1World.isRemote)
         {
@@ -79,7 +89,7 @@ public class BlockVanillaSpecialOre extends CustomBlock
             {
                 if (!par1World.isRemote)
                 {
-                    EntityFallingSand entityfallingsand = new EntityFallingSand(par1World, (double)((float)par2 + 0.5F), (double)((float)par3 + 0.5F), (double)((float)par4 + 0.5F), this.blockID, par1World.getBlockMetadata(par2, par3, par4));
+                    EntityFallingSand entityfallingsand = new EntityFallingSand(par1World, par2 + 0.5F, par3 + 0.5F, par4 + 0.5F, this.blockID, par1World.getBlockMetadata(par2, par3, par4));
                     this.onStartFalling(entityfallingsand);
                     par1World.spawnEntityInWorld(entityfallingsand);
                 }
@@ -109,7 +119,8 @@ public class BlockVanillaSpecialOre extends CustomBlock
     /**
      * How many world ticks before ticking
      */
-    public int tickRate(World par1World)
+    @Override
+	public int tickRate(World par1World)
     {
         return 2;
     }
