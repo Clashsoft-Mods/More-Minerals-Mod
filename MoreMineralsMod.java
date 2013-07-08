@@ -23,6 +23,7 @@ import clashsoft.clashsoftapi.datatools.ItemDataTool;
 import clashsoft.clashsoftapi.util.CSArray;
 import clashsoft.clashsoftapi.util.CSCrafting;
 import clashsoft.clashsoftapi.util.CSItems;
+import clashsoft.clashsoftapi.util.CSItems.DataToolSet;
 import clashsoft.clashsoftapi.util.CSLang;
 import clashsoft.clashsoftapi.util.CSUtil;
 import clashsoft.mods.moreminerals.block.BlockDirtOre;
@@ -260,19 +261,19 @@ public class MoreMineralsMod
 	public static ItemDataAxe dataAxe;
 	public static ItemDataHoe dataHoe;
 
-	public static EnumToolMaterial adamantite = CSItems.addToolMaterial("Adamantite", 3, 2048, 14F, 12, 20, 0x000000, null, true);
-	public static EnumToolMaterial cobalt = CSItems.addToolMaterial("Cobalt", 2, 1536, 10F, 10, 10, 0x000000, null, true);
-	public static EnumToolMaterial demonite = CSItems.addToolMaterial("Demonite", 2, 800, 6F, 6, 30, 0x000000, null, true);
-	public static EnumToolMaterial mythril = CSItems.addToolMaterial("Mythril", 1, 1024, 8F, 7, 12, 0x000000, null, true);
-	public static EnumToolMaterial aluminium = CSItems.addToolMaterial("Aluminium", 2, 512, 8F, 8, 10, 0x000000, null, true);
-	public static EnumToolMaterial chrome = CSItems.addToolMaterial("Chrome", 2, 256, 10F, 9, 12, 0x000000, null, true);
-	public static EnumToolMaterial copper = CSItems.addToolMaterial("Copper", 1, 128, 4F, 5, 8, 0x000000, null, true);
-	public static EnumToolMaterial silver = CSItems.addToolMaterial("Silver", 2, 512, 6F, 6, 16, 0x000000, null, true);
-	public static EnumToolMaterial tin = CSItems.addToolMaterial("Tin", 2, 182, 5F, 5, 9, 0x000000, null, true);
-	public static EnumToolMaterial titanium = CSItems.addToolMaterial("Titanium", 3, 2048, 16F, 10, 13, 0x000000, null, true);
-	public static EnumToolMaterial emerald = CSItems.addToolMaterial("Emerald", 3, 1200, 8F, 10, 17, 0x000000, new ItemStack(Item.emerald), true);
-	public static EnumToolMaterial ruby = CSItems.addToolMaterial("Ruby", 3, 1200, 8F, 9, 17, 0x000000, null, true);
-	public static EnumToolMaterial sapphire = CSItems.addToolMaterial("Sapphire", 3, 1200, 8F, 9, 17, 0x000000, null, true);
+	public static EnumToolMaterial adamantite;
+	public static EnumToolMaterial cobalt;
+	public static EnumToolMaterial demonite;		
+	public static EnumToolMaterial mythril;	
+	public static EnumToolMaterial aluminium;
+	public static EnumToolMaterial chrome;
+	public static EnumToolMaterial copper;
+	public static EnumToolMaterial silver;
+	public static EnumToolMaterial tin;	
+	public static EnumToolMaterial titanium;
+	public static EnumToolMaterial emerald;
+	public static EnumToolMaterial ruby;
+	public static EnumToolMaterial sapphire;
 
 	@PreInit
 	public void preInit(FMLPreInitializationEvent event)
@@ -369,6 +370,8 @@ public class MoreMineralsMod
 		dataPickaxe = (ItemDataPickaxe) new ItemDataPickaxe(dataPickaxe_ID, EnumToolMaterial.IRON).setCreativeTab(toolsTab).setUnlocalizedName("MM_Pickaxes");
 		dataAxe = (ItemDataAxe) new ItemDataAxe(dataAxe_ID, EnumToolMaterial.IRON).setCreativeTab(toolsTab).setUnlocalizedName("MM_Axes");
 		dataHoe = (ItemDataHoe) new ItemDataHoe(dataHoe_ID, EnumToolMaterial.IRON).setCreativeTab(toolsTab).setUnlocalizedName("MM_Hoes");
+		
+		setupToolMaterials(new CSItems.DataToolSet(dataSword, dataSpade, dataPickaxe, dataAxe, dataHoe));
 
 		proxy.registerBlockRenderers();
 		proxy.registerItemRenderers();
@@ -474,6 +477,23 @@ public class MoreMineralsMod
 		NetworkRegistry.instance().registerGuiHandler(INSTANCE, proxy);
 
 		addLocalizations();
+	}
+
+	private void setupToolMaterials(DataToolSet dataToolSet)
+	{
+		adamantite	= CSItems.addToolMaterial("Adamantite", 3, 2048, 14F, 4F, 20, 0x000000, null, dataToolSet);
+		cobalt		= CSItems.addToolMaterial("Cobalt", 2, 1536, 10F, 3.2F, 10, 0x000000, null, dataToolSet);
+		demonite	= CSItems.addToolMaterial("Demonite", 2, 800, 6F, 3.0F, 30, 0x000000, null, dataToolSet);
+		mythril		= CSItems.addToolMaterial("Mythril", 1, 1024, 8F, 3.1F, 12, 0x000000, null, dataToolSet);
+		aluminium	= CSItems.addToolMaterial("Aluminium", 2, 512, 8F, 2.2F, 10, 0x000000, null, dataToolSet);
+		chrome		= CSItems.addToolMaterial("Chrome", 2, 256, 10F, 2.7F, 12, 0x000000, null, dataToolSet);
+		copper		= CSItems.addToolMaterial("Copper", 1, 128, 4F, 1.8F, 8, 0x000000, null, dataToolSet);
+		silver		= CSItems.addToolMaterial("Silver", 2, 512, 6F, 2.3F, 16, 0x000000, null, dataToolSet);
+		tin			= CSItems.addToolMaterial("Tin", 2, 182, 5F, 1.75F, 9, 0x000000, null, dataToolSet); 
+		titanium	= CSItems.addToolMaterial("Titanium", 3, 2048, 16F, 2.9F, 13, 0x000000, null, dataToolSet);
+		emerald		= CSItems.addToolMaterial("Emerald", 3, 1200, 8F, 2.95F, 17, 0x000000, new ItemStack(Item.emerald), dataToolSet);
+		ruby		= CSItems.addToolMaterial("Ruby", 3, 1200, 8F, 2.4F, 17, 0x000000, null, dataToolSet);
+		sapphire 	= CSItems.addToolMaterial("Sapphire", 3, 1200, 8F, 2.4F, 17, 0x000000, null, dataToolSet);
 	}
 
 	private void setHarvestLevelsAndHardnessess()
