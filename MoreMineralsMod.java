@@ -356,8 +356,6 @@ public class MoreMineralsMod
 	{	
 		CSUtil.log("[MoreMineralsMod] Loading More Minerals Mod");
 		CSUtil.log("[MoreMineralsMod] " + allnames.length + " Materials added");
-		CSUtil.log(gentypes[CSArray.valueOf(allnames, "%&Gallium")]);
-		CSUtil.log(gentypes[CSArray.valueOf(allnames, "%&Germanium")]);
 		
 		vanillaSpecialItems = (CustomItem) new CustomItem(vanillaSpecialItems_ID, CSArray.combine(CSArray.combine(CSArray.addToAll(vanillanames, "", " Ingot"), CSArray.addToAll(vanillanames, "", " Dust")), CSArray.addToAll(vanillanames, "", " Nugget")), CSArray.combine(CSArray.combine(CSArray.addToAll(vanillaoverlays, "ingot", ""), CSArray.addToAll(vanillaoverlays, "dust", "")), CSArray.addToAll(vanillaoverlays, "nugget", ""))).disableMetadata(3, 4, 13, 17).setUnlocalizedName("MM_VanillaSpecialItems").setCreativeTab(rawMaterialsTab);
 		ingots = (CustomItem) new CustomItem(ingots_ID, CSArray.addToAll(allnames, "", " Ingot"), CSArray.addToAll(alloverlays, "ingot", "")).disableMetadata(gemids).setUnlocalizedName("MM_Ingots").setCreativeTab(rawMaterialsTab);

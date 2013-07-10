@@ -3,20 +3,12 @@ package clashsoft.mods.moreminerals.orecrusher;
 import clashsoft.clashsoftapi.util.CSArray;
 import clashsoft.mods.moreminerals.MoreMineralsMod;
 import clashsoft.mods.moreminerals.block.BlockOreCrusher;
-import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemHoe;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemSword;
-import net.minecraft.item.ItemTool;
-import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
@@ -49,7 +41,8 @@ public class TileEntityOreCrusher extends TileEntity implements ISidedInventory,
     /**
      * Returns the number of slots in the inventory.
      */
-    public int getSizeInventory()
+    @Override
+	public int getSizeInventory()
     {
         return this.crusherItemStacks.length;
     }
@@ -57,7 +50,8 @@ public class TileEntityOreCrusher extends TileEntity implements ISidedInventory,
     /**
      * Returns the stack in slot i
      */
-    public ItemStack getStackInSlot(int par1)
+    @Override
+	public ItemStack getStackInSlot(int par1)
     {
         return this.crusherItemStacks[par1];
     }
@@ -66,7 +60,8 @@ public class TileEntityOreCrusher extends TileEntity implements ISidedInventory,
      * Removes from an inventory slot (first arg) up to a specified number (second arg) of items and returns them in a
      * new stack.
      */
-    public ItemStack decrStackSize(int par1, int par2)
+    @Override
+	public ItemStack decrStackSize(int par1, int par2)
     {
         if (this.crusherItemStacks[par1] != null)
         {
@@ -100,7 +95,8 @@ public class TileEntityOreCrusher extends TileEntity implements ISidedInventory,
      * When some containers are closed they call this on each slot, then drop whatever it returns as an EntityItem -
      * like when you close a workbench GUI.
      */
-    public ItemStack getStackInSlotOnClosing(int par1)
+    @Override
+	public ItemStack getStackInSlotOnClosing(int par1)
     {
         if (this.crusherItemStacks[par1] != null)
         {
@@ -117,7 +113,8 @@ public class TileEntityOreCrusher extends TileEntity implements ISidedInventory,
     /**
      * Sets the given item stack to the specified slot in the inventory (can be crafting or armor sections).
      */
-    public void setInventorySlotContents(int par1, ItemStack par2ItemStack)
+    @Override
+	public void setInventorySlotContents(int par1, ItemStack par2ItemStack)
     {
         this.crusherItemStacks[par1] = par2ItemStack;
 
@@ -130,7 +127,8 @@ public class TileEntityOreCrusher extends TileEntity implements ISidedInventory,
     /**
      * Returns the name of the inventory.
      */
-    public String getInvName()
+    @Override
+	public String getInvName()
     {
         return this.isInvNameLocalized() ? this.field_94130_e : "container.orecrusher";
     }
@@ -139,7 +137,8 @@ public class TileEntityOreCrusher extends TileEntity implements ISidedInventory,
      * If this returns false, the inventory name will be used as an unlocalized name, and translated into the player's
      * language. Otherwise it will be used directly.
      */
-    public boolean isInvNameLocalized()
+    @Override
+	public boolean isInvNameLocalized()
     {
         return this.field_94130_e != null && this.field_94130_e.length() > 0;
     }
@@ -152,7 +151,8 @@ public class TileEntityOreCrusher extends TileEntity implements ISidedInventory,
     /**
      * Reads a tile entity from NBT.
      */
-    public void readFromNBT(NBTTagCompound par1NBTTagCompound)
+    @Override
+	public void readFromNBT(NBTTagCompound par1NBTTagCompound)
     {
         super.readFromNBT(par1NBTTagCompound);
         NBTTagList nbttaglist = par1NBTTagCompound.getTagList("Items");
@@ -182,7 +182,8 @@ public class TileEntityOreCrusher extends TileEntity implements ISidedInventory,
     /**
      * Writes a tile entity to NBT.
      */
-    public void writeToNBT(NBTTagCompound par1NBTTagCompound)
+    @Override
+	public void writeToNBT(NBTTagCompound par1NBTTagCompound)
     {
         super.writeToNBT(par1NBTTagCompound);
         par1NBTTagCompound.setShort("BurnTime", (short)this.furnaceBurnTime);
@@ -212,7 +213,8 @@ public class TileEntityOreCrusher extends TileEntity implements ISidedInventory,
      * Returns the maximum stack size for a inventory slot. Seems to always be 64, possibly will be extended. *Isn't
      * this more of a set than a get?*
      */
-    public int getInventoryStackLimit()
+    @Override
+	public int getInventoryStackLimit()
     {
         return 64;
     }
@@ -401,19 +403,23 @@ public class TileEntityOreCrusher extends TileEntity implements ISidedInventory,
     /**
      * Do not make give this method the name canInteractWith because it clashes with Container
      */
-    public boolean isUseableByPlayer(EntityPlayer par1EntityPlayer)
+    @Override
+	public boolean isUseableByPlayer(EntityPlayer par1EntityPlayer)
     {
-        return this.worldObj.getBlockTileEntity(this.xCoord, this.yCoord, this.zCoord) != this ? false : par1EntityPlayer.getDistanceSq((double)this.xCoord + 0.5D, (double)this.yCoord + 0.5D, (double)this.zCoord + 0.5D) <= 64.0D;
+        return this.worldObj.getBlockTileEntity(this.xCoord, this.yCoord, this.zCoord) != this ? false : par1EntityPlayer.getDistanceSq(this.xCoord + 0.5D, this.yCoord + 0.5D, this.zCoord + 0.5D) <= 64.0D;
     }
 
-    public void openChest() {}
+    @Override
+	public void openChest() {}
 
-    public void closeChest() {}
+    @Override
+	public void closeChest() {}
 
+    @Override
     /**
      * Returns true if automation is allowed to insert the given stack (ignoring stack size) into the given slot.
      */
-    public boolean isStackValidForSlot(int par1, ItemStack par2ItemStack)
+    public boolean isItemValidForSlot(int par1, ItemStack par2ItemStack)
     {
         return par1 == 2 ? false : (par1 == 1 ? isItemFuel(par2ItemStack) : true);
     }
@@ -422,7 +428,8 @@ public class TileEntityOreCrusher extends TileEntity implements ISidedInventory,
      * Returns an array containing the indices of the slots that can be accessed by automation on the given side of this
      * block.
      */
-    public int[] getAccessibleSlotsFromSide(int par1)
+    @Override
+	public int[] getAccessibleSlotsFromSide(int par1)
     {
         return par1 == 0 ? field_102011_e : (par1 == 1 ? field_102010_d : field_102009_f);
     }
@@ -431,16 +438,18 @@ public class TileEntityOreCrusher extends TileEntity implements ISidedInventory,
      * Returns true if automation can insert the given item in the given slot from the given side. Args: Slot, item,
      * side
      */
-    public boolean canInsertItem(int par1, ItemStack par2ItemStack, int par3)
+    @Override
+	public boolean canInsertItem(int par1, ItemStack par2ItemStack, int par3)
     {
-        return this.isStackValidForSlot(par1, par2ItemStack);
+        return this.isItemValidForSlot(par1, par2ItemStack);
     }
 
     /**
      * Returns true if automation can extract the given item in the given slot from the given side. Args: Slot, item,
      * side
      */
-    public boolean canExtractItem(int par1, ItemStack par2ItemStack, int par3)
+    @Override
+	public boolean canExtractItem(int par1, ItemStack par2ItemStack, int par3)
     {
         return par3 != 0 || par1 != 1 || par2ItemStack.itemID == Item.bucketEmpty.itemID;
     }
