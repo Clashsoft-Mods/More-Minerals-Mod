@@ -15,7 +15,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.common.ForgeDummyContainer;
 
-public class TileEntityOreCrusher extends TileEntity implements ISidedInventory, net.minecraftforge.common.ISidedInventory
+public class TileEntityOreCrusher extends TileEntity implements ISidedInventory
 {
     private static final int[] field_102010_d = new int[] {0};
     private static final int[] field_102011_e = new int[] {2, 1};
@@ -452,28 +452,5 @@ public class TileEntityOreCrusher extends TileEntity implements ISidedInventory,
 	public boolean canExtractItem(int par1, ItemStack par2ItemStack, int par3)
     {
         return par3 != 0 || par1 != 1 || par2ItemStack.itemID == Item.bucketEmpty.itemID;
-    }
-
-    @Override
-    public int getStartInventorySide(ForgeDirection side)
-    {
-        if (ForgeDummyContainer.legacyFurnaceSides)
-        {
-            if (side == ForgeDirection.DOWN) return 1;
-            if (side == ForgeDirection.UP) return 0;
-            return 2;
-        }
-        else
-        {
-            if (side == ForgeDirection.DOWN) return 2;
-            if (side == ForgeDirection.UP) return 0;
-            return 1;
-        }
-    }
-
-    @Override
-    public int getSizeInventorySide(ForgeDirection side)
-    {
-        return 1;
     }
 }
