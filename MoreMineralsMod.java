@@ -53,13 +53,13 @@ public class MoreMineralsMod
 	@SidedProxy(clientSide = "clashsoft.mods.moreminerals.ClientProxy", serverSide = "clashsoft.mods.moreminerals.CommonProxy")
 	public static CommonProxy proxy;
 
-	public static CustomCreativeTab stoneOresTab = new CustomCreativeTab("MM_stoneores", null);
-	public static CustomCreativeTab netherOresTab = new CustomCreativeTab("MM_netherores", null);
-	public static CustomCreativeTab endOresTab = new CustomCreativeTab("MM_endores", null);
-	public static CustomCreativeTab dirtOresTab = new CustomCreativeTab("MM_dirtores", null);
-	public static CustomCreativeTab sandOresTab = new CustomCreativeTab("MM_sandores", null);
-	public static CustomCreativeTab rawMaterialsTab = new CustomCreativeTab("MM_rawmaterials", null);
-	public static CustomCreativeTab toolsTab = new CustomCreativeTab("MM_tools", null);
+	public static MMCreativeTabs stoneOresTab = new MMCreativeTabs("MM_stoneores");
+	public static MMCreativeTabs netherOresTab = new MMCreativeTabs("MM_netherores");
+	public static MMCreativeTabs endOresTab = new MMCreativeTabs("MM_endores");
+	public static MMCreativeTabs dirtOresTab = new MMCreativeTabs("MM_dirtores");
+	public static MMCreativeTabs sandOresTab = new MMCreativeTabs("MM_sandores");
+	public static MMCreativeTabs rawMaterialsTab = new MMCreativeTabs("MM_rawmaterials");
+	public static MMCreativeTabs toolsTab = new MMCreativeTabs("MM_tools");
 
 	public static int OreCrusher_TEID = 15;
 
