@@ -154,13 +154,13 @@ public class MoreMineralsOreGenerator implements IWorldGenerator
 		}
 
 		//Vanilla End Ores
-		for (int i = 0; i < MoreMineralsMod.gentypes.length; i++)
+		for (int i = 0; i < MoreMineralsMod.vanillagentypes.length; i++)
 		{
-			if (MoreMineralsMod.gentypes[i] <= 32)
+			if (MoreMineralsMod.vanillagentypes[i] <= 32)
 			{
-				int maxHeight = MoreMineralsMod.gentypes[i] * 2 + 20; //height
-				int amountPerChunk = (int)(MoreMineralsMod.gentypes[i] / 2);
-				int amountPerVeign = (int)(MathHelper.sqrt_double(MoreMineralsMod.gentypes[i]));
+				int maxHeight = MoreMineralsMod.vanillagentypes[i] * 2 + 20; //height
+				int amountPerChunk = (int)(MoreMineralsMod.vanillagentypes[i] / 2);
+				int amountPerVeign = (int)(MathHelper.sqrt_double(MoreMineralsMod.vanillagentypes[i]));
 				int blockID = MoreMineralsMod.vanillaSpecialOres1.blockID;
 				int meta = i + 7;
 
