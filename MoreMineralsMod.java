@@ -33,6 +33,7 @@ import clashsoft.mods.moreminerals.block.BlockVanillaSpecialOre;
 import clashsoft.mods.moreminerals.orecrusher.OreCrusherRecipes;
 import clashsoft.mods.moreminerals.orecrusher.TileEntityOreCrusher;
 import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.Mod.PreInit;
@@ -275,7 +276,7 @@ public class MoreMineralsMod
 	public static EnumToolMaterial ruby;
 	public static EnumToolMaterial sapphire;
 
-	@PreInit
+	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
 	{		
 		Configuration config = new Configuration(event.getSuggestedConfigurationFile());
@@ -351,7 +352,7 @@ public class MoreMineralsMod
 		config.save();
 	}
 
-	@Init
+	@EventHandler
 	public void load(FMLInitializationEvent event)
 	{	
 		CSUtil.log("[MoreMineralsMod] Loading More Minerals Mod");

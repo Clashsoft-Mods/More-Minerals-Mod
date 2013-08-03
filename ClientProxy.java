@@ -1,6 +1,5 @@
 package clashsoft.mods.moreminerals;
 
-import clashsoft.clashsoftapi.ClashsoftMod;
 import net.minecraftforge.client.MinecraftForgeClient;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 
