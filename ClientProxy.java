@@ -5,7 +5,7 @@ import cpw.mods.fml.client.registry.RenderingRegistry;
 
 public class ClientProxy extends CommonProxy
 {
-	public static int oreRenderer;
+	public static int	oreRenderer;
 	
 	@Override
 	public void registerBlockRenderers()

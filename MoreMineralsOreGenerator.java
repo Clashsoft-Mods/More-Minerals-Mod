@@ -2,10 +2,7 @@ package clashsoft.mods.moreminerals;
 
 import java.util.Random;
 
-import clashsoft.clashsoftapi.util.CSArray;
 import clashsoft.clashsoftapi.util.CSRandom;
-import clashsoft.clashsoftapi.util.CSUtil;
-import clashsoft.mods.moretools.MoreToolsMod_Tools;
 import net.minecraft.block.Block;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;

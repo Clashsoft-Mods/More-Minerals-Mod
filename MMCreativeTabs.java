@@ -5,7 +5,7 @@ import net.minecraft.item.ItemStack;
 
 public class MMCreativeTabs extends CreativeTabs
 {
-	private ItemStack icon;
+	private ItemStack	icon;
 	
 	public MMCreativeTabs(String label)
 	{
@@ -17,12 +17,13 @@ public class MMCreativeTabs extends CreativeTabs
 		this.icon = stack;
 		return this;
 	}
-
+	
 	/**
-     * Get the ItemStack that will be rendered to the tab.
-     */
-    public ItemStack getIconItemStack()
-    {
-        return icon;
-    }
+	 * Get the ItemStack that will be rendered to the tab.
+	 */
+	@Override
+	public ItemStack getIconItemStack()
+	{
+		return icon;
+	}
 }

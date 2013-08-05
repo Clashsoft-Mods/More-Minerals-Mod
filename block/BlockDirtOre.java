@@ -52,7 +52,8 @@ public class BlockDirtOre extends CustomBlock
     /**
      * Get the block's damage value (for use with pick block).
      */
-    public int getDamageValue(World par1World, int par2, int par3, int par4)
+    @Override
+	public int getDamageValue(World par1World, int par2, int par3, int par4)
     {
         return par1World.getBlockMetadata(par2, par3, par4);
     }
