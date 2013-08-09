@@ -3,6 +3,7 @@ package clashsoft.mods.moreminerals.block;
 import java.util.Random;
 
 import clashsoft.mods.moreminerals.MoreMineralsMod;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;

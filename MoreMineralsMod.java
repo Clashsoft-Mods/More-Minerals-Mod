@@ -1,28 +1,13 @@
 package clashsoft.mods.moreminerals;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.EnumToolMaterial;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemStack;
-import net.minecraft.src.ModLoader;
-import net.minecraftforge.common.Configuration;
-import net.minecraftforge.common.MinecraftForge;
-import clashsoft.clashsoftapi.*;
-import clashsoft.clashsoftapi.datatools.ItemDataAxe;
-import clashsoft.clashsoftapi.datatools.ItemDataHoe;
-import clashsoft.clashsoftapi.datatools.ItemDataPickaxe;
-import clashsoft.clashsoftapi.datatools.ItemDataSpade;
-import clashsoft.clashsoftapi.datatools.ItemDataSword;
-import clashsoft.clashsoftapi.datatools.ItemDataTool;
-import clashsoft.clashsoftapi.util.CSArray;
-import clashsoft.clashsoftapi.util.CSCrafting;
-import clashsoft.clashsoftapi.util.CSItems;
+import java.util.Arrays;
+
+import clashsoft.clashsoftapi.CustomBlock;
+import clashsoft.clashsoftapi.CustomItem;
+import clashsoft.clashsoftapi.ItemCustomBlock;
+import clashsoft.clashsoftapi.datatools.*;
+import clashsoft.clashsoftapi.util.*;
 import clashsoft.clashsoftapi.util.CSItems.DataToolSet;
-import clashsoft.clashsoftapi.util.CSLang;
-import clashsoft.clashsoftapi.util.CSUtil;
 import clashsoft.mods.moreminerals.block.BlockDirtOre;
 import clashsoft.mods.moreminerals.block.BlockOreCrusher;
 import clashsoft.mods.moreminerals.block.BlockSandOre;
@@ -38,6 +23,17 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
+
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.EnumToolMaterial;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
+import net.minecraft.src.ModLoader;
+import net.minecraftforge.common.Configuration;
+import net.minecraftforge.common.MinecraftForge;
 
 @Mod(modid = "MoreMineralsMod", name = "More Minerals Mod", version = CSUtil.CURRENT_VERION)
 @NetworkMod(clientSideRequired = true, serverSideRequired = false)
@@ -125,8 +121,7 @@ public class MoreMineralsMod
 	public static int				dataAxe_ID				= 11008;
 	public static int				dataHoe_ID				= 11009;
 	
-	public static int[]				gentypes				= new int[] // maxGenHeight
-															{ 32, 32, 0, 0, 0, 28, 13, 0, // Silicon
+	public static int[]				overworldGen			= new int[] { 32, 32, 0, 0, 0, 28, 13, 0, // Silicon
 			0, 0, 0, 0, 0, 12, 32, 16, // Chrome
 			24, 0, 0, 32, 64, 0, 0, 0, // Germanium
 			0, 0, 0, 0, 0, 0, 0, 16, // Molybdenum
@@ -138,11 +133,31 @@ public class MoreMineralsMod
 			0, 0, 0, 0, 0, 0, 0, 24, // Uranium
 			0, 0, 12, 14, 20, 16, 24, 24, // Ruby
 			24, 24, 16, 16, 0, 0, 0, 0, // -
-			0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-	public static int[]				vanillagentypes			= new int[] { 128, 16, 32, 32, 64, 32, 16 };
+			0, 0, 0, 0, 0, 0, 0, 0, // -
+			0, 0, 0, 0, 0, 0, 0, 0, // -
+			0, 0, 0, 0, 0, 0, 0, 0, // -
+			0, 0, 0, 0, 0, 0, 0, 0							// -
+															};
+	public static int[]				netherGen = overworldGen, endGen = overworldGen, dirtGen = overworldGen, sandGen = overworldGen;
 	
-	public static String[]			allnames				= new String[] { "Lithium", "Beryllium", "%&Boron", "%&Carbon", "%&Sodium", "Magnesium", "Aluminium", "%&Silicon", "%&Phosphorus", "%&Sulfur", "%&Potassium", "%&Calcium", "%&Scandium", "Titanium", "Vanadium", "Chrome", "Manganese", "%&Iron", "%&Cobalt", "Nickel", "Copper", "%&Zinc", "%&Gallium", "%&Germanium", "%&Arsenic", "%&Selenium", "%&Rubidium", "%&Strontium", "%&Yttrium", "%&Zirconium", "%&Niobium", "Molybdenum", "%&Technetium", "%&Ruthenium", "%&Rhodium", "%&Palladium", "Silver", "%&Cadmium", "%&Indium", "Tin", "%&Antimony", "%&Tellurium", "%&Iodine", "%&Caesium", "%&Barium", "%&Lanthanum", "%&Cerium", "%&Praseodymium", "%&Neodynium", "%&Promethium", "%&Samarium", "%&Europium", "%&Gadolinium", "%&Terbium", "%&Dysprosium", "%&Holmium", "%&Erbium", "%&Thulium", "%&Ytterbium", "%&Lutetium", "%&Hafnium", "%&Tantalum", "Tungsten", "%&Rhenium", "%&Osmium", "Iridium", "Platinum", "%&Gold", "%&Mercury", "%&Thallium", "Lead",
-			"%&Bismuth", "%&Polonium", "%&Astatine", "%&Francium", "%&Radium", "%&Actinium", "%&Thorium", "%&Protactinium", "Uranium", "%&Neptunium", "%&Plutonium", "Adamantite", "Cobalt", "Demonite", "Mythril", "Amethyst", "Ruby", "Sapphire", "Topaz", "Spinel", "Opal", "%&", "%&", "%&", "%&", "%&", "%&", "%&", "%&", "%&", "%&", "%&", "%&", "%&", "%&", "%&", "%&", "%&", "%&", "%&", "%&", "%&", "%&", "%&", "%&", "%&", "%&", "%&", "%&", "%&", "%&", "%&", "%&", "%&", "%&", "%&", "%&", };
+	public static int[]				vanillaGen				= new int[] { 128, 16, 32, 32, 64, 32, 16 };
+	
+	public static String[]			allnames				= new String[] { "Lithium", "Beryllium", "%&Boron", "%&Carbon", "%&Sodium", "Magnesium", "Aluminium", "%&Silicon", // -
+			"%&Phosphorus", "%&Sulfur", "%&Potassium", "%&Calcium", "%&Scandium", "Titanium", "Vanadium", "Chrome", // -
+			"Manganese", "%&Iron", "%&Cobalt", "Nickel", "Copper", "%&Zinc", "%&Gallium", "%&Germanium", // -
+			"%&Arsenic", "%&Selenium", "%&Rubidium", "%&Strontium", "%&Yttrium", "%&Zirconium", "%&Niobium", "Molybdenum", // -
+			"%&Technetium", "%&Ruthenium", "%&Rhodium", "%&Palladium", "Silver", "%&Cadmium", "%&Indium", "Tin", // -
+			"%&Antimony", "%&Tellurium", "%&Iodine", "%&Caesium", "%&Barium", "%&Lanthanum", "%&Cerium", "%&Praseodymium", // -
+			"%&Neodynium", "%&Promethium", "%&Samarium", "%&Europium", "%&Gadolinium", "%&Terbium", "%&Dysprosium", "%&Holmium", // -
+			"%&Erbium", "%&Thulium", "%&Ytterbium", "%&Lutetium", "%&Hafnium", "%&Tantalum", "Tungsten", "%&Rhenium", // -
+			"%&Osmium", "Iridium", "Platinum", "%&Gold", "%&Mercury", "%&Thallium", "Lead", "%&Bismuth", // -
+			"%&Polonium", "%&Astatine", "%&Francium", "%&Radium", "%&Actinium", "%&Thorium", "%&Protactinium", "Uranium", // -
+			"%&Neptunium", "%&Plutonium", "Adamantite", "Cobalt", "Demonite", "Mythril", "Amethyst", "Ruby", // -
+			"Sapphire", "Topaz", "Spinel", "Opal", "%&", "%&", "%&", "%&", // -
+			"%&", "%&", "%&", "%&", "%&", "%&", "%&", "%&", // -
+			"%&", "%&", "%&", "%&", "%&", "%&", "%&", "%&", // -
+			"%&", "%&", "%&", "%&", "%&", "%&", "%&", "%&", // -
+			"%&", "%&", "%&", "%&", "%&", "%&", "%&", "%&", };
 	public static String[][]		splitnames				= CSArray.split(allnames, 16);
 	public static String[]			names1					= splitnames[0];
 	public static String[]			names2					= splitnames[1];
@@ -254,6 +269,12 @@ public class MoreMineralsMod
 	{
 		Configuration config = new Configuration(event.getSuggestedConfigurationFile());
 		config.load();
+		
+		overworldGen = config.get("Generation", "Overworld Max Height", overworldGen, "Ores: [" + Arrays.toString(allnames) + "] Note: %& = not implemented, 0 = does not generate").getIntList();
+		netherGen = config.get("Generation", "Nether Max Height", netherGen, "Nether Ores: [" + Arrays.toString(allnames) + "] Note: %& = not implemented, 0 = does not generate").getIntList();
+		endGen = config.get("Generation", "End Max Height", endGen, "End Ores: [" + Arrays.toString(allnames) + "] Note: %& = not implemented, 0 = does not generate").getIntList();
+		dirtGen = config.get("Generation", "Dirt Max Height", dirtGen, "Dirt Ores: [" + Arrays.toString(allnames) + "] Note: %& = not implemented, 0 = does not generate").getIntList();
+		sandGen = config.get("Generation", "Sand Max Height", sandGen, "Sand Ores: [" + Arrays.toString(allnames) + "] Note: %& = not implemented, 0 = does not generate").getIntList();
 		
 		vanillaOres_ID = config.getBlock("Special Vanilla Ores ID 1", 1200).getInt();
 		vanillaOres_ID2 = config.getBlock("Special Vanilla Ores ID 2", 1201).getInt();
@@ -471,7 +492,7 @@ public class MoreMineralsMod
 		{
 			for (int j = 0; j < splitnames[i].length; j++)
 			{
-				int gentype = gentypes[j + (i * 16)];
+				int gentype = overworldGen[j + (i * 16)];
 				int harvestLevel = gentype <= 12 ? 3 : (gentype <= 32 ? 2 : (gentype <= 64 ? 1 : 0));
 				MinecraftForge.setBlockHarvestLevel(MoreMineralsHelper.getOreFromMetadata(j + (i * 16), "stone"), "pickaxe", harvestLevel);
 				MinecraftForge.setBlockHarvestLevel(MoreMineralsHelper.getOreFromMetadata(j + (i * 16), "nether"), "pickaxe", harvestLevel > 0 ? harvestLevel - 1 : harvestLevel);
@@ -576,6 +597,8 @@ public class MoreMineralsMod
 	
 	public void addCraftingRecipes()
 	{
+		GameRegistry.addRecipe(new RepairDataTools());
+		
 		GameRegistry.addShapedRecipe(new ItemStack(oreCrusher, 1, 3), new Object[] { "tct", "cTc", "tct", 't', new ItemStack(ingots, 1, CSArray.valueOf(allnames, "Tin")), 'c', new ItemStack(ingots, 1, CSArray.valueOf(allnames, "Chrome")), 'T', new ItemStack(ingots, 1, CSArray.valueOf(allnames, "Titanium")), });
 		
 		for (int i = 0; i < 128; i++)

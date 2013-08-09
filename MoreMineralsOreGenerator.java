@@ -27,47 +27,64 @@ public class MoreMineralsOreGenerator implements IWorldGenerator
 	public void generateSurface(World world, int chunkX, int chunkZ, Random random)
 	{
 		//More Minerals Stone, Dirt and Sand Ores
-		for (int i = 0; i < MoreMineralsMod.gentypes.length; i++)
+		for (int i = 0; i < MoreMineralsMod.overworldGen.length; i++)
 		{
-			int maxHeight = MoreMineralsMod.gentypes[i]; //height
-			if (maxHeight > 0 && !MoreMineralsMod.allnames[i].contains("%&"))
+			int stoneID = MoreMineralsHelper.getOreFromMetadata(i, "stone").blockID;
+			int dirtID = MoreMineralsHelper.getOreFromMetadata(i, "dirt").blockID;
+			int sandID = MoreMineralsHelper.getOreFromMetadata(i, "sand").blockID;
+			int meta = i % 16;
+			
+			int maxHeightStone = MoreMineralsMod.overworldGen[i]; //height
+			if (maxHeightStone > 0 && !MoreMineralsMod.allnames[i].contains("%&"))
 			{
-				int amountPerChunk = (int)(MoreMineralsMod.gentypes[i] / 2);
-				int amountPerVeign = (int)(MathHelper.sqrt_double(MoreMineralsMod.gentypes[i]) * 1.5D);
-				int stoneID = MoreMineralsHelper.getOreFromMetadata(i, "stone").blockID;
-				int dirtID = MoreMineralsHelper.getOreFromMetadata(i, "dirt").blockID;
-				int sandID = MoreMineralsHelper.getOreFromMetadata(i, "sand").blockID;
-				int meta = i < 16 ? i : i - 16;
-
+				int amountPerChunk = (int)(MoreMineralsMod.overworldGen[i] / 2);
+				int amountPerVeign = (int)(MathHelper.sqrt_double(MoreMineralsMod.overworldGen[i]) * 1.5D);
 				for(int j = 0; j < amountPerChunk; j++)
 				{
 					int randPosX = chunkX * 16 + random.nextInt(16);
-					int randPosY = random.nextInt(maxHeight);
+					int randPosY = random.nextInt(maxHeightStone);
 					int randPosZ = chunkZ * 16 + random.nextInt(16);
 					(new WorldGenMinable(stoneID, meta, amountPerVeign, Block.stone.blockID)).generate(world, random, randPosX, randPosY, randPosZ);
 				}
+			}
+			int maxHeightDirt = MoreMineralsMod.dirtGen[i];
+			if (maxHeightDirt >= 42 && !MoreMineralsMod.allnames[i].contains("%&"))
+			{
+				int amountPerChunk = (int)(MoreMineralsMod.dirtGen[i] / 2);
+				int amountPerVeign = (int)(MathHelper.sqrt_double(MoreMineralsMod.dirtGen[i]) * 1.5D);
 				for (int j = 0; j < amountPerChunk / 4; j++)
 				{
 					int randPosX = chunkX * 16 + random.nextInt(16);
-					int randPosY = random.nextInt(maxHeight);
+					int randPosY = random.nextInt(maxHeightDirt);
 					int randPosY2 = CSRandom.nextInt(random, 48, 80); //Sand wont generate lower than that.
 					int randPosY3 = CSRandom.nextInt(random, 5, 128);
 					int randPosZ = chunkZ * 16 + random.nextInt(16);
-					if (maxHeight >= 36) //Only common ores generate as dirt and sand ores.
-						(new WorldGenMinable(sandID, meta, amountPerVeign / 3, Block.sand.blockID)).generate(world, random, randPosX, randPosY2, randPosZ);
-
-					if (maxHeight >= 42)
-						(new WorldGenMinable(dirtID, meta, amountPerVeign / 2, Block.dirt.blockID)).generate(world, random, randPosX, randPosY3, randPosZ);
+					(new WorldGenMinable(dirtID, meta, amountPerVeign / 2, Block.dirt.blockID)).generate(world, random, randPosX, randPosY3, randPosZ);
+				}
+			}
+			int maxHeightSand = MoreMineralsMod.sandGen[i];
+			if (maxHeightSand >= 36 && !MoreMineralsMod.allnames[i].contains("%&"))
+			{
+				int amountPerChunk = (int)(MoreMineralsMod.sandGen[i] / 2);
+				int amountPerVeign = (int)(MathHelper.sqrt_double(MoreMineralsMod.sandGen[i]) * 1.5D);
+				for (int j = 0; j < amountPerChunk / 4; j++)
+				{
+					int randPosX = chunkX * 16 + random.nextInt(16);
+					int randPosY = random.nextInt(maxHeightSand);
+					int randPosY2 = CSRandom.nextInt(random, 48, 80); //Sand wont generate lower than that.
+					int randPosY3 = CSRandom.nextInt(random, 5, 128);
+					int randPosZ = chunkZ * 16 + random.nextInt(16);
+					(new WorldGenMinable(sandID, meta, amountPerVeign / 3, Block.sand.blockID)).generate(world, random, randPosX, randPosY2, randPosZ);
 				}
 			}
 		}
 
 		//Vanilla Dirt + Sand Ores
-		for (int i = 0; i < MoreMineralsMod.vanillagentypes.length; i++)
+		for (int i = 0; i < MoreMineralsMod.vanillaGen.length; i++)
 		{
-			int maxHeight = MoreMineralsMod.vanillagentypes[i]; //height
-			int amountPerChunk = (int)(MoreMineralsMod.vanillagentypes[i] / 2);
-			int amountPerVeign = (int)(MathHelper.sqrt_double(MoreMineralsMod.vanillagentypes[i]) * 1.5D);
+			int maxHeight = MoreMineralsMod.vanillaGen[i]; //height
+			int amountPerChunk = (int)(MoreMineralsMod.vanillaGen[i] / 2);
+			int amountPerVeign = (int)(MathHelper.sqrt_double(MoreMineralsMod.vanillaGen[i]) * 1.5D);
 			int blockID = MoreMineralsMod.vanillaSpecialOres2.blockID;
 			int meta = i;
 
@@ -88,15 +105,15 @@ public class MoreMineralsOreGenerator implements IWorldGenerator
 
 	public void generateNether(World world, int chunkX, int chunkZ, Random random)
 	{
-		for (int i = 0; i < MoreMineralsMod.gentypes.length; i++)
+		for (int i = 0; i < MoreMineralsMod.netherGen.length; i++)
 		{
-			if (MoreMineralsMod.gentypes[i] > 0 && !MoreMineralsMod.allnames[i].contains("%&"))
+			if (MoreMineralsMod.netherGen[i] > 0 && !MoreMineralsMod.allnames[i].contains("%&"))
 			{
-			int maxHeight = MoreMineralsMod.gentypes[i] / 2 + 4; //height
-			int amountPerChunk = (int)(MoreMineralsMod.gentypes[i] / 3);
-			int amountPerVeign = (int)(MathHelper.sqrt_double(MoreMineralsMod.gentypes[i]) * 1.75D);
-			int netheroreID = i < 16 ? MoreMineralsMod.netherOres1.blockID : MoreMineralsMod.netherOres2.blockID;
-			int meta = i < 16 ? i : i - 16;
+			int maxHeight = MoreMineralsMod.netherGen[i] / 2 + 4; //height
+			int amountPerChunk = (int)(MoreMineralsMod.netherGen[i] / 3);
+			int amountPerVeign = (int)(MathHelper.sqrt_double(MoreMineralsMod.netherGen[i]) * 1.75D);
+			int netheroreID = MoreMineralsHelper.getOreFromMetadata(i, "nether").blockID;
+			int meta = i % 16;
 
 			for(int j = 0; j < amountPerChunk; j++)
 			{
@@ -109,11 +126,11 @@ public class MoreMineralsOreGenerator implements IWorldGenerator
 		}
 
 		//Vanilla Nether Ores
-		for (int i = 0; i < MoreMineralsMod.vanillagentypes.length; i++)
+		for (int i = 0; i < MoreMineralsMod.vanillaGen.length; i++)
 		{
-			int maxHeight = MoreMineralsMod.vanillagentypes[i] / 2 + 4; //height
-			int amountPerChunk = (int)(MoreMineralsMod.gentypes[i] / 3);
-			int amountPerVeign = (int)(MathHelper.sqrt_double(MoreMineralsMod.gentypes[i]) * 1.8D);
+			int maxHeight = MoreMineralsMod.vanillaGen[i] / 2 + 4; //height
+			int amountPerChunk = (int)(MoreMineralsMod.vanillaGen[i] / 3);
+			int amountPerVeign = (int)(MathHelper.sqrt_double(MoreMineralsMod.vanillaGen[i]) * 1.8D);
 			int blockID = MoreMineralsMod.vanillaSpecialOres1.blockID;
 			int meta = i;
 
@@ -130,14 +147,14 @@ public class MoreMineralsOreGenerator implements IWorldGenerator
 	public void generateEnd(World world, int chunkX, int chunkZ, Random random)
 	{
 		//More Minerals End Ores
-		for (int i = 0; i < MoreMineralsMod.gentypes.length; i++)
+		for (int i = 0; i < MoreMineralsMod.endGen.length; i++)
 		{
-			if (MoreMineralsMod.gentypes[i] > 0 && !MoreMineralsMod.allnames[i].contains("%&") && MoreMineralsMod.gentypes[i] <= 32)
+			if (MoreMineralsMod.endGen[i] > 0 && !MoreMineralsMod.allnames[i].contains("%&") && MoreMineralsMod.endGen[i] <= 32)
 			{
-				int maxHeight = MoreMineralsMod.gentypes[i] * 2 + 5; //height
-				int amountPerChunk = (int)(MoreMineralsMod.gentypes[i] / 2);
-				int amountPerVeign = (int)(MathHelper.sqrt_double(MoreMineralsMod.gentypes[i]) * 0.8D);
-				int endoreID = i < 16 ? MoreMineralsMod.endOres1.blockID : MoreMineralsMod.endOres2.blockID;
+				int maxHeight = MoreMineralsMod.endGen[i] * 2 + 5; //height
+				int amountPerChunk = (int)(MoreMineralsMod.endGen[i] / 2);
+				int amountPerVeign = (int)(MathHelper.sqrt_double(MoreMineralsMod.endGen[i]) * 0.8D);
+				int endoreID = MoreMineralsHelper.getOreFromMetadata(i, "end").blockID;
 				int meta = i < 16 ? i : i - 16;
 
 				for(int j = 0; j < amountPerChunk; j++)
@@ -151,13 +168,13 @@ public class MoreMineralsOreGenerator implements IWorldGenerator
 		}
 
 		//Vanilla End Ores
-		for (int i = 0; i < MoreMineralsMod.vanillagentypes.length; i++)
+		for (int i = 0; i < MoreMineralsMod.vanillaGen.length; i++)
 		{
-			if (MoreMineralsMod.vanillagentypes[i] <= 32)
+			if (MoreMineralsMod.vanillaGen[i] <= 32)
 			{
-				int maxHeight = MoreMineralsMod.vanillagentypes[i] * 2 + 20; //height
-				int amountPerChunk = (int)(MoreMineralsMod.vanillagentypes[i] / 2);
-				int amountPerVeign = (int)(MathHelper.sqrt_double(MoreMineralsMod.vanillagentypes[i]));
+				int maxHeight = MoreMineralsMod.vanillaGen[i] * 2 + 20; //height
+				int amountPerChunk = (int)(MoreMineralsMod.vanillaGen[i] / 2);
+				int amountPerVeign = (int)(MathHelper.sqrt_double(MoreMineralsMod.vanillaGen[i]));
 				int blockID = MoreMineralsMod.vanillaSpecialOres1.blockID;
 				int meta = i + 7;
 

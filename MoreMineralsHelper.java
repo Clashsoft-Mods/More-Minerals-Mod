@@ -123,6 +123,12 @@ public class MoreMineralsHelper
 		return null;
 	}
 	
+	/**
+	 * Refers to the actual id integer field, not just getOreFromMetadata(meta, blockType).blockID
+	 * @param meta
+	 * @param blockType
+	 * @return
+	 */
 	public static int getIDFromMetadata(int meta, String blockType)
 	{
 		if (blockType == "stone")
