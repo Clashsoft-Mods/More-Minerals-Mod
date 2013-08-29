@@ -124,7 +124,9 @@ public class MoreMineralsHelper
 	}
 	
 	/**
-	 * Refers to the actual id integer field, not just getOreFromMetadata(meta, blockType).blockID
+	 * Refers to the actual id integer field, not just getOreFromMetadata(meta,
+	 * blockType).blockID
+	 * 
 	 * @param meta
 	 * @param blockType
 	 * @return

@@ -138,7 +138,7 @@ public class MoreMineralsMod
 			0, 0, 0, 0, 0, 0, 0, 0, // -
 			0, 0, 0, 0, 0, 0, 0, 0							// -
 															};
-	public static int[]				netherGen = overworldGen, endGen = overworldGen, dirtGen = overworldGen, sandGen = overworldGen;
+	public static int[]				netherGen				= overworldGen, endGen = overworldGen, dirtGen = overworldGen, sandGen = overworldGen;
 	
 	public static int[]				vanillaGen				= new int[] { 128, 16, 32, 32, 64, 32, 16 };
 	
@@ -158,7 +158,7 @@ public class MoreMineralsMod
 			"%&", "%&", "%&", "%&", "%&", "%&", "%&", "%&", // -
 			"%&", "%&", "%&", "%&", "%&", "%&", "%&", "%&", // -
 			"%&", "%&", "%&", "%&", "%&", "%&", "%&", "%&", };
-	public static String[][]		splitnames				= CSArray.split(allnames, 16);
+	public static String[][]		splitnames				= CSArrays.split(allnames, 16);
 	public static String[]			names1					= splitnames[0];
 	public static String[]			names2					= splitnames[1];
 	public static String[]			names3					= splitnames[2];
@@ -170,19 +170,19 @@ public class MoreMineralsMod
 	public static String[]			gemnames				= new String[] { "Amethyst", "Ruby", "Sapphire", "Topaz", "Spinel", "Opal" };
 	public static String[]			vanillanames			= new String[] { "Coal", "Diamond", "Emerald", "Gold", "Iron", "Lapislazuli", "Redstone" };
 	
-	public static String[]			alloverlays				= CSArray.caseAll(allnames, 0);
-	public static String[]			overlays1				= CSArray.caseAll(names1, 0);
-	public static String[]			overlays2				= CSArray.caseAll(names2, 0);
-	public static String[]			overlays3				= CSArray.caseAll(names3, 0);
-	public static String[]			overlays4				= CSArray.caseAll(names4, 0);
-	public static String[]			overlays5				= CSArray.caseAll(names5, 0);
-	public static String[]			overlays6				= CSArray.caseAll(names6, 0);
-	public static String[]			overlays7				= CSArray.caseAll(names7, 0);
-	public static String[]			overlays8				= CSArray.caseAll(names8, 0);
-	public static String[]			gemoverlays				= CSArray.caseAll(gemnames, 0);
-	public static String[]			vanillaoverlays			= CSArray.caseAll(vanillanames, 0);
+	public static String[]			alloverlays				= CSArrays.caseAll(allnames, 0);
+	public static String[]			overlays1				= CSArrays.caseAll(names1, 0);
+	public static String[]			overlays2				= CSArrays.caseAll(names2, 0);
+	public static String[]			overlays3				= CSArrays.caseAll(names3, 0);
+	public static String[]			overlays4				= CSArrays.caseAll(names4, 0);
+	public static String[]			overlays5				= CSArrays.caseAll(names5, 0);
+	public static String[]			overlays6				= CSArrays.caseAll(names6, 0);
+	public static String[]			overlays7				= CSArrays.caseAll(names7, 0);
+	public static String[]			overlays8				= CSArrays.caseAll(names8, 0);
+	public static String[]			gemoverlays				= CSArrays.caseAll(gemnames, 0);
+	public static String[]			vanillaoverlays			= CSArrays.caseAll(vanillanames, 0);
 	
-	private static int[]			gemids					= new int[] { CSArray.valueOf(allnames, "Amethyst"), CSArray.valueOf(allnames, "Ruby"), CSArray.valueOf(allnames, "Sapphire"), CSArray.valueOf(allnames, "Topaz"), CSArray.valueOf(allnames, "Spinel"), CSArray.valueOf(allnames, "Opal") };
+	private static int[]			gemids					= new int[] { CSArrays.valueOf(allnames, "Amethyst"), CSArrays.valueOf(allnames, "Ruby"), CSArrays.valueOf(allnames, "Sapphire"), CSArrays.valueOf(allnames, "Topaz"), CSArrays.valueOf(allnames, "Spinel"), CSArrays.valueOf(allnames, "Opal") };
 	
 	public static CustomBlock		vanillaSpecialOres1;
 	public static CustomBlock		vanillaSpecialOres2;
@@ -352,11 +352,11 @@ public class MoreMineralsMod
 		CSUtil.log("[MoreMineralsMod] Loading More Minerals Mod");
 		CSUtil.log("[MoreMineralsMod] " + allnames.length + " Materials added");
 		
-		vanillaSpecialItems = (CustomItem) new CustomItem(vanillaSpecialItems_ID, CSArray.combine(CSArray.combine(CSArray.addToAll(vanillanames, "", " Ingot"), CSArray.addToAll(vanillanames, "", " Dust")), CSArray.addToAll(vanillanames, "", " Nugget")), CSArray.combine(CSArray.combine(CSArray.addToAll(vanillaoverlays, "ingot", ""), CSArray.addToAll(vanillaoverlays, "dust", "")), CSArray.addToAll(vanillaoverlays, "nugget", ""))).disableMetadata(3, 4, 13, 17).setUnlocalizedName("MM_VanillaSpecialItems").setCreativeTab(rawMaterialsTab);
-		ingots = (CustomItem) new CustomItem(ingots_ID, CSArray.addToAll(allnames, "", " Ingot"), CSArray.addToAll(alloverlays, "ingot", "")).disableMetadata(gemids).setUnlocalizedName("MM_Ingots").setCreativeTab(rawMaterialsTab);
-		dusts = (CustomItem) new CustomItem(dusts_ID, CSArray.addToAll(allnames, "", " Dust"), CSArray.addToAll(alloverlays, "dust", "")).setUnlocalizedName("MM_Dusts").setCreativeTab(rawMaterialsTab);
-		nuggets = (CustomItem) new CustomItem(nuggets_ID, CSArray.addToAll(allnames, "", " Nugget"), CSArray.addToAll(alloverlays, "nugget", "")).setUnlocalizedName("MM_Nuggets").setCreativeTab(rawMaterialsTab);
-		gems = (CustomItem) new CustomItem(gems_ID, gemnames, CSArray.addToAll(gemoverlays, "gem", "")).setUnlocalizedName("MM_Gems").setCreativeTab(rawMaterialsTab);
+		vanillaSpecialItems = (CustomItem) new CustomItem(vanillaSpecialItems_ID, CSArrays.combine(CSArrays.combine(CSArrays.addToAll(vanillanames, "", " Ingot"), CSArrays.addToAll(vanillanames, "", " Dust")), CSArrays.addToAll(vanillanames, "", " Nugget")), CSArrays.combine(CSArrays.combine(CSArrays.addToAll(vanillaoverlays, "ingot", ""), CSArrays.addToAll(vanillaoverlays, "dust", "")), CSArrays.addToAll(vanillaoverlays, "nugget", ""))).disableMetadata(3, 4, 13, 17).setUnlocalizedName("MM_VanillaSpecialItems").setCreativeTab(rawMaterialsTab);
+		ingots = (CustomItem) new CustomItem(ingots_ID, CSArrays.addToAll(allnames, "", " Ingot"), CSArrays.addToAll(alloverlays, "ingot", "")).disableMetadata(gemids).setUnlocalizedName("MM_Ingots").setCreativeTab(rawMaterialsTab);
+		dusts = (CustomItem) new CustomItem(dusts_ID, CSArrays.addToAll(allnames, "", " Dust"), CSArrays.addToAll(alloverlays, "dust", "")).setUnlocalizedName("MM_Dusts").setCreativeTab(rawMaterialsTab);
+		nuggets = (CustomItem) new CustomItem(nuggets_ID, CSArrays.addToAll(allnames, "", " Nugget"), CSArrays.addToAll(alloverlays, "nugget", "")).setUnlocalizedName("MM_Nuggets").setCreativeTab(rawMaterialsTab);
+		gems = (CustomItem) new CustomItem(gems_ID, gemnames, CSArrays.addToAll(gemoverlays, "gem", "")).setUnlocalizedName("MM_Gems").setCreativeTab(rawMaterialsTab);
 		
 		dataSword = (ItemDataSword) new ItemDataSword(dataSword_ID, EnumToolMaterial.IRON).setCreativeTab(toolsTab).setUnlocalizedName("MM_Swords");
 		dataSpade = (ItemDataSpade) new ItemDataSpade(dataSpade_ID, EnumToolMaterial.IRON).setCreativeTab(toolsTab).setUnlocalizedName("MM_Spades");
@@ -369,37 +369,37 @@ public class MoreMineralsMod
 		proxy.registerBlockRenderers();
 		proxy.registerItemRenderers();
 		
-		String[] vanillaNames = CSArray.combine(CSArray.addToAll(vanillanames, "Nether ", " Ore"), CSArray.addToAll(vanillanames, "End ", " Ore"));
-		String[] vanillaNames2 = CSArray.combine(CSArray.addToAll(vanillanames, "Dirt-Based ", " Ore"), CSArray.addToAll(vanillanames, "Sand-Based ", " Ore"));
-		vanillaSpecialOres1 = (CustomBlock) new CustomBlock(vanillaOres_ID, Material.rock, vanillaNames, CSArray.addToAll(CSArray.combine(vanillaoverlays, vanillaoverlays), "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { netherOresTab, netherOresTab, netherOresTab, netherOresTab, netherOresTab, netherOresTab, netherOresTab, endOresTab, endOresTab, endOresTab, endOresTab, endOresTab, endOresTab, endOresTab, endOresTab }).setUnlocalizedName("MM_VanillaSpecialOres").setHardness(2.15F);
-		vanillaSpecialOres2 = (CustomBlock) new BlockVanillaSpecialOre(vanillaOres_ID2, Material.ground, vanillaNames2, CSArray.addToAll(CSArray.combine(vanillaoverlays, vanillaoverlays), "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { dirtOresTab, dirtOresTab, dirtOresTab, dirtOresTab, dirtOresTab, dirtOresTab, dirtOresTab, sandOresTab, sandOresTab, sandOresTab, sandOresTab, sandOresTab, sandOresTab, sandOresTab }).setUnlocalizedName("MM_VanillaSpecialOres2").setHardness(1.7F);
+		String[] vanillaNames = CSArrays.combine(CSArrays.addToAll(vanillanames, "Nether ", " Ore"), CSArrays.addToAll(vanillanames, "End ", " Ore"));
+		String[] vanillaNames2 = CSArrays.combine(CSArrays.addToAll(vanillanames, "Dirt-Based ", " Ore"), CSArrays.addToAll(vanillanames, "Sand-Based ", " Ore"));
+		vanillaSpecialOres1 = (CustomBlock) new CustomBlock(vanillaOres_ID, Material.rock, vanillaNames, CSArrays.addToAll(CSArrays.combine(vanillaoverlays, vanillaoverlays), "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { netherOresTab, netherOresTab, netherOresTab, netherOresTab, netherOresTab, netherOresTab, netherOresTab, endOresTab, endOresTab, endOresTab, endOresTab, endOresTab, endOresTab, endOresTab, endOresTab }).setUnlocalizedName("MM_VanillaSpecialOres").setHardness(2.15F);
+		vanillaSpecialOres2 = (CustomBlock) new BlockVanillaSpecialOre(vanillaOres_ID2, Material.ground, vanillaNames2, CSArrays.addToAll(CSArrays.combine(vanillaoverlays, vanillaoverlays), "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { dirtOresTab, dirtOresTab, dirtOresTab, dirtOresTab, dirtOresTab, dirtOresTab, dirtOresTab, sandOresTab, sandOresTab, sandOresTab, sandOresTab, sandOresTab, sandOresTab, sandOresTab }).setUnlocalizedName("MM_VanillaSpecialOres2").setHardness(1.7F);
 		
-		stoneOres1 = (CustomBlock) new CustomBlock(stoneOres_ID1, Material.rock, CSArray.addToAll(names1, "", " Ore"), CSArray.addToAll(overlays1, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { stoneOresTab }).setUnlocalizedName("MM_StoneOres1").setHardness(2.3F);
-		stoneOres2 = (CustomBlock) new CustomBlock(stoneOres_ID2, Material.rock, CSArray.addToAll(names2, "", " Ore"), CSArray.addToAll(overlays2, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { stoneOresTab }).setUnlocalizedName("MM_StoneOres2").setHardness(2.3F);
-		stoneOres3 = (CustomBlock) new CustomBlock(stoneOres_ID3, Material.rock, CSArray.addToAll(names3, "", " Ore"), CSArray.addToAll(overlays3, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { stoneOresTab }).setUnlocalizedName("MM_StoneOres3").setHardness(2.3F);
-		stoneOres4 = (CustomBlock) new CustomBlock(stoneOres_ID4, Material.rock, CSArray.addToAll(names4, "", " Ore"), CSArray.addToAll(overlays4, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { stoneOresTab }).setUnlocalizedName("MM_StoneOres4").setHardness(2.3F);
-		stoneOres5 = (CustomBlock) new CustomBlock(stoneOres_ID5, Material.rock, CSArray.addToAll(names5, "", " Ore"), CSArray.addToAll(overlays5, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { stoneOresTab }).setUnlocalizedName("MM_StoneOres5").setHardness(2.3F);
-		stoneOres6 = (CustomBlock) new CustomBlock(stoneOres_ID6, Material.rock, CSArray.addToAll(names6, "", " Ore"), CSArray.addToAll(overlays6, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { stoneOresTab }).setUnlocalizedName("MM_StoneOres6").setHardness(2.3F);
-		stoneOres7 = (CustomBlock) new CustomBlock(stoneOres_ID7, Material.rock, CSArray.addToAll(names7, "", " Ore"), CSArray.addToAll(overlays7, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { stoneOresTab }).setUnlocalizedName("MM_StoneOres7").setHardness(2.3F);
-		stoneOres8 = (CustomBlock) new CustomBlock(stoneOres_ID8, Material.rock, CSArray.addToAll(names8, "", " Ore"), CSArray.addToAll(overlays8, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { stoneOresTab }).setUnlocalizedName("MM_StoneOres8").setHardness(2.3F);
+		stoneOres1 = (CustomBlock) new CustomBlock(stoneOres_ID1, Material.rock, CSArrays.addToAll(names1, "", " Ore"), CSArrays.addToAll(overlays1, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { stoneOresTab }).setUnlocalizedName("MM_StoneOres1").setHardness(2.3F);
+		stoneOres2 = (CustomBlock) new CustomBlock(stoneOres_ID2, Material.rock, CSArrays.addToAll(names2, "", " Ore"), CSArrays.addToAll(overlays2, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { stoneOresTab }).setUnlocalizedName("MM_StoneOres2").setHardness(2.3F);
+		stoneOres3 = (CustomBlock) new CustomBlock(stoneOres_ID3, Material.rock, CSArrays.addToAll(names3, "", " Ore"), CSArrays.addToAll(overlays3, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { stoneOresTab }).setUnlocalizedName("MM_StoneOres3").setHardness(2.3F);
+		stoneOres4 = (CustomBlock) new CustomBlock(stoneOres_ID4, Material.rock, CSArrays.addToAll(names4, "", " Ore"), CSArrays.addToAll(overlays4, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { stoneOresTab }).setUnlocalizedName("MM_StoneOres4").setHardness(2.3F);
+		stoneOres5 = (CustomBlock) new CustomBlock(stoneOres_ID5, Material.rock, CSArrays.addToAll(names5, "", " Ore"), CSArrays.addToAll(overlays5, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { stoneOresTab }).setUnlocalizedName("MM_StoneOres5").setHardness(2.3F);
+		stoneOres6 = (CustomBlock) new CustomBlock(stoneOres_ID6, Material.rock, CSArrays.addToAll(names6, "", " Ore"), CSArrays.addToAll(overlays6, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { stoneOresTab }).setUnlocalizedName("MM_StoneOres6").setHardness(2.3F);
+		stoneOres7 = (CustomBlock) new CustomBlock(stoneOres_ID7, Material.rock, CSArrays.addToAll(names7, "", " Ore"), CSArrays.addToAll(overlays7, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { stoneOresTab }).setUnlocalizedName("MM_StoneOres7").setHardness(2.3F);
+		stoneOres8 = (CustomBlock) new CustomBlock(stoneOres_ID8, Material.rock, CSArrays.addToAll(names8, "", " Ore"), CSArrays.addToAll(overlays8, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { stoneOresTab }).setUnlocalizedName("MM_StoneOres8").setHardness(2.3F);
 		
-		netherOres1 = (CustomBlock) new CustomBlock(netherOres_ID1, Material.rock, CSArray.addToAll(names1, "Nether ", " Ore"), CSArray.addToAll(overlays1, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { netherOresTab }).setUnlocalizedName("MM_NetherOres1").setHardness(2.1F);
-		netherOres2 = (CustomBlock) new CustomBlock(netherOres_ID2, Material.rock, CSArray.addToAll(names2, "Nether ", " Ore"), CSArray.addToAll(overlays2, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { netherOresTab }).setUnlocalizedName("MM_NetherOres2").setHardness(2.1F);
-		netherOres3 = (CustomBlock) new CustomBlock(netherOres_ID3, Material.rock, CSArray.addToAll(names3, "Nether ", " Ore"), CSArray.addToAll(overlays3, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { netherOresTab }).setUnlocalizedName("MM_NetherOres3").setHardness(2.1F);
-		netherOres4 = (CustomBlock) new CustomBlock(netherOres_ID4, Material.rock, CSArray.addToAll(names4, "Nether ", " Ore"), CSArray.addToAll(overlays4, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { netherOresTab }).setUnlocalizedName("MM_NetherOres4").setHardness(2.1F);
-		netherOres5 = (CustomBlock) new CustomBlock(netherOres_ID5, Material.rock, CSArray.addToAll(names5, "Nether ", " Ore"), CSArray.addToAll(overlays5, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { netherOresTab }).setUnlocalizedName("MM_NetherOres5").setHardness(2.1F);
-		netherOres6 = (CustomBlock) new CustomBlock(netherOres_ID6, Material.rock, CSArray.addToAll(names6, "Nether ", " Ore"), CSArray.addToAll(overlays6, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { netherOresTab }).setUnlocalizedName("MM_NetherOres6").setHardness(2.1F);
-		netherOres7 = (CustomBlock) new CustomBlock(netherOres_ID7, Material.rock, CSArray.addToAll(names7, "Nether ", " Ore"), CSArray.addToAll(overlays7, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { netherOresTab }).setUnlocalizedName("MM_NetherOres7").setHardness(2.1F);
-		netherOres8 = (CustomBlock) new CustomBlock(netherOres_ID8, Material.rock, CSArray.addToAll(names8, "Nether ", " Ore"), CSArray.addToAll(overlays8, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { netherOresTab }).setUnlocalizedName("MM_NetherOres8").setHardness(2.1F);
+		netherOres1 = (CustomBlock) new CustomBlock(netherOres_ID1, Material.rock, CSArrays.addToAll(names1, "Nether ", " Ore"), CSArrays.addToAll(overlays1, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { netherOresTab }).setUnlocalizedName("MM_NetherOres1").setHardness(2.1F);
+		netherOres2 = (CustomBlock) new CustomBlock(netherOres_ID2, Material.rock, CSArrays.addToAll(names2, "Nether ", " Ore"), CSArrays.addToAll(overlays2, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { netherOresTab }).setUnlocalizedName("MM_NetherOres2").setHardness(2.1F);
+		netherOres3 = (CustomBlock) new CustomBlock(netherOres_ID3, Material.rock, CSArrays.addToAll(names3, "Nether ", " Ore"), CSArrays.addToAll(overlays3, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { netherOresTab }).setUnlocalizedName("MM_NetherOres3").setHardness(2.1F);
+		netherOres4 = (CustomBlock) new CustomBlock(netherOres_ID4, Material.rock, CSArrays.addToAll(names4, "Nether ", " Ore"), CSArrays.addToAll(overlays4, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { netherOresTab }).setUnlocalizedName("MM_NetherOres4").setHardness(2.1F);
+		netherOres5 = (CustomBlock) new CustomBlock(netherOres_ID5, Material.rock, CSArrays.addToAll(names5, "Nether ", " Ore"), CSArrays.addToAll(overlays5, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { netherOresTab }).setUnlocalizedName("MM_NetherOres5").setHardness(2.1F);
+		netherOres6 = (CustomBlock) new CustomBlock(netherOres_ID6, Material.rock, CSArrays.addToAll(names6, "Nether ", " Ore"), CSArrays.addToAll(overlays6, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { netherOresTab }).setUnlocalizedName("MM_NetherOres6").setHardness(2.1F);
+		netherOres7 = (CustomBlock) new CustomBlock(netherOres_ID7, Material.rock, CSArrays.addToAll(names7, "Nether ", " Ore"), CSArrays.addToAll(overlays7, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { netherOresTab }).setUnlocalizedName("MM_NetherOres7").setHardness(2.1F);
+		netherOres8 = (CustomBlock) new CustomBlock(netherOres_ID8, Material.rock, CSArrays.addToAll(names8, "Nether ", " Ore"), CSArrays.addToAll(overlays8, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { netherOresTab }).setUnlocalizedName("MM_NetherOres8").setHardness(2.1F);
 		
-		endOres1 = (CustomBlock) new CustomBlock(endOres_ID1, Material.rock, CSArray.addToAll(names1, "End ", " Ore"), CSArray.addToAll(overlays1, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { endOresTab }).setUnlocalizedName("MM_EndOres1").setHardness(2.2F);
-		endOres2 = (CustomBlock) new CustomBlock(endOres_ID2, Material.rock, CSArray.addToAll(names2, "End ", " Ore"), CSArray.addToAll(overlays2, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { endOresTab }).setUnlocalizedName("MM_EndOres2").setHardness(2.2F);
-		endOres3 = (CustomBlock) new CustomBlock(endOres_ID3, Material.rock, CSArray.addToAll(names3, "End ", " Ore"), CSArray.addToAll(overlays3, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { endOresTab }).setUnlocalizedName("MM_EndOres3").setHardness(2.2F);
-		endOres4 = (CustomBlock) new CustomBlock(endOres_ID4, Material.rock, CSArray.addToAll(names4, "End ", " Ore"), CSArray.addToAll(overlays4, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { endOresTab }).setUnlocalizedName("MM_EndOres4").setHardness(2.2F);
-		endOres5 = (CustomBlock) new CustomBlock(endOres_ID5, Material.rock, CSArray.addToAll(names5, "End ", " Ore"), CSArray.addToAll(overlays5, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { endOresTab }).setUnlocalizedName("MM_EndOres5").setHardness(2.2F);
-		endOres6 = (CustomBlock) new CustomBlock(endOres_ID6, Material.rock, CSArray.addToAll(names6, "End ", " Ore"), CSArray.addToAll(overlays6, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { endOresTab }).setUnlocalizedName("MM_EndOres6").setHardness(2.2F);
-		endOres7 = (CustomBlock) new CustomBlock(endOres_ID7, Material.rock, CSArray.addToAll(names7, "End ", " Ore"), CSArray.addToAll(overlays7, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { endOresTab }).setUnlocalizedName("MM_EndOres7").setHardness(2.2F);
-		endOres8 = (CustomBlock) new CustomBlock(endOres_ID8, Material.rock, CSArray.addToAll(names8, "End ", " Ore"), CSArray.addToAll(overlays8, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { endOresTab }).setUnlocalizedName("MM_EndOres8").setHardness(2.2F);
+		endOres1 = (CustomBlock) new CustomBlock(endOres_ID1, Material.rock, CSArrays.addToAll(names1, "End ", " Ore"), CSArrays.addToAll(overlays1, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { endOresTab }).setUnlocalizedName("MM_EndOres1").setHardness(2.2F);
+		endOres2 = (CustomBlock) new CustomBlock(endOres_ID2, Material.rock, CSArrays.addToAll(names2, "End ", " Ore"), CSArrays.addToAll(overlays2, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { endOresTab }).setUnlocalizedName("MM_EndOres2").setHardness(2.2F);
+		endOres3 = (CustomBlock) new CustomBlock(endOres_ID3, Material.rock, CSArrays.addToAll(names3, "End ", " Ore"), CSArrays.addToAll(overlays3, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { endOresTab }).setUnlocalizedName("MM_EndOres3").setHardness(2.2F);
+		endOres4 = (CustomBlock) new CustomBlock(endOres_ID4, Material.rock, CSArrays.addToAll(names4, "End ", " Ore"), CSArrays.addToAll(overlays4, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { endOresTab }).setUnlocalizedName("MM_EndOres4").setHardness(2.2F);
+		endOres5 = (CustomBlock) new CustomBlock(endOres_ID5, Material.rock, CSArrays.addToAll(names5, "End ", " Ore"), CSArrays.addToAll(overlays5, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { endOresTab }).setUnlocalizedName("MM_EndOres5").setHardness(2.2F);
+		endOres6 = (CustomBlock) new CustomBlock(endOres_ID6, Material.rock, CSArrays.addToAll(names6, "End ", " Ore"), CSArrays.addToAll(overlays6, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { endOresTab }).setUnlocalizedName("MM_EndOres6").setHardness(2.2F);
+		endOres7 = (CustomBlock) new CustomBlock(endOres_ID7, Material.rock, CSArrays.addToAll(names7, "End ", " Ore"), CSArrays.addToAll(overlays7, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { endOresTab }).setUnlocalizedName("MM_EndOres7").setHardness(2.2F);
+		endOres8 = (CustomBlock) new CustomBlock(endOres_ID8, Material.rock, CSArrays.addToAll(names8, "End ", " Ore"), CSArrays.addToAll(overlays8, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { endOresTab }).setUnlocalizedName("MM_EndOres8").setHardness(2.2F);
 		
 		for (int i = 0; i < gemids.length; i++)
 		{
@@ -409,32 +409,32 @@ public class MoreMineralsMod
 		}
 		;
 		
-		dirtOres1 = (CustomBlock) new BlockDirtOre(dirtOres_ID1, Material.ground, CSArray.addToAll(names1, "Dirt-Based ", " Ore"), CSArray.addToAll(overlays1, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { dirtOresTab }).setUnlocalizedName("MM_DirtOres1").setHardness(1.7F);
-		dirtOres2 = (CustomBlock) new BlockDirtOre(dirtOres_ID2, Material.ground, CSArray.addToAll(names2, "Dirt-Based ", " Ore"), CSArray.addToAll(overlays2, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { dirtOresTab }).setUnlocalizedName("MM_DirtOres2").setHardness(1.7F);
-		dirtOres3 = (CustomBlock) new BlockDirtOre(dirtOres_ID3, Material.ground, CSArray.addToAll(names3, "Dirt-Based ", " Ore"), CSArray.addToAll(overlays3, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { dirtOresTab }).setUnlocalizedName("MM_DirtOres3").setHardness(1.7F);
-		dirtOres4 = (CustomBlock) new BlockDirtOre(dirtOres_ID4, Material.ground, CSArray.addToAll(names4, "Dirt-Based ", " Ore"), CSArray.addToAll(overlays4, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { dirtOresTab }).setUnlocalizedName("MM_DirtOres4").setHardness(1.7F);
-		dirtOres5 = (CustomBlock) new BlockDirtOre(dirtOres_ID5, Material.ground, CSArray.addToAll(names5, "Dirt-Based ", " Ore"), CSArray.addToAll(overlays5, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { dirtOresTab }).setUnlocalizedName("MM_DirtOres5").setHardness(1.7F);
-		dirtOres6 = (CustomBlock) new BlockDirtOre(dirtOres_ID6, Material.ground, CSArray.addToAll(names6, "Dirt-Based ", " Ore"), CSArray.addToAll(overlays6, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { dirtOresTab }).setUnlocalizedName("MM_DirtOres6").setHardness(1.7F);
-		dirtOres7 = (CustomBlock) new BlockDirtOre(dirtOres_ID7, Material.ground, CSArray.addToAll(names7, "Dirt-Based ", " Ore"), CSArray.addToAll(overlays7, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { dirtOresTab }).setUnlocalizedName("MM_DirtOres7").setHardness(1.7F);
-		dirtOres8 = (CustomBlock) new BlockDirtOre(dirtOres_ID8, Material.ground, CSArray.addToAll(names8, "Dirt-Based ", " Ore"), CSArray.addToAll(overlays8, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { dirtOresTab }).setUnlocalizedName("MM_DirtOres8").setHardness(1.7F);
+		dirtOres1 = (CustomBlock) new BlockDirtOre(dirtOres_ID1, Material.ground, CSArrays.addToAll(names1, "Dirt-Based ", " Ore"), CSArrays.addToAll(overlays1, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { dirtOresTab }).setUnlocalizedName("MM_DirtOres1").setHardness(1.7F);
+		dirtOres2 = (CustomBlock) new BlockDirtOre(dirtOres_ID2, Material.ground, CSArrays.addToAll(names2, "Dirt-Based ", " Ore"), CSArrays.addToAll(overlays2, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { dirtOresTab }).setUnlocalizedName("MM_DirtOres2").setHardness(1.7F);
+		dirtOres3 = (CustomBlock) new BlockDirtOre(dirtOres_ID3, Material.ground, CSArrays.addToAll(names3, "Dirt-Based ", " Ore"), CSArrays.addToAll(overlays3, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { dirtOresTab }).setUnlocalizedName("MM_DirtOres3").setHardness(1.7F);
+		dirtOres4 = (CustomBlock) new BlockDirtOre(dirtOres_ID4, Material.ground, CSArrays.addToAll(names4, "Dirt-Based ", " Ore"), CSArrays.addToAll(overlays4, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { dirtOresTab }).setUnlocalizedName("MM_DirtOres4").setHardness(1.7F);
+		dirtOres5 = (CustomBlock) new BlockDirtOre(dirtOres_ID5, Material.ground, CSArrays.addToAll(names5, "Dirt-Based ", " Ore"), CSArrays.addToAll(overlays5, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { dirtOresTab }).setUnlocalizedName("MM_DirtOres5").setHardness(1.7F);
+		dirtOres6 = (CustomBlock) new BlockDirtOre(dirtOres_ID6, Material.ground, CSArrays.addToAll(names6, "Dirt-Based ", " Ore"), CSArrays.addToAll(overlays6, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { dirtOresTab }).setUnlocalizedName("MM_DirtOres6").setHardness(1.7F);
+		dirtOres7 = (CustomBlock) new BlockDirtOre(dirtOres_ID7, Material.ground, CSArrays.addToAll(names7, "Dirt-Based ", " Ore"), CSArrays.addToAll(overlays7, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { dirtOresTab }).setUnlocalizedName("MM_DirtOres7").setHardness(1.7F);
+		dirtOres8 = (CustomBlock) new BlockDirtOre(dirtOres_ID8, Material.ground, CSArrays.addToAll(names8, "Dirt-Based ", " Ore"), CSArrays.addToAll(overlays8, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { dirtOresTab }).setUnlocalizedName("MM_DirtOres8").setHardness(1.7F);
 		
-		sandOres1 = (CustomBlock) new BlockSandOre(sandOres_ID1, Material.ground, CSArray.addToAll(names1, "Sand-Based ", " Ore"), CSArray.addToAll(overlays1, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { sandOresTab }).setUnlocalizedName("MM_SandOres1").setHardness(1.7F);
-		sandOres2 = (CustomBlock) new BlockSandOre(sandOres_ID2, Material.ground, CSArray.addToAll(names2, "Sand-Based ", " Ore"), CSArray.addToAll(overlays2, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { sandOresTab }).setUnlocalizedName("MM_SandOres2").setHardness(1.7F);
-		sandOres3 = (CustomBlock) new BlockSandOre(sandOres_ID3, Material.ground, CSArray.addToAll(names3, "Sand-Based ", " Ore"), CSArray.addToAll(overlays3, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { sandOresTab }).setUnlocalizedName("MM_SandOres3").setHardness(1.7F);
-		sandOres4 = (CustomBlock) new BlockSandOre(sandOres_ID4, Material.ground, CSArray.addToAll(names4, "Sand-Based ", " Ore"), CSArray.addToAll(overlays4, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { sandOresTab }).setUnlocalizedName("MM_SandOres4").setHardness(1.7F);
-		sandOres5 = (CustomBlock) new BlockSandOre(sandOres_ID5, Material.ground, CSArray.addToAll(names5, "Sand-Based ", " Ore"), CSArray.addToAll(overlays5, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { sandOresTab }).setUnlocalizedName("MM_SandOres5").setHardness(1.7F);
-		sandOres6 = (CustomBlock) new BlockSandOre(sandOres_ID6, Material.ground, CSArray.addToAll(names6, "Sand-Based ", " Ore"), CSArray.addToAll(overlays6, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { sandOresTab }).setUnlocalizedName("MM_SandOres6").setHardness(1.7F);
-		sandOres7 = (CustomBlock) new BlockSandOre(sandOres_ID7, Material.ground, CSArray.addToAll(names7, "Sand-Based ", " Ore"), CSArray.addToAll(overlays7, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { sandOresTab }).setUnlocalizedName("MM_SandOres7").setHardness(1.7F);
-		sandOres8 = (CustomBlock) new BlockSandOre(sandOres_ID8, Material.ground, CSArray.addToAll(names8, "Sand-Based ", " Ore"), CSArray.addToAll(overlays8, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { sandOresTab }).setUnlocalizedName("MM_SandOres8").setHardness(1.7F);
+		sandOres1 = (CustomBlock) new BlockSandOre(sandOres_ID1, Material.ground, CSArrays.addToAll(names1, "Sand-Based ", " Ore"), CSArrays.addToAll(overlays1, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { sandOresTab }).setUnlocalizedName("MM_SandOres1").setHardness(1.7F);
+		sandOres2 = (CustomBlock) new BlockSandOre(sandOres_ID2, Material.ground, CSArrays.addToAll(names2, "Sand-Based ", " Ore"), CSArrays.addToAll(overlays2, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { sandOresTab }).setUnlocalizedName("MM_SandOres2").setHardness(1.7F);
+		sandOres3 = (CustomBlock) new BlockSandOre(sandOres_ID3, Material.ground, CSArrays.addToAll(names3, "Sand-Based ", " Ore"), CSArrays.addToAll(overlays3, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { sandOresTab }).setUnlocalizedName("MM_SandOres3").setHardness(1.7F);
+		sandOres4 = (CustomBlock) new BlockSandOre(sandOres_ID4, Material.ground, CSArrays.addToAll(names4, "Sand-Based ", " Ore"), CSArrays.addToAll(overlays4, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { sandOresTab }).setUnlocalizedName("MM_SandOres4").setHardness(1.7F);
+		sandOres5 = (CustomBlock) new BlockSandOre(sandOres_ID5, Material.ground, CSArrays.addToAll(names5, "Sand-Based ", " Ore"), CSArrays.addToAll(overlays5, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { sandOresTab }).setUnlocalizedName("MM_SandOres5").setHardness(1.7F);
+		sandOres6 = (CustomBlock) new BlockSandOre(sandOres_ID6, Material.ground, CSArrays.addToAll(names6, "Sand-Based ", " Ore"), CSArrays.addToAll(overlays6, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { sandOresTab }).setUnlocalizedName("MM_SandOres6").setHardness(1.7F);
+		sandOres7 = (CustomBlock) new BlockSandOre(sandOres_ID7, Material.ground, CSArrays.addToAll(names7, "Sand-Based ", " Ore"), CSArrays.addToAll(overlays7, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { sandOresTab }).setUnlocalizedName("MM_SandOres7").setHardness(1.7F);
+		sandOres8 = (CustomBlock) new BlockSandOre(sandOres_ID8, Material.ground, CSArrays.addToAll(names8, "Sand-Based ", " Ore"), CSArrays.addToAll(overlays8, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { sandOresTab }).setUnlocalizedName("MM_SandOres8").setHardness(1.7F);
 		
-		storageBlocks1 = (CustomBlock) new CustomBlock(storageBlocks_ID1, Material.iron, CSArray.addToAll(names1, "Block of ", ""), CSArray.addToAll(overlays1, "", "block"), new CreativeTabs[] { rawMaterialsTab }).setUnlocalizedName("MM_StorageBlocks1").setHardness(2.5F);
-		storageBlocks2 = (CustomBlock) new CustomBlock(storageBlocks_ID2, Material.iron, CSArray.addToAll(names2, "Block of ", ""), CSArray.addToAll(overlays2, "", "block"), new CreativeTabs[] { rawMaterialsTab }).setUnlocalizedName("MM_StorageBlocks2").setHardness(2.5F);
-		storageBlocks3 = (CustomBlock) new CustomBlock(storageBlocks_ID3, Material.iron, CSArray.addToAll(names3, "Block of ", ""), CSArray.addToAll(overlays3, "", "block"), new CreativeTabs[] { rawMaterialsTab }).setUnlocalizedName("MM_StorageBlocks3").setHardness(2.5F);
-		storageBlocks4 = (CustomBlock) new CustomBlock(storageBlocks_ID4, Material.iron, CSArray.addToAll(names4, "Block of ", ""), CSArray.addToAll(overlays4, "", "block"), new CreativeTabs[] { rawMaterialsTab }).setUnlocalizedName("MM_StorageBlocks4").setHardness(2.5F);
-		storageBlocks5 = (CustomBlock) new CustomBlock(storageBlocks_ID5, Material.iron, CSArray.addToAll(names5, "Block of ", ""), CSArray.addToAll(overlays5, "", "block"), new CreativeTabs[] { rawMaterialsTab }).setUnlocalizedName("MM_StorageBlocks5").setHardness(2.5F);
-		storageBlocks6 = (CustomBlock) new CustomBlock(storageBlocks_ID6, Material.iron, CSArray.addToAll(names6, "Block of ", ""), CSArray.addToAll(overlays6, "", "block"), new CreativeTabs[] { rawMaterialsTab }).setUnlocalizedName("MM_StorageBlocks6").setHardness(2.5F);
-		storageBlocks7 = (CustomBlock) new CustomBlock(storageBlocks_ID7, Material.iron, CSArray.addToAll(names7, "Block of ", ""), CSArray.addToAll(overlays7, "", "block"), new CreativeTabs[] { rawMaterialsTab }).setUnlocalizedName("MM_StorageBlocks7").setHardness(2.5F);
-		storageBlocks8 = (CustomBlock) new CustomBlock(storageBlocks_ID8, Material.iron, CSArray.addToAll(names8, "Block of ", ""), CSArray.addToAll(overlays8, "", "block"), new CreativeTabs[] { rawMaterialsTab }).setUnlocalizedName("MM_StorageBlocks8").setHardness(2.5F);
+		storageBlocks1 = (CustomBlock) new CustomBlock(storageBlocks_ID1, Material.iron, CSArrays.addToAll(names1, "Block of ", ""), CSArrays.addToAll(overlays1, "", "block"), new CreativeTabs[] { rawMaterialsTab }).setUnlocalizedName("MM_StorageBlocks1").setHardness(2.5F);
+		storageBlocks2 = (CustomBlock) new CustomBlock(storageBlocks_ID2, Material.iron, CSArrays.addToAll(names2, "Block of ", ""), CSArrays.addToAll(overlays2, "", "block"), new CreativeTabs[] { rawMaterialsTab }).setUnlocalizedName("MM_StorageBlocks2").setHardness(2.5F);
+		storageBlocks3 = (CustomBlock) new CustomBlock(storageBlocks_ID3, Material.iron, CSArrays.addToAll(names3, "Block of ", ""), CSArrays.addToAll(overlays3, "", "block"), new CreativeTabs[] { rawMaterialsTab }).setUnlocalizedName("MM_StorageBlocks3").setHardness(2.5F);
+		storageBlocks4 = (CustomBlock) new CustomBlock(storageBlocks_ID4, Material.iron, CSArrays.addToAll(names4, "Block of ", ""), CSArrays.addToAll(overlays4, "", "block"), new CreativeTabs[] { rawMaterialsTab }).setUnlocalizedName("MM_StorageBlocks4").setHardness(2.5F);
+		storageBlocks5 = (CustomBlock) new CustomBlock(storageBlocks_ID5, Material.iron, CSArrays.addToAll(names5, "Block of ", ""), CSArrays.addToAll(overlays5, "", "block"), new CreativeTabs[] { rawMaterialsTab }).setUnlocalizedName("MM_StorageBlocks5").setHardness(2.5F);
+		storageBlocks6 = (CustomBlock) new CustomBlock(storageBlocks_ID6, Material.iron, CSArrays.addToAll(names6, "Block of ", ""), CSArrays.addToAll(overlays6, "", "block"), new CreativeTabs[] { rawMaterialsTab }).setUnlocalizedName("MM_StorageBlocks6").setHardness(2.5F);
+		storageBlocks7 = (CustomBlock) new CustomBlock(storageBlocks_ID7, Material.iron, CSArrays.addToAll(names7, "Block of ", ""), CSArrays.addToAll(overlays7, "", "block"), new CreativeTabs[] { rawMaterialsTab }).setUnlocalizedName("MM_StorageBlocks7").setHardness(2.5F);
+		storageBlocks8 = (CustomBlock) new CustomBlock(storageBlocks_ID8, Material.iron, CSArrays.addToAll(names8, "Block of ", ""), CSArrays.addToAll(overlays8, "", "block"), new CreativeTabs[] { rawMaterialsTab }).setUnlocalizedName("MM_StorageBlocks8").setHardness(2.5F);
 		
 		oreCrusher = (BlockOreCrusher) new BlockOreCrusher(oreCrusher_ID, false).setHardness(2.0F).setStepSound(Block.soundMetalFootstep).setCreativeTab(rawMaterialsTab).setUnlocalizedName("MM_OreCrusher");
 		oreCrusherActive = (BlockOreCrusher) new BlockOreCrusher(oreCrusherActive_ID, false).setHardness(2.0F).setStepSound(Block.soundMetalFootstep).setUnlocalizedName("MM_OreCrusher");
@@ -454,12 +454,12 @@ public class MoreMineralsMod
 		addOreDictionaryEntrys();
 		setHarvestLevelsAndHardnessess();
 		
-		stoneOresTab.setIconItemStack(new ItemStack(MoreMineralsHelper.getOreFromMetadata(CSArray.valueOf(allnames, "Magnesium"), "stone"), 1, CSArray.valueOf(allnames, "Magnesium") % 16));
-		netherOresTab.setIconItemStack(new ItemStack(MoreMineralsHelper.getOreFromMetadata(CSArray.valueOf(allnames, "Uranium"), "nether"), 1, CSArray.valueOf(allnames, "Uranium") % 16));
-		endOresTab.setIconItemStack(new ItemStack(MoreMineralsHelper.getOreFromMetadata(CSArray.valueOf(allnames, "Ruby"), "end"), 1, CSArray.valueOf(allnames, "Ruby") % 16));
-		dirtOresTab.setIconItemStack(new ItemStack(MoreMineralsHelper.getOreFromMetadata(CSArray.valueOf(allnames, "Iridium"), "dirt"), 1, CSArray.valueOf(allnames, "Iridium") % 16));
-		sandOresTab.setIconItemStack(new ItemStack(MoreMineralsHelper.getOreFromMetadata(CSArray.valueOf(allnames, "Beryllium"), "sand"), 1, CSArray.valueOf(allnames, "Beryllium") % 16));
-		rawMaterialsTab.setIconItemStack(new ItemStack(ingots, 1, CSArray.valueOf(allnames, "Aluminium")));
+		stoneOresTab.setIconItemStack(new ItemStack(MoreMineralsHelper.getOreFromMetadata(CSArrays.valueOf(allnames, "Magnesium"), "stone"), 1, CSArrays.valueOf(allnames, "Magnesium") % 16));
+		netherOresTab.setIconItemStack(new ItemStack(MoreMineralsHelper.getOreFromMetadata(CSArrays.valueOf(allnames, "Uranium"), "nether"), 1, CSArrays.valueOf(allnames, "Uranium") % 16));
+		endOresTab.setIconItemStack(new ItemStack(MoreMineralsHelper.getOreFromMetadata(CSArrays.valueOf(allnames, "Ruby"), "end"), 1, CSArrays.valueOf(allnames, "Ruby") % 16));
+		dirtOresTab.setIconItemStack(new ItemStack(MoreMineralsHelper.getOreFromMetadata(CSArrays.valueOf(allnames, "Iridium"), "dirt"), 1, CSArrays.valueOf(allnames, "Iridium") % 16));
+		sandOresTab.setIconItemStack(new ItemStack(MoreMineralsHelper.getOreFromMetadata(CSArrays.valueOf(allnames, "Beryllium"), "sand"), 1, CSArrays.valueOf(allnames, "Beryllium") % 16));
+		rawMaterialsTab.setIconItemStack(new ItemStack(ingots, 1, CSArrays.valueOf(allnames, "Aluminium")));
 		toolsTab.setIconItemStack(ItemDataTool.setToolMaterial(new ItemStack(dataPickaxe), silver));
 		
 		GameRegistry.registerTileEntity(TileEntityOreCrusher.class, "OreCrusher");
@@ -501,12 +501,12 @@ public class MoreMineralsMod
 				MinecraftForge.setBlockHarvestLevel(MoreMineralsHelper.getOreFromMetadata(j + (i * 16), "sand"), i, "shovel", 1);
 				MinecraftForge.setBlockHarvestLevel(MoreMineralsHelper.getOreFromMetadata(j + (i * 16), "dirt"), i, "shovel", 1);
 				
-				float stoneHardness = Block.stone.blockHardness + (6.4F / (float) gentype) + (gentype <= 24 ? 0.5F : 0F);
-				float netherHardness = Block.netherrack.blockHardness + (6.4F / (float) gentype) + (gentype <= 24 ? 0.6F : 0F);
-				float endHardness = Block.whiteStone.blockHardness + (6.4F / (float) gentype) + (gentype <= 24 ? 0.7F : 0F);
-				float dirtHardness = Block.dirt.blockHardness + (6.4F / (float) gentype) + (gentype <= 24 ? 0.4F : 0F);
-				float sandHardness = Block.sand.blockHardness + (6.4F / (float) gentype) + (gentype <= 24 ? 0.4F : 0F);
-				float storageHardness = Block.blockIron.blockHardness + (6.4F / (float) gentype) + (gentype <= 24 ? 0.8F : 0F);
+				float stoneHardness = Block.stone.blockHardness + (6.4F / gentype) + (gentype <= 24 ? 0.5F : 0F);
+				float netherHardness = Block.netherrack.blockHardness + (6.4F / gentype) + (gentype <= 24 ? 0.6F : 0F);
+				float endHardness = Block.whiteStone.blockHardness + (6.4F / gentype) + (gentype <= 24 ? 0.7F : 0F);
+				float dirtHardness = Block.dirt.blockHardness + (6.4F / gentype) + (gentype <= 24 ? 0.4F : 0F);
+				float sandHardness = Block.sand.blockHardness + (6.4F / gentype) + (gentype <= 24 ? 0.4F : 0F);
+				float storageHardness = Block.blockIron.blockHardness + (6.4F / gentype) + (gentype <= 24 ? 0.8F : 0F);
 				MoreMineralsHelper.getOreFromMetadata(j + (i * 16), "stone").setHardness(j, stoneHardness);
 				MoreMineralsHelper.getOreFromMetadata(j + (i * 16), "nether").setHardness(j, netherHardness);
 				MoreMineralsHelper.getOreFromMetadata(j + (i * 16), "end").setHardness(j, endHardness);
@@ -599,11 +599,11 @@ public class MoreMineralsMod
 	{
 		GameRegistry.addRecipe(new RepairDataTools());
 		
-		GameRegistry.addShapedRecipe(new ItemStack(oreCrusher, 1, 3), new Object[] { "tct", "cTc", "tct", 't', new ItemStack(ingots, 1, CSArray.valueOf(allnames, "Tin")), 'c', new ItemStack(ingots, 1, CSArray.valueOf(allnames, "Chrome")), 'T', new ItemStack(ingots, 1, CSArray.valueOf(allnames, "Titanium")), });
+		GameRegistry.addShapedRecipe(new ItemStack(oreCrusher, 1, 3), new Object[] { "tct", "cTc", "tct", 't', new ItemStack(ingots, 1, CSArrays.valueOf(allnames, "Tin")), 'c', new ItemStack(ingots, 1, CSArrays.valueOf(allnames, "Chrome")), 'T', new ItemStack(ingots, 1, CSArrays.valueOf(allnames, "Titanium")), });
 		
 		for (int i = 0; i < 128; i++)
 		{
-			ItemStack is = (CSArray.contains(gemids, i) ? new ItemStack(gems, 1, CSArray.valueOf(gemids, i)) : new ItemStack(ingots, 1, i));
+			ItemStack is = (CSArrays.contains(gemids, i) ? new ItemStack(gems, 1, CSArrays.valueOf(gemids, i)) : new ItemStack(ingots, 1, i));
 			GameRegistry.addShapelessRecipe(new ItemStack(MoreMineralsHelper.getOreFromMetadata(i, "storage"), 1, i % 16), is, is, is, is, is, is, is, is, is);
 			GameRegistry.addShapelessRecipe(is, new ItemStack(nuggets, 1, i), new ItemStack(nuggets, 1, i), new ItemStack(nuggets, 1, i), new ItemStack(nuggets, 1, i), new ItemStack(nuggets, 1, i), new ItemStack(nuggets, 1, i), new ItemStack(nuggets, 1, i), new ItemStack(nuggets, 1, i), new ItemStack(nuggets, 1, i));
 			GameRegistry.addShapelessRecipe(new ItemStack(nuggets, 9, i), is);
@@ -633,19 +633,19 @@ public class MoreMineralsMod
 		{
 			Item tool = i == 0 ? dataSword : (i == 1 ? dataSpade : (i == 2 ? dataPickaxe : (i == 3 ? dataAxe : dataHoe)));
 			
-			CSCrafting.addToolRecipe(ItemDataTool.setToolMaterial(new ItemStack(tool), adamantite), new ItemStack(ingots, 1, CSArray.valueOf(allnames, "Adamantite")), i);
-			CSCrafting.addToolRecipe(ItemDataTool.setToolMaterial(new ItemStack(tool), cobalt), new ItemStack(ingots, 1, CSArray.valueOf(allnames, "Cobalt")), i);
-			CSCrafting.addToolRecipe(ItemDataTool.setToolMaterial(new ItemStack(tool), demonite), new ItemStack(ingots, 1, CSArray.valueOf(allnames, "Demonite")), i);
-			CSCrafting.addToolRecipe(ItemDataTool.setToolMaterial(new ItemStack(tool), mythril), new ItemStack(ingots, 1, CSArray.valueOf(allnames, "Mythril")), i);
-			CSCrafting.addToolRecipe(ItemDataTool.setToolMaterial(new ItemStack(tool), aluminium), new ItemStack(ingots, 1, CSArray.valueOf(allnames, "Aluminium")), i);
-			CSCrafting.addToolRecipe(ItemDataTool.setToolMaterial(new ItemStack(tool), chrome), new ItemStack(ingots, 1, CSArray.valueOf(allnames, "Chrome")), i);
-			CSCrafting.addToolRecipe(ItemDataTool.setToolMaterial(new ItemStack(tool), copper), new ItemStack(ingots, 1, CSArray.valueOf(allnames, "Copper")), i);
-			CSCrafting.addToolRecipe(ItemDataTool.setToolMaterial(new ItemStack(tool), silver), new ItemStack(ingots, 1, CSArray.valueOf(allnames, "Silver")), i);
-			CSCrafting.addToolRecipe(ItemDataTool.setToolMaterial(new ItemStack(tool), tin), new ItemStack(ingots, 1, CSArray.valueOf(allnames, "Tin")), i);
-			CSCrafting.addToolRecipe(ItemDataTool.setToolMaterial(new ItemStack(tool), titanium), new ItemStack(ingots, 1, CSArray.valueOf(allnames, "Titanium")), i);
-			CSCrafting.addToolRecipe(ItemDataTool.setToolMaterial(new ItemStack(tool), emerald), new ItemStack(vanillaSpecialItems, 1, CSArray.valueOf(vanillanames, "Emerald")), i);
-			CSCrafting.addToolRecipe(ItemDataTool.setToolMaterial(new ItemStack(tool), ruby), new ItemStack(gems, 1, CSArray.valueOf(gemnames, "Ruby")), i);
-			CSCrafting.addToolRecipe(ItemDataTool.setToolMaterial(new ItemStack(tool), sapphire), new ItemStack(gems, 1, CSArray.valueOf(gemnames, "Sapphire")), i);
+			CSCrafting.addToolRecipe(ItemDataTool.setToolMaterial(new ItemStack(tool), adamantite), new ItemStack(ingots, 1, CSArrays.valueOf(allnames, "Adamantite")), i);
+			CSCrafting.addToolRecipe(ItemDataTool.setToolMaterial(new ItemStack(tool), cobalt), new ItemStack(ingots, 1, CSArrays.valueOf(allnames, "Cobalt")), i);
+			CSCrafting.addToolRecipe(ItemDataTool.setToolMaterial(new ItemStack(tool), demonite), new ItemStack(ingots, 1, CSArrays.valueOf(allnames, "Demonite")), i);
+			CSCrafting.addToolRecipe(ItemDataTool.setToolMaterial(new ItemStack(tool), mythril), new ItemStack(ingots, 1, CSArrays.valueOf(allnames, "Mythril")), i);
+			CSCrafting.addToolRecipe(ItemDataTool.setToolMaterial(new ItemStack(tool), aluminium), new ItemStack(ingots, 1, CSArrays.valueOf(allnames, "Aluminium")), i);
+			CSCrafting.addToolRecipe(ItemDataTool.setToolMaterial(new ItemStack(tool), chrome), new ItemStack(ingots, 1, CSArrays.valueOf(allnames, "Chrome")), i);
+			CSCrafting.addToolRecipe(ItemDataTool.setToolMaterial(new ItemStack(tool), copper), new ItemStack(ingots, 1, CSArrays.valueOf(allnames, "Copper")), i);
+			CSCrafting.addToolRecipe(ItemDataTool.setToolMaterial(new ItemStack(tool), silver), new ItemStack(ingots, 1, CSArrays.valueOf(allnames, "Silver")), i);
+			CSCrafting.addToolRecipe(ItemDataTool.setToolMaterial(new ItemStack(tool), tin), new ItemStack(ingots, 1, CSArrays.valueOf(allnames, "Tin")), i);
+			CSCrafting.addToolRecipe(ItemDataTool.setToolMaterial(new ItemStack(tool), titanium), new ItemStack(ingots, 1, CSArrays.valueOf(allnames, "Titanium")), i);
+			CSCrafting.addToolRecipe(ItemDataTool.setToolMaterial(new ItemStack(tool), emerald), new ItemStack(vanillaSpecialItems, 1, CSArrays.valueOf(vanillanames, "Emerald")), i);
+			CSCrafting.addToolRecipe(ItemDataTool.setToolMaterial(new ItemStack(tool), ruby), new ItemStack(gems, 1, CSArrays.valueOf(gemnames, "Ruby")), i);
+			CSCrafting.addToolRecipe(ItemDataTool.setToolMaterial(new ItemStack(tool), sapphire), new ItemStack(gems, 1, CSArrays.valueOf(gemnames, "Sapphire")), i);
 		}
 	}
 	
@@ -655,7 +655,7 @@ public class MoreMineralsMod
 		{
 			for (int j = 0; j < splitnames[i].length; j++)
 			{
-				ItemStack is = (CSArray.contains(gemids, (j + (i * 16))) ? new ItemStack(gems, 1, CSArray.valueOf(gemids, j + (i * 16))) : new ItemStack(ingots, 1, j + (i * 16)));
+				ItemStack is = (CSArrays.contains(gemids, (j + (i * 16))) ? new ItemStack(gems, 1, CSArrays.valueOf(gemids, j + (i * 16))) : new ItemStack(ingots, 1, j + (i * 16)));
 				ItemStack is2 = new ItemStack(is.getItem(), 2, is.getItemDamage());
 				
 				CSCrafting.addSmelting(new ItemStack(MoreMineralsHelper.getOreFromMetadata(j + (i * 16), "stone"), 1, j), is, 0.1F);
@@ -699,7 +699,7 @@ public class MoreMineralsMod
 		{
 			for (int j = 0; j < splitnames[i].length; j++)
 			{
-				ItemStack is = (CSArray.contains(gemids, j + (i * 16)) ? new ItemStack(gems, 1, CSArray.valueOf(gemids, j + (i * 16))) : new ItemStack(ingots, 1, j + (i * 16)));
+				ItemStack is = (CSArrays.contains(gemids, j + (i * 16)) ? new ItemStack(gems, 1, CSArrays.valueOf(gemids, j + (i * 16))) : new ItemStack(ingots, 1, j + (i * 16)));
 				
 				OreCrusherRecipes.crushing().addCrushing(MoreMineralsHelper.getOreFromMetadata(j + (i * 16), "stone").blockID, j, new ItemStack(dusts, 2, j + (i * 16)), 0.1F);
 				OreCrusherRecipes.crushing().addCrushing(MoreMineralsHelper.getOreFromMetadata(j + (i * 16), "nether").blockID, j, new ItemStack(dusts, 4, j + (i * 16)), 0.2F);
