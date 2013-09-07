@@ -3,16 +3,17 @@ package clashsoft.mods.moreminerals.block;
 import java.util.List;
 import java.util.Random;
 
+import clashsoft.clashsoftapi.CustomBlock;
+import clashsoft.mods.moreminerals.MoreMineralsMod;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.item.EntityFallingSand;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import clashsoft.clashsoftapi.CustomBlock;
-import clashsoft.mods.moreminerals.MoreMineralsMod;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockVanillaSpecialOre extends CustomBlock
 {

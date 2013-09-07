@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import net.minecraft.item.ItemStack;
 
 public class OreCrusherRecipes
@@ -74,7 +75,7 @@ public class OreCrusherRecipes
         {
             return null;
         }
-        ItemStack ret = (ItemStack)metaCrushingList.get(Arrays.asList(item.itemID, item.getItemDamage()));
+        ItemStack ret = metaCrushingList.get(Arrays.asList(item.itemID, item.getItemDamage()));
         if (ret != null)
         {
             return ret;

@@ -54,6 +54,7 @@ public class BlockSandOre extends BlockDirtOre
 	/**
 	 * Called whenever the block is added into the world. Args: world, x, y, z
 	 */
+	@Override
 	public void onBlockAdded(World par1World, int par2, int par3, int par4)
 	{
 		par1World.scheduleBlockUpdate(par2, par3, par4, this.blockID, this.tickRate(par1World));
@@ -64,6 +65,7 @@ public class BlockSandOre extends BlockDirtOre
 	 * neighbor changed (coordinates passed are their own) Args: x, y, z,
 	 * neighbor blockID
 	 */
+	@Override
 	public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5)
 	{
 		par1World.scheduleBlockUpdate(par2, par3, par4, this.blockID, this.tickRate(par1World));
@@ -72,6 +74,7 @@ public class BlockSandOre extends BlockDirtOre
 	/**
 	 * Ticks the block if it's been scheduled
 	 */
+	@Override
 	public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random)
 	{
 		if (!par1World.isRemote)
@@ -93,7 +96,7 @@ public class BlockSandOre extends BlockDirtOre
 			{
 				if (!par1World.isRemote)
 				{
-					EntityFallingSand entityfallingsand = new EntityFallingSand(par1World, (double) ((float) par2 + 0.5F), (double) ((float) par3 + 0.5F), (double) ((float) par4 + 0.5F), this.blockID, par1World.getBlockMetadata(par2, par3, par4));
+					EntityFallingSand entityfallingsand = new EntityFallingSand(par1World, par2 + 0.5F, par3 + 0.5F, par4 + 0.5F, this.blockID, par1World.getBlockMetadata(par2, par3, par4));
 					this.onStartFalling(entityfallingsand);
 					par1World.spawnEntityInWorld(entityfallingsand);
 				}
@@ -125,6 +128,7 @@ public class BlockSandOre extends BlockDirtOre
 	/**
 	 * How many world ticks before ticking
 	 */
+	@Override
 	public int tickRate(World par1World)
 	{
 		return 2;
