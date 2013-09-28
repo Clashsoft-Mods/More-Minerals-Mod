@@ -27,6 +27,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -34,11 +35,16 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.src.ModLoader;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.ForgeSubscribe;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 
-@Mod(modid = "MoreMineralsMod", name = "More Minerals Mod", version = CSUtil.CURRENT_VERION)
+@Mod(modid = "MoreMineralsMod", name = "More Minerals Mod", version = MoreMineralsMod.VERSION)
 @NetworkMod(clientSideRequired = true, serverSideRequired = false)
 public class MoreMineralsMod
 {
+	public static final int			REVISION				= 1;
+	public static final String		VERSION					= CSUtil.CURRENT_VERION + "-" + REVISION;
+	
 	@Instance("MoreMineralsMod")
 	public static MoreMineralsMod	INSTANCE;
 	
@@ -407,7 +413,6 @@ public class MoreMineralsMod
 			MoreMineralsHelper.getOreFromMetadata(gemids[i], "nether").setDrops(gemids[i] % 16, new ItemStack(gems, 2, i));
 			MoreMineralsHelper.getOreFromMetadata(gemids[i], "end").setDrops(gemids[i] % 16, new ItemStack(gems, 2, i));
 		}
-		;
 		
 		dirtOres1 = (CustomBlock) new BlockDirtOre(dirtOres_ID1, Material.ground, CSArrays.addToAll(names1, "Dirt-Based ", " Ore"), CSArrays.addToAll(overlays1, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { dirtOresTab }).setUnlocalizedName("MM_DirtOres1").setHardness(1.7F);
 		dirtOres2 = (CustomBlock) new BlockDirtOre(dirtOres_ID2, Material.ground, CSArrays.addToAll(names2, "Dirt-Based ", " Ore"), CSArrays.addToAll(overlays2, "", "overlay"), true, ClientProxy.oreRenderer, new CreativeTabs[] { dirtOresTab }).setUnlocalizedName("MM_DirtOres2").setHardness(1.7F);
@@ -465,8 +470,20 @@ public class MoreMineralsMod
 		GameRegistry.registerTileEntity(TileEntityOreCrusher.class, "OreCrusher");
 		GameRegistry.registerWorldGenerator(new MoreMineralsOreGenerator());
 		NetworkRegistry.instance().registerGuiHandler(INSTANCE, proxy);
+		MinecraftForge.EVENT_BUS.register(this);
 		
 		addLocalizations();
+	}
+	
+	@ForgeSubscribe
+	public void playerJoined(EntityJoinWorldEvent event)
+	{
+		if (event.entity instanceof EntityPlayer)
+		{
+			String nextVersion = CSUtil.checkForUpdate("mmm", CSUtil.CLASHSOFT_ADFLY, VERSION);
+			if (nextVersion != VERSION)
+				((EntityPlayer) event.entity).addChatMessage("A new More Minerals Mod version is available: " + nextVersion + ". You are using " + VERSION);
+		}
 	}
 	
 	private void setupToolMaterials(DataToolSet dataToolSet)
