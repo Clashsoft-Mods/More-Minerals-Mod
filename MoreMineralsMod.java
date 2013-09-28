@@ -8,6 +8,7 @@ import clashsoft.clashsoftapi.ItemCustomBlock;
 import clashsoft.clashsoftapi.datatools.*;
 import clashsoft.clashsoftapi.util.*;
 import clashsoft.clashsoftapi.util.CSItems.DataToolSet;
+import clashsoft.clashsoftapi.util.update.ModUpdate;
 import clashsoft.mods.moreminerals.block.BlockDirtOre;
 import clashsoft.mods.moreminerals.block.BlockOreCrusher;
 import clashsoft.mods.moreminerals.block.BlockSandOre;
@@ -480,9 +481,8 @@ public class MoreMineralsMod
 	{
 		if (event.entity instanceof EntityPlayer)
 		{
-			String nextVersion = CSUtil.checkForUpdate("mmm", CSUtil.CLASHSOFT_ADFLY, VERSION);
-			if (nextVersion != VERSION)
-				((EntityPlayer) event.entity).addChatMessage("A new More Minerals Mod version is available: " + nextVersion + ". You are using " + VERSION);
+			ModUpdate update = CSUtil.checkForUpdate("mmm", CSUtil.CLASHSOFT_ADFLY, MoreMineralsMod.VERSION);
+			CSUtil.notifyUpdate((EntityPlayer) event.entity, "More Minerals Mod", update);
 		}
 	}
 	
