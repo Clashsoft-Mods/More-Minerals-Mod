@@ -44,7 +44,7 @@ import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 public class MoreMineralsMod
 {
 	public static final int			REVISION				= 2;
-	public static final String		VERSION					= CSUtil.CURRENT_VERION + "-" + REVISION;
+	public static final String		VERSION					= CSUpdate.CURRENT_VERION + "-" + REVISION;
 	
 	@Instance("MoreMineralsMod")
 	public static MoreMineralsMod	INSTANCE;
@@ -481,8 +481,8 @@ public class MoreMineralsMod
 	{
 		if (event.entity instanceof EntityPlayer)
 		{
-			ModUpdate update = CSUtil.checkForUpdate("mmm", CSUtil.CLASHSOFT_ADFLY, MoreMineralsMod.VERSION);
-			CSUtil.notifyUpdate((EntityPlayer) event.entity, "More Minerals Mod", update);
+			ModUpdate update = CSUpdate.checkForUpdate("More Minerals Mod", MoreMineralsMod.VERSION);
+			CSUpdate.notifyUpdate((EntityPlayer) event.entity, "More Minerals Mod", update);
 		}
 	}
 	
