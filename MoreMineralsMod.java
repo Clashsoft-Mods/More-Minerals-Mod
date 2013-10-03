@@ -43,8 +43,8 @@ import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 @NetworkMod(clientSideRequired = true, serverSideRequired = false)
 public class MoreMineralsMod
 {
-	public static final int			REVISION				= 3;
-	public static final String		VERSION					= CSUpdate.CURRENT_VERION + "-" + REVISION;
+	public static final int			REVISION				= 4;
+	public static final String		VERSION					= CSUpdate.CURRENT_VERSION + "-" + REVISION;
 	
 	@Instance("MoreMineralsMod")
 	public static MoreMineralsMod	INSTANCE;
