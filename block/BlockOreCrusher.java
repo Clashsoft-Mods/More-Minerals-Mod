@@ -8,7 +8,8 @@ import java.util.List;
 import java.util.Random;
 
 import clashsoft.mods.moreminerals.MoreMineralsMod;
-import clashsoft.mods.moreminerals.orecrusher.TileEntityOreCrusher;
+import clashsoft.mods.moreminerals.tileentity.TileEntityOreCrusher;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;

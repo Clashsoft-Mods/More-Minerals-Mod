@@ -1,8 +1,10 @@
-package clashsoft.mods.moreminerals;
+package clashsoft.mods.moreminerals.world.gen;
 
 import java.util.Random;
 
 import clashsoft.clashsoftapi.util.CSRandom;
+import clashsoft.mods.moreminerals.MoreMineralsMod;
+import clashsoft.mods.moreminerals.block.OreHelper;
 import cpw.mods.fml.common.IWorldGenerator;
 
 import net.minecraft.block.Block;
@@ -12,7 +14,7 @@ import net.minecraft.world.WorldProviderEnd;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 
-public class MoreMineralsOreGenerator implements IWorldGenerator
+public class MMMOreGenerator implements IWorldGenerator
 {
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider)
@@ -30,9 +32,9 @@ public class MoreMineralsOreGenerator implements IWorldGenerator
 		// More Minerals Stone, Dirt and Sand Ores
 		for (int i = 0; i < MoreMineralsMod.overworldGen.length; i++)
 		{
-			int stoneID = MoreMineralsHelper.getOreFromMetadata(i, "stone").blockID;
-			int dirtID = MoreMineralsHelper.getOreFromMetadata(i, "dirt").blockID;
-			int sandID = MoreMineralsHelper.getOreFromMetadata(i, "sand").blockID;
+			int stoneID = OreHelper.getOreFromMetadata(i, "stone").blockID;
+			int dirtID = OreHelper.getOreFromMetadata(i, "dirt").blockID;
+			int sandID = OreHelper.getOreFromMetadata(i, "sand").blockID;
 			int meta = i % 16;
 			
 			int maxHeightStone = MoreMineralsMod.overworldGen[i]; // height
@@ -128,7 +130,7 @@ public class MoreMineralsOreGenerator implements IWorldGenerator
 				int maxHeight = MoreMineralsMod.netherGen[i] / 2 + 4; // height
 				int amountPerChunk = MoreMineralsMod.netherGen[i] / 3;
 				int amountPerVeign = (int) (MathHelper.sqrt_double(MoreMineralsMod.netherGen[i]) * 1.75D);
-				int netheroreID = MoreMineralsHelper.getOreFromMetadata(i, "nether").blockID;
+				int netheroreID = OreHelper.getOreFromMetadata(i, "nether").blockID;
 				int meta = i % 16;
 				
 				for (int j = 0; j < amountPerChunk; j++)
@@ -170,7 +172,7 @@ public class MoreMineralsOreGenerator implements IWorldGenerator
 				int maxHeight = MoreMineralsMod.endGen[i] * 2 + 5; // height
 				int amountPerChunk = MoreMineralsMod.endGen[i] / 2;
 				int amountPerVeign = (int) (MathHelper.sqrt_double(MoreMineralsMod.endGen[i]) * 0.8D);
-				int endoreID = MoreMineralsHelper.getOreFromMetadata(i, "end").blockID;
+				int endoreID = OreHelper.getOreFromMetadata(i, "end").blockID;
 				int meta = i < 16 ? i : i - 16;
 				
 				for (int j = 0; j < amountPerChunk; j++)

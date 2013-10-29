@@ -1,16 +1,18 @@
-package clashsoft.mods.moreminerals;
+package clashsoft.mods.moreminerals.client.renderer.block;
 
 import org.lwjgl.opengl.GL11;
 
+import clashsoft.mods.moreminerals.MoreMineralsMod;
+import clashsoft.mods.moreminerals.block.OreHelper;
+import clashsoft.mods.moreminerals.client.MMMClientProxy;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 
-public class MoreMineralsOreRenderer implements ISimpleBlockRenderingHandler
+public class MMMOreRenderer implements ISimpleBlockRenderingHandler
 {
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer)
@@ -90,8 +92,6 @@ public class MoreMineralsOreRenderer implements ISimpleBlockRenderingHandler
 		int metadata = world.getBlockMetadata(x, y, z);
 		Block bgBlock = getBackgroundBlock(i, metadata);
 		
-		Icon icon = block.getBlockTexture(world, x, y, z, 0);
-		
 		renderer.renderStandardBlock(bgBlock, x, y, z);
 		renderer.renderStandardBlock(block, x, y, z);
 		
@@ -100,23 +100,23 @@ public class MoreMineralsOreRenderer implements ISimpleBlockRenderingHandler
 	
 	private static Block getBackgroundBlock(int blockID, int metadata)
 	{
-		if (MoreMineralsHelper.isOreType(blockID, "stone"))
+		if (OreHelper.isOreType(blockID, "stone"))
 		{
 			return Block.stone;
 		}
-		else if (MoreMineralsHelper.isOreType(blockID, "nether"))
+		else if (OreHelper.isOreType(blockID, "nether"))
 		{
 			return Block.netherrack;
 		}
-		else if (MoreMineralsHelper.isOreType(blockID, "end"))
+		else if (OreHelper.isOreType(blockID, "end"))
 		{
 			return Block.whiteStone;
 		}
-		else if (MoreMineralsHelper.isOreType(blockID, "dirt"))
+		else if (OreHelper.isOreType(blockID, "dirt"))
 		{
 			return Block.dirt;
 		}
-		else if (MoreMineralsHelper.isOreType(blockID, "sand"))
+		else if (OreHelper.isOreType(blockID, "sand"))
 		{
 			return Block.sand;
 		}
@@ -154,7 +154,7 @@ public class MoreMineralsOreRenderer implements ISimpleBlockRenderingHandler
 	@Override
 	public int getRenderId()
 	{
-		return ClientProxy.oreRenderer;
+		return MMMClientProxy.oreRenderer;
 	}
 	
 }

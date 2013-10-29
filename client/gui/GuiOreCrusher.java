@@ -1,7 +1,9 @@
-package clashsoft.mods.moreminerals.orecrusher;
+package clashsoft.mods.moreminerals.client.gui;
 
 import org.lwjgl.opengl.GL11;
 
+import clashsoft.mods.moreminerals.inventory.ContainerOreCrusher;
+import clashsoft.mods.moreminerals.tileentity.TileEntityOreCrusher;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

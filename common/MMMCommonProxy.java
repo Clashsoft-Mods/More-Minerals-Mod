@@ -1,14 +1,17 @@
-package clashsoft.mods.moreminerals;
+package clashsoft.mods.moreminerals.common;
 
-import clashsoft.mods.moreminerals.orecrusher.ContainerOreCrusher;
-import clashsoft.mods.moreminerals.orecrusher.GuiOreCrusher;
-import clashsoft.mods.moreminerals.orecrusher.TileEntityOreCrusher;
+import clashsoft.mods.moreminerals.MoreMineralsMod;
+import clashsoft.mods.moreminerals.client.gui.GuiOreCrusher;
+import clashsoft.mods.moreminerals.inventory.ContainerOreCrusher;
+import clashsoft.mods.moreminerals.tileentity.TileEntityOreCrusher;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+
 import cpw.mods.fml.common.network.IGuiHandler;
 
-public class CommonProxy implements IGuiHandler
+public class MMMCommonProxy implements IGuiHandler
 {
 	@Override
 	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)

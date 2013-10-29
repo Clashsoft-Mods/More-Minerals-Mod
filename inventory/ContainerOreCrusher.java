@@ -1,5 +1,7 @@
-package clashsoft.mods.moreminerals.orecrusher;
+package clashsoft.mods.moreminerals.inventory;
 
+import clashsoft.mods.moreminerals.orecrusher.OreCrusherRecipes;
+import clashsoft.mods.moreminerals.tileentity.TileEntityOreCrusher;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

@@ -1,8 +1,9 @@
-package clashsoft.mods.moreminerals;
+package clashsoft.mods.moreminerals.block;
 
 import clashsoft.clashsoftapi.CustomBlock;
+import clashsoft.mods.moreminerals.MoreMineralsMod;
 
-public class MoreMineralsHelper
+public class OreHelper
 {
 	public static CustomBlock getOreFromMetadata(int meta, String blockType)
 	{
