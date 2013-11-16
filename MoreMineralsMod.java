@@ -9,7 +9,6 @@ import clashsoft.clashsoftapi.ItemCustomBlock;
 import clashsoft.clashsoftapi.datatools.*;
 import clashsoft.clashsoftapi.util.*;
 import clashsoft.clashsoftapi.util.CSItems.DataToolSet;
-import clashsoft.clashsoftapi.util.update.ModUpdate;
 import clashsoft.mods.moreminerals.block.*;
 import clashsoft.mods.moreminerals.client.MMMClientProxy;
 import clashsoft.mods.moreminerals.common.MMMCommonProxy;
@@ -482,8 +481,7 @@ public class MoreMineralsMod
 	{
 		if (event.entity instanceof EntityPlayer)
 		{
-			ModUpdate update = CSUpdate.checkForUpdate("More Minerals Mod", MoreMineralsMod.VERSION);
-			CSUpdate.notifyUpdate((EntityPlayer) event.entity, "More Minerals Mod", update);
+			CSUpdate.doClashsoftUpdateCheck((EntityPlayer) event.entity, "More Minerals Mod", "mmm", VERSION);
 		}
 	}
 	
