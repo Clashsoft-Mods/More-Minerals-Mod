@@ -359,8 +359,8 @@ public class MoreMineralsMod
 		CSUtil.log("[MoreMineralsMod] Loading More Minerals Mod");
 		CSUtil.log("[MoreMineralsMod] " + allnames.length + " Materials added");
 		
-		vanillaSpecialItems = (CustomItem) new CustomItem(vanillaSpecialItems_ID, CSArrays.concat(CSArrays.concat(CSArrays.concatAll(vanillanames, "", " Ingot"), CSArrays.concatAll(vanillanames, "", " Dust")), CSArrays.concatAll(vanillanames, "", " Nugget")), CSArrays.concat(CSArrays.concat(CSArrays.concatAll(vanillaoverlays, "ingot", ""), CSArrays.concatAll(vanillaoverlays, "dust", "")), CSArrays.concatAll(vanillaoverlays, "nugget", ""))).disableMetadata(3, 4, 13, 17).setUnlocalizedName("MM_VanillaSpecialItems").setCreativeTab(rawMaterialsTab);
-		ingots = (CustomItem) new CustomItem(ingots_ID, CSArrays.concatAll(allnames, "", " Ingot"), CSArrays.concatAll(alloverlays, "ingot", "")).disableMetadata(gemids).setUnlocalizedName("MM_Ingots").setCreativeTab(rawMaterialsTab);
+		vanillaSpecialItems = (CustomItem) new CustomItem(vanillaSpecialItems_ID, CSArrays.concat(CSArrays.concat(CSArrays.concatAll(vanillanames, "", " Ingot"), CSArrays.concatAll(vanillanames, "", " Dust")), CSArrays.concatAll(vanillanames, "", " Nugget")), CSArrays.concat(CSArrays.concat(CSArrays.concatAll(vanillaoverlays, "ingot", ""), CSArrays.concatAll(vanillaoverlays, "dust", "")), CSArrays.concatAll(vanillaoverlays, "nugget", ""))).setMetadataEnabled(false, 3, 4, 13, 17).setUnlocalizedName("MM_VanillaSpecialItems").setCreativeTab(rawMaterialsTab);
+		ingots = (CustomItem) new CustomItem(ingots_ID, CSArrays.concatAll(allnames, "", " Ingot"), CSArrays.concatAll(alloverlays, "ingot", "")).setMetadataEnabled(false, gemids).setUnlocalizedName("MM_Ingots").setCreativeTab(rawMaterialsTab);
 		dusts = (CustomItem) new CustomItem(dusts_ID, CSArrays.concatAll(allnames, "", " Dust"), CSArrays.concatAll(alloverlays, "dust", "")).setUnlocalizedName("MM_Dusts").setCreativeTab(rawMaterialsTab);
 		nuggets = (CustomItem) new CustomItem(nuggets_ID, CSArrays.concatAll(allnames, "", " Nugget"), CSArrays.concatAll(alloverlays, "nugget", "")).setUnlocalizedName("MM_Nuggets").setCreativeTab(rawMaterialsTab);
 		gems = (CustomItem) new CustomItem(gems_ID, gemnames, CSArrays.concatAll(gemoverlays, "gem", "")).setUnlocalizedName("MM_Gems").setCreativeTab(rawMaterialsTab);
@@ -371,7 +371,7 @@ public class MoreMineralsMod
 		dataAxe = (ItemDataAxe) new ItemDataAxe(dataAxe_ID, EnumToolMaterial.IRON).setCreativeTab(toolsTab).setUnlocalizedName("MM_Axes");
 		dataHoe = (ItemDataHoe) new ItemDataHoe(dataHoe_ID, EnumToolMaterial.IRON).setCreativeTab(toolsTab).setUnlocalizedName("MM_Hoes");
 		
-		setupToolMaterials(new CSItems.DataToolSet(dataSword, dataSpade, dataPickaxe, dataAxe, dataHoe));
+		setupToolMaterials(new DataToolSet(dataSword, dataSpade, dataPickaxe, dataAxe, dataHoe));
 		
 		proxy.registerBlockRenderers();
 		proxy.registerItemRenderers();
