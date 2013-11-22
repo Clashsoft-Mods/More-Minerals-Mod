@@ -2,7 +2,7 @@ package clashsoft.mods.moreminerals.block;
 
 import java.util.Random;
 
-import clashsoft.clashsoftapi.CustomBlock;
+import clashsoft.cslib.minecraft.CustomBlock;
 import clashsoft.mods.moreminerals.MoreMineralsMod;
 
 import net.minecraft.block.material.Material;

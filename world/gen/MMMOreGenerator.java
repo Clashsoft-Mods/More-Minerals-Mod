@@ -2,7 +2,7 @@ package clashsoft.mods.moreminerals.world.gen;
 
 import java.util.Random;
 
-import clashsoft.clashsoftapi.util.CSRandom;
+import clashsoft.cslib.util.CSRandom;
 import clashsoft.mods.moreminerals.MoreMineralsMod;
 import clashsoft.mods.moreminerals.block.OreHelper;
 import cpw.mods.fml.common.IWorldGenerator;

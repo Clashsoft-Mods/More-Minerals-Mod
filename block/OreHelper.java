@@ -1,6 +1,6 @@
 package clashsoft.mods.moreminerals.block;
 
-import clashsoft.clashsoftapi.CustomBlock;
+import clashsoft.cslib.minecraft.CustomBlock;
 import clashsoft.mods.moreminerals.MoreMineralsMod;
 
 public class OreHelper

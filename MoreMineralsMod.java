@@ -2,13 +2,17 @@ package clashsoft.mods.moreminerals;
 
 import java.util.Arrays;
 
-import clashsoft.clashsoftapi.CustomBlock;
-import clashsoft.clashsoftapi.CustomCreativeTab;
-import clashsoft.clashsoftapi.CustomItem;
-import clashsoft.clashsoftapi.ItemCustomBlock;
-import clashsoft.clashsoftapi.datatools.*;
-import clashsoft.clashsoftapi.util.*;
-import clashsoft.clashsoftapi.util.CSItems.DataToolSet;
+import clashsoft.cslib.minecraft.CustomBlock;
+import clashsoft.cslib.minecraft.CustomCreativeTab;
+import clashsoft.cslib.minecraft.CustomItem;
+import clashsoft.cslib.minecraft.ItemCustomBlock;
+import clashsoft.cslib.minecraft.item.datatools.*;
+import clashsoft.cslib.minecraft.update.CSUpdate;
+import clashsoft.cslib.minecraft.util.CSCrafting;
+import clashsoft.cslib.minecraft.util.CSItems;
+import clashsoft.cslib.minecraft.util.CSLang;
+import clashsoft.cslib.minecraft.util.CSItems.DataToolSet;
+import clashsoft.cslib.util.*;
 import clashsoft.mods.moreminerals.block.*;
 import clashsoft.mods.moreminerals.client.MMMClientProxy;
 import clashsoft.mods.moreminerals.common.MMMCommonProxy;

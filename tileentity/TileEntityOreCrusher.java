@@ -1,6 +1,6 @@
 package clashsoft.mods.moreminerals.tileentity;
 
-import clashsoft.clashsoftapi.util.CSArrays;
+import clashsoft.cslib.util.CSArrays;
 import clashsoft.mods.moreminerals.MoreMineralsMod;
 import clashsoft.mods.moreminerals.block.BlockOreCrusher;
 import clashsoft.mods.moreminerals.orecrusher.OreCrusherRecipes;

@@ -3,7 +3,7 @@ package clashsoft.mods.moreminerals.block;
 import java.util.List;
 import java.util.Random;
 
-import clashsoft.clashsoftapi.CustomBlock;
+import clashsoft.cslib.minecraft.CustomBlock;
 import clashsoft.mods.moreminerals.MoreMineralsMod;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
