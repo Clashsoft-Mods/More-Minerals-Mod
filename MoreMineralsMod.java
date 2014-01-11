@@ -8,11 +8,11 @@ import clashsoft.cslib.minecraft.CustomItem;
 import clashsoft.cslib.minecraft.ItemCustomBlock;
 import clashsoft.cslib.minecraft.item.datatools.*;
 import clashsoft.cslib.minecraft.update.CSUpdate;
-import clashsoft.cslib.minecraft.util.CSCrafting;
-import clashsoft.cslib.minecraft.util.CSItems;
-import clashsoft.cslib.minecraft.util.CSLang;
+import clashsoft.cslib.minecraft.util.*;
 import clashsoft.cslib.minecraft.util.CSItems.DataToolSet;
-import clashsoft.cslib.util.*;
+import clashsoft.cslib.util.CSArrays;
+import clashsoft.cslib.util.CSLog;
+import clashsoft.cslib.util.CSString;
 import clashsoft.mods.moreminerals.block.*;
 import clashsoft.mods.moreminerals.client.MMMClientProxy;
 import clashsoft.mods.moreminerals.common.MMMCommonProxy;
@@ -360,8 +360,8 @@ public class MoreMineralsMod
 	@EventHandler
 	public void load(FMLInitializationEvent event)
 	{
-		CSUtil.log("[MoreMineralsMod] Loading More Minerals Mod");
-		CSUtil.log("[MoreMineralsMod] " + allnames.length + " Materials added");
+		CSLog.info("[MoreMineralsMod] Loading More Minerals Mod");
+		CSLog.info("[MoreMineralsMod] " + allnames.length + " Materials added");
 		
 		vanillaSpecialItems = (CustomItem) new CustomItem(vanillaSpecialItems_ID, CSArrays.concat(CSString.concatAll(vanillanames, "", " Ingot"), CSString.concatAll(vanillanames, "", " Dust"), CSString.concatAll(vanillanames, "", " Nugget")), CSArrays.concat(CSArrays.concat(CSString.concatAll(vanillaoverlays, "ingot", ""), CSString.concatAll(vanillaoverlays, "dust", "")), CSString.concatAll(vanillaoverlays, "nugget", ""))).setMetadataEnabled(false, 3, 4, 13, 17).setUnlocalizedName("MM_VanillaSpecialItems").setCreativeTab(rawMaterialsTab);
 		ingots = (CustomItem) new CustomItem(ingots_ID, CSString.concatAll(allnames, "", " Ingot"), CSString.concatAll(alloverlays, "ingot", "")).setMetadataEnabled(false, gemids).setUnlocalizedName("MM_Ingots").setCreativeTab(rawMaterialsTab);
