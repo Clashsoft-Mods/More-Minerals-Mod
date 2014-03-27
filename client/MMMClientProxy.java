@@ -1,7 +1,7 @@
 package clashsoft.mods.moreminerals.client;
 
-import clashsoft.mods.moreminerals.common.MMMCommonProxy;
+import clashsoft.mods.moreminerals.common.MMMProxy;
 
-public class MMMClientProxy extends MMMCommonProxy
+public class MMMClientProxy extends MMMProxy
 {
 }
