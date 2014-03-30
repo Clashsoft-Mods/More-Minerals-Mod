@@ -18,4 +18,8 @@ public class MMMProxy implements IGuiHandler
 	{
 		return null;
 	}
+	
+	public void registerRenderers()
+	{
+	}
 }
