@@ -1,6 +1,7 @@
 package clashsoft.mods.moreminerals.block;
 
 import clashsoft.mods.moreminerals.chem.Element;
+import clashsoft.mods.moreminerals.chem.PeriodicTable;
 import clashsoft.mods.moreminerals.tileentity.TileEntityOres;
 
 import net.minecraft.block.BlockContainer;
@@ -40,13 +41,7 @@ public class BlockOres extends BlockContainer
 	public int colorMultiplier(IBlockAccess world, int x, int y, int z)
 	{
 		Element[] elements = getElements(world, x, y, z);
-		int color = 0;
-		for (Element e : elements)
-		{
-			color += e.getColor();
-		}
-		color /= elements.length;
-		return color;
+		return PeriodicTable.calcColor(elements, world.getBlockMetadata(x, y, z));
 	}
 	
 	@Override

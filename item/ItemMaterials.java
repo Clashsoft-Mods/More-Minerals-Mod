@@ -102,6 +102,13 @@ public class ItemMaterials extends Item
 	}
 	
 	@Override
+	public int getColorFromItemStack(ItemStack stack, int pass)
+	{
+		Element[] elements = getElements(stack);
+		return PeriodicTable.calcColor(elements, stack.getItemDamage() + 2);
+	}
+	
+	@Override
 	public String getItemStackDisplayName(ItemStack stack)
 	{
 		Element[] elements = getElements(stack);
