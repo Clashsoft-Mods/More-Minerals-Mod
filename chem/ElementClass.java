@@ -15,9 +15,21 @@ public enum ElementClass
 	{
 		return this.name;
 	}
-
+	
 	public boolean isMetal()
 	{
 		return this == ALKALI_METAL || this == ALKALINE_EARTH_METAL || this == METALLOID;
+	}
+	
+	public static ElementClass parse(String name)
+	{
+		for (ElementClass ec : values())
+		{
+			if (name.equalsIgnoreCase(ec.name()))
+			{
+				return ec;
+			}
+		}
+		return SPECIAL;
 	}
 }

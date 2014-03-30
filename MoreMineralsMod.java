@@ -54,7 +54,7 @@ public class MoreMineralsMod
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
 	{
-		proxy.registerRenderers();
+		proxy.init();
 		
 		ores = (BlockOres) new BlockOres();
 		materials = (ItemMaterials) new ItemMaterials().setCreativeTab(CreativeTabs.tabMaterials);
