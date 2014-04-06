@@ -80,9 +80,9 @@ public class ItemMaterials extends Item
 			Element e = PeriodicTable.get(i);
 			if (e != null)
 			{
-				ingotIcons[i] = iconRegister.registerIcon("moreminerals:" + e.getTextureName(2));
-				nuggetIcons[i] = iconRegister.registerIcon("moreminerals:" + e.getTextureName(3));
-				dustIcons[i] = iconRegister.registerIcon("moreminerals:" + e.getTextureName(4));
+				ingotIcons[i] = iconRegister.registerIcon(e.getTextureName(2));
+				nuggetIcons[i] = iconRegister.registerIcon(e.getTextureName(3));
+				dustIcons[i] = iconRegister.registerIcon(e.getTextureName(4));
 			}
 		}
 	}
@@ -99,6 +99,12 @@ public class ItemMaterials extends Item
 		else if (metadata == 2)
 			return dustIcons[e.getNumber()];
 		return null;
+	}
+	
+	@Override
+	public IIcon getIcon(ItemStack stack, int pass)
+	{
+		return this.getIconIndex(stack);
 	}
 	
 	@Override

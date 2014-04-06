@@ -164,7 +164,9 @@ public class Element
 	
 	public int getColor(int var)
 	{
-		if (colors.length == 1) // All colors
+		if (colors == null)
+			return 0xFFFFFF;
+		else if (colors.length == 1) // All colors
 			return colors[0];
 		else if (colors.length == 2) // Ore Color, Item Color // Usually this one
 			if (var == 0 || var == 2)
@@ -196,23 +198,23 @@ public class Element
 	{
 		if (var == 0)
 		{
-			return "ore_overlay";
+			return "moreminerals:ore_overlay";
 		}
 		else if (var == 1)
 		{
-			return "ore_block";
+			return "moreminerals:ore_block";
 		}
 		else if (var == 2)
 		{
-			return "ingot";
+			return "moreminerals:ingot";
 		}
 		else if (var == 3)
 		{
-			return "nugget";
+			return "moreminerals:nugget";
 		}
 		else if (var == 4)
 		{
-			return "dust";
+			return "moreminerals:dust";
 		}
 		return "";
 	}

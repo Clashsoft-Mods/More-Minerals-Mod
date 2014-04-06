@@ -19,23 +19,23 @@ public class GemElement extends Element
 	{
 		if (var == 0)
 		{
-			return "gem_overlay";
+			return "moreminerals:gem_overlay";
 		}
 		else if (var == 1)
 		{
-			return "gem_block";
+			return "moreminerals:gem_block";
 		}
 		else if (var == 2)
 		{
-			return "gem";
+			return "moreminerals:gem";
 		}
 		else if (var == 3)
 		{
-			return "gem_nugget";
+			return "moreminerals:gem_nugget";
 		}
 		else if (var == 4)
 		{
-			return "dust";
+			return "moreminerals:dust";
 		}
 		return "";
 	}
