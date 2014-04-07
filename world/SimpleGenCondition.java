@@ -4,7 +4,7 @@ import net.minecraft.world.World;
 
 public class SimpleGenCondition implements IGenCondition
 {
-	private int minY;
+	private int	minY;
 	
 	public SimpleGenCondition(int minY)
 	{

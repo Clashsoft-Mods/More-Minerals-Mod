@@ -57,8 +57,8 @@ public class BlockOres extends BlockContainer
 			Element e = PeriodicTable.get(i);
 			if (e != null)
 			{
-				oreIcons[i] = iconRegister.registerIcon(e.getTextureName(0));
-				blockIcons[i] = iconRegister.registerIcon(e.getTextureName(1));
+				this.oreIcons[i] = iconRegister.registerIcon(e.getTextureName(0));
+				this.blockIcons[i] = iconRegister.registerIcon(e.getTextureName(1));
 			}
 		}
 	}

@@ -164,23 +164,23 @@ public class Element
 	
 	public int getColor(int var)
 	{
-		if (colors == null)
+		if (this.colors == null)
 			return 0xFFFFFF;
-		else if (colors.length == 1) // All colors
-			return colors[0];
-		else if (colors.length == 2) // Ore Color, Item Color // Usually this one
+		else if (this.colors.length == 1) // All colors
+			return this.colors[0];
+		else if (this.colors.length == 2) // Ore Color, Item Color // Usually this one
 			if (var == 0 || var == 2)
-				return colors[0];
+				return this.colors[0];
 			else
-				return colors[1];
-		else if (colors.length == 3) // Ore Color, Block Color, Item Color
+				return this.colors[1];
+		else if (this.colors.length == 3) // Ore Color, Block Color, Item Color
 			if (var < 3)
-				return colors[var];
+				return this.colors[var];
 			else
-				return colors[2];
-		else if (var < colors.length) // Ore Color, Block Color, Ingot Color, Nugget Color, Dust
+				return this.colors[2];
+		else if (var < this.colors.length) // Ore Color, Block Color, Ingot Color, Nugget Color, Dust
 										// Color
-			return colors[var];
+			return this.colors[var];
 		return 0xFFFFFF;
 	}
 	

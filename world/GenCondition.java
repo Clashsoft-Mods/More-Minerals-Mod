@@ -113,24 +113,24 @@ public class GenCondition implements IGenCondition
 	@Override
 	public boolean canGenerate()
 	{
-		return yMax != -1;
+		return this.yMax != -1;
 	}
 	
 	@Override
 	public boolean canGenerateAt(World world, int x, int y, int z)
 	{
-		if (yMax == -1)
+		if (this.yMax == -1)
 			return false;
-		if (y > yMax)
+		if (y > this.yMax)
 			return false;
-		if (yMin != -1 && y < yMin)
+		if (this.yMin != -1 && y < this.yMin)
 			return false;
 		
 		BiomeGenBase biome = world.getBiomeGenForCoords(x, z);
 		
-		if (excludedBiomes != null && excludedBiomes.contains(biome))
+		if (this.excludedBiomes != null && this.excludedBiomes.contains(biome))
 			return false;
-		if (includedBiomes != null && !includedBiomes.contains(biome))
+		if (this.includedBiomes != null && !this.includedBiomes.contains(biome))
 			return false;
 		return true;
 	}

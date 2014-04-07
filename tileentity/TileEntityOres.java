@@ -9,8 +9,8 @@ import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityOres extends TileEntity
 {
-	public Block block;
-	public Element[] elements;
+	public Block		block;
+	public Element[]	elements;
 	
 	public TileEntityOres()
 	{
