@@ -1,25 +1,15 @@
 package clashsoft.mods.moreminerals.common;
 
-import cpw.mods.fml.common.network.IGuiHandler;
+import clashsoft.cslib.minecraft.common.BaseProxy;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
-public class MMMProxy implements IGuiHandler
+public class MMMProxy extends BaseProxy
 {
 	@Override
 	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
 	{
 		return null;
-	}
-	
-	@Override
-	public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
-	{
-		return null;
-	}
-	
-	public void init()
-	{
 	}
 }

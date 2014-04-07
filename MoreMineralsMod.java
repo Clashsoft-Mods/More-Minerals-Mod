@@ -66,7 +66,7 @@ public class MoreMineralsMod extends ClashsoftMod
 	
 	public MoreMineralsMod()
 	{
-		super(MODID, NAME, ACRONYM, VERSION);
+		super(proxy, MODID, NAME, ACRONYM, VERSION);
 		this.url = "https://github.com/Clashsoft/More-Minerals-Mod/wiki";
 	}
 	
@@ -75,8 +75,6 @@ public class MoreMineralsMod extends ClashsoftMod
 	public void preInit(FMLPreInitializationEvent event)
 	{
 		super.preInit(event);
-		
-		proxy.init();
 		
 		ores = (BlockOres) new BlockOres().setCreativeTab(oresTab);
 		materials = (ItemMaterials) new ItemMaterials().setCreativeTab(materialsTab);
