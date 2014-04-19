@@ -9,23 +9,20 @@ import clashsoft.cslib.util.CSUtil;
 import clashsoft.mods.moreminerals.world.GenCondition;
 import clashsoft.mods.moreminerals.world.IGenCondition;
 
+import net.minecraft.block.Block;
 import net.minecraft.world.World;
 
 public class Element
 {
 	private int				number;
-	
 	private String			name;
 	private String			symbol;
 	
+	private IGenCondition	genCondition;
 	private ElementClass	elementClass;
-	
 	private int				period;
 	private int				group;
-	
 	private int[]			colors;
-	
-	private IGenCondition	genCondition;
 	
 	public Element(int number, String name, String symbol, int period, int group, ElementClass elementClass)
 	{
@@ -41,6 +38,9 @@ public class Element
 	
 	public static Element parse(String line)
 	{
+		if (line.startsWith("#"))
+			return null;
+		
 		int pos = line.indexOf(':');
 		if (pos == -1)
 			return null;
@@ -79,12 +79,18 @@ public class Element
 			}
 			else if (i == 1)
 			{
-				arg = arg.substring(1, arg.length() - 1);
-				int cPos = arg.indexOf(',');
-				String periodS = arg.substring(0, cPos);
-				String groupS = arg.substring(cPos + 1);
-				period = Integer.parseInt(periodS);
-				group = Integer.parseInt(groupS);
+				try
+				{
+					arg = arg.substring(1, arg.length() - 1);
+					int cPos = arg.indexOf(',');
+					String periodS = arg.substring(0, cPos);
+					String groupS = arg.substring(cPos + 1);
+					period = Integer.parseInt(periodS);
+					group = Integer.parseInt(groupS);
+				}
+				catch (Exception ignored)
+				{
+				}
 			}
 			else if (i == 2)
 			{
@@ -92,13 +98,19 @@ public class Element
 			}
 			else if (i == 3)
 			{
-				arg = arg.substring(1, arg.length() - 1);
-				String[] colorsS = arg.split(",");
-				int len = colorsS.length;
-				colors = new int[len];
-				for (int j = 0; j < len; j++)
+				try
 				{
-					colors[j] = CSUtil.tryParse(colorsS[j], 16, -1);
+					arg = arg.substring(1, arg.length() - 1);
+					String[] colorsS = arg.split(",");
+					int len = colorsS.length;
+					colors = new int[len];
+					for (int j = 0; j < len; j++)
+					{
+						colors[j] = CSUtil.tryParse(colorsS[j], 16, -1);
+					}
+				}
+				catch (Exception ignored)
+				{
 				}
 			}
 			else if (i == 4)
@@ -107,7 +119,25 @@ public class Element
 			}
 		}
 		
-		return new Element(number, name, symbol, period, group, elementClass).setColors(colors).setGenCondition(gc);
+		Element element;
+		if (number >= PeriodicTable.VANILLA_LOW && number < PeriodicTable.VANILLA_HIGH)
+		{
+			element = new VanillaElement(number, name, symbol);
+		}
+		else if (number >= PeriodicTable.GEMS_LOW && number < PeriodicTable.GEMS_HIGH)
+		{
+			element = new GemElement(number, name, symbol);
+		}
+		else if (number >= PeriodicTable.SPECIAL_LOW)
+		{
+			element = new SpecialElement(number, name, symbol, elementClass);
+		}
+		else
+		{
+			element = new Element(number, name, symbol, period, group, elementClass);
+		}
+		
+		return element.setColors(colors).setGenCondition(gc);
 	}
 	
 	public Element setGenCondition(IGenCondition gc)
@@ -168,7 +198,8 @@ public class Element
 			return 0xFFFFFF;
 		else if (this.colors.length == 1) // All colors
 			return this.colors[0];
-		else if (this.colors.length == 2) // Ore Color, Item Color // Usually this one
+		else if (this.colors.length == 2) // Ore Color, Item Color // Usually
+											// this one
 			if (var == 0 || var == 2)
 				return this.colors[0];
 			else
@@ -178,13 +209,14 @@ public class Element
 				return this.colors[var];
 			else
 				return this.colors[2];
-		else if (var < this.colors.length) // Ore Color, Block Color, Ingot Color, Nugget Color, Dust
-										// Color
+		else if (var < this.colors.length) // Ore Color, Block Color, Ingot
+											// Color, Nugget Color, Dust
+											// Color
 			return this.colors[var];
 		return 0xFFFFFF;
 	}
 	
-	public boolean isAvailable()
+	public boolean isAvailable(Block block)
 	{
 		return this.genCondition == null || this.genCondition.canGenerate();
 	}

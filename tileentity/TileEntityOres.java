@@ -14,7 +14,7 @@ public class TileEntityOres extends TileEntity
 	
 	public TileEntityOres()
 	{
-		this.elements = new Element[] { PeriodicTable.Iron };
+		this.elements = new Element[] { PeriodicTable.get(29) };
 	}
 	
 	public Element[] getElements()

@@ -16,10 +16,7 @@ import net.minecraft.util.StatCollector;
 
 public class ItemMaterials extends Item
 {
-	public static final String[]	names		= {
-			"item.ingot",
-			"item.nugget",
-			"item.dust"						};
+	public static final String[]	names		= { "item.ingot", "item.nugget", "item.dust" };
 	
 	public IIcon[]					ingotIcons	= new IIcon[PeriodicTable.SIZE];
 	public IIcon[]					nuggetIcons	= new IIcon[PeriodicTable.SIZE];
@@ -52,13 +49,13 @@ public class ItemMaterials extends Item
 	
 	public static void setElement(ItemStack stack, Element e)
 	{
-		NBTTagCompound compound = stack.getTagCompound();
-		if (compound == null)
+		NBTTagCompound nbt = stack.getTagCompound();
+		if (nbt == null)
 		{
-			compound = new NBTTagCompound();
-			stack.setTagCompound(compound);
+			nbt = new NBTTagCompound();
+			stack.setTagCompound(nbt);
 		}
-		compound.setIntArray("Elements", new int[] { e.getNumber() });
+		nbt.setIntArray("Elements", new int[] { e.getNumber() });
 	}
 	
 	public static void setElements(ItemStack stack, Element... elements)
@@ -120,26 +117,30 @@ public class ItemMaterials extends Item
 		Element[] elements = getElements(stack);
 		if (elements != null)
 		{
-			int len = elements.length;
-			if (len == 1)
-			{
-				return elements[0].getName() + " " + super.getItemStackDisplayName(stack);
-			}
-			else
-			{
-				StringBuilder builder = new StringBuilder(len << 1);
-				for (int i = 0; i < len; i++)
-				{
-					builder.append(elements[i].getSymbol());
-				}
-				builder.append(" ");
-				builder.append(StatCollector.translateToLocal("material.alloy"));
-				builder.append(" ");
-				builder.append(super.getItemStackDisplayName(stack));
-				return builder.toString();
-			}
+			StringBuilder builder = new StringBuilder(elements.length << 4);
+			joinElementNames(elements, builder);
+			builder.append(" ");
+			builder.append(super.getItemStackDisplayName(stack));
 		}
 		return super.getItemStackDisplayName(stack);
+	}
+	
+	public static void joinElementNames(Element[] elements, StringBuilder builder)
+	{
+		int len = elements.length;
+		if (len == 1)
+		{
+			builder.append(elements[0].getName());
+		}
+		else
+		{
+			for (int i = 0; i < len; i++)
+			{
+				builder.append(elements[i].getSymbol());
+			}
+			builder.append(" ");
+			builder.append(StatCollector.translateToLocal("material.alloy"));
+		}
 	}
 	
 	@Override
@@ -168,7 +169,7 @@ public class ItemMaterials extends Item
 		{
 			for (Element e : PeriodicTable.getElements())
 			{
-				if (e != null && e.isAvailable())
+				if (e != null && e.isAvailable(null))
 				{
 					ItemStack stack = new ItemStack(this, 1, i);
 					setElement(stack, e);

@@ -20,7 +20,9 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 
+import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Blocks;
 
 @Mod(modid = MoreMineralsMod.MODID, name = MoreMineralsMod.NAME, version = MoreMineralsMod.VERSION, dependencies = MoreMineralsMod.DEPENDENCIES)
 public class MoreMineralsMod extends ClashsoftMod
@@ -28,7 +30,7 @@ public class MoreMineralsMod extends ClashsoftMod
 	public static final String		MODID				= "moreminerals";
 	public static final String		NAME				= "More Minerals Mod";
 	public static final String		ACRONYM				= "mmm";
-	public static final String		VERSION				= CSUpdate.CURRENT_VERSION + "-1.0.0";
+	public static final String		VERSION				= CSUpdate.CURRENT_VERSION + "-1.0.0-dev";
 	public static final String		DEPENDENCIES		= CSLib.DEPENDENCY;
 	
 	@Instance(MODID)
@@ -37,32 +39,16 @@ public class MoreMineralsMod extends ClashsoftMod
 	@SidedProxy(clientSide = "clashsoft.mods.moreminerals.client.MMMClientProxy", serverSide = "clashsoft.mods.moreminerals.common.MMMProxy")
 	public static MMMProxy			proxy;
 	
-	public static int[]				overworldGen		= new int[] {
-			12,
-			14,
-			20,
-			16,
-			//
-			24,
-			24,
-			24,
-			24,
-			16,
-			16											};
-	public static int[]				overworldGenVanilla	= new int[] {
-			128,
-			16,
-			32,
-			32,
-			64,
-			32,
-			16											};
+	public static int[]				overworldGen		= new int[] { 12, 14, 20, 16, 24, 24, 24, 24, 16, 16 };
+	public static int[]				overworldGenVanilla	= new int[] { 128, 16, 32, 32, 64, 32, 16 };
+	
+	public static Block[]			baseBlocks			= { Blocks.stone, Blocks.dirt, Blocks.sand, Blocks.gravel, Blocks.netherrack, Blocks.end_stone };
 	
 	public static BlockOres			ores;
 	public static ItemMaterials		materials;
 	
 	public static CreativeTabs		oresTab				= new CustomCreativeTab("ores");
-	public static CreativeTabs		materialsTab		= new CustomCreativeTab("ores");
+	public static CreativeTabs		materialsTab		= new CustomCreativeTab("materials");
 	
 	public MoreMineralsMod()
 	{

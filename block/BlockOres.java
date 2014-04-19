@@ -1,25 +1,40 @@
 package clashsoft.mods.moreminerals.block;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import clashsoft.mods.moreminerals.chem.Element;
 import clashsoft.mods.moreminerals.chem.PeriodicTable;
+import clashsoft.mods.moreminerals.client.MMMClientProxy;
 import clashsoft.mods.moreminerals.tileentity.TileEntityOres;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class BlockOres extends BlockContainer
 {
-	public IIcon[]	oreIcons	= new IIcon[PeriodicTable.SIZE];
-	public IIcon[]	blockIcons	= new IIcon[PeriodicTable.SIZE];
+	public Map<String, IIcon>	icons	= new HashMap();
+	
+	public TileEntityOres temp;
 	
 	public BlockOres()
 	{
 		super(Material.rock);
+	}
+	
+	@Override
+	public int getRenderType()
+	{
+		return MMMClientProxy.oresRenderType;
 	}
 	
 	public static Element[] getElements(IBlockAccess world, int x, int y, int z)
@@ -43,6 +58,32 @@ public class BlockOres extends BlockContainer
 	}
 	
 	@Override
+	public void breakBlock(World world, int x, int y, int z, Block oldBlock, int oldMetadata)
+	{
+		this.temp = (TileEntityOres) world.getTileEntity(x, y, z);
+		super.breakBlock(world, x, y, z, oldBlock, oldMetadata);
+	}
+	
+	@Override
+	public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z)
+	{
+		this.temp = (TileEntityOres) world.getTileEntity(x, y, z);
+		return this.createStackedBlock(world.getBlockMetadata(x, y, z));
+	}
+	
+	@Override
+	protected ItemStack createStackedBlock(int metadata)
+	{
+		ItemStack stack = new ItemStack(this, 1, metadata);
+		if (this.temp != null)
+		{
+			stack.stackTagCompound = new NBTTagCompound();
+			this.temp.writeToNBT(stack.stackTagCompound);
+		}
+		return stack;
+	}
+	
+	@Override
 	public int colorMultiplier(IBlockAccess world, int x, int y, int z)
 	{
 		Element[] elements = getElements(world, x, y, z);
@@ -57,8 +98,10 @@ public class BlockOres extends BlockContainer
 			Element e = PeriodicTable.get(i);
 			if (e != null)
 			{
-				this.oreIcons[i] = iconRegister.registerIcon(e.getTextureName(0));
-				this.blockIcons[i] = iconRegister.registerIcon(e.getTextureName(1));
+				String oreName = e.getTextureName(0);
+				String blockName = e.getTextureName(1);
+				this.icons.put(oreName, iconRegister.registerIcon(oreName));
+				this.icons.put(blockName, iconRegister.registerIcon(blockName));
 			}
 		}
 	}
@@ -68,9 +111,7 @@ public class BlockOres extends BlockContainer
 	{
 		Element e = getElements(world, x, y, z)[0];
 		int i = world.getBlockMetadata(x, y, z);
-		if (i == 0)
-			return this.oreIcons[e.getNumber()];
-		return this.blockIcons[e.getNumber()];
+		return this.icons.get(e.getTextureName(i & 1));
 	}
 	
 	@Override

@@ -1,11 +1,13 @@
 package clashsoft.mods.moreminerals.client.render.block;
 
+import clashsoft.mods.moreminerals.chem.PeriodicTable;
 import clashsoft.mods.moreminerals.client.MMMClientProxy;
 import clashsoft.mods.moreminerals.tileentity.TileEntityOres;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
+import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.world.IBlockAccess;
 
 public class RenderBlockOres implements ISimpleBlockRenderingHandler
@@ -20,8 +22,16 @@ public class RenderBlockOres implements ISimpleBlockRenderingHandler
 	{
 		TileEntityOres te = (TileEntityOres) world.getTileEntity(x, y, z);
 		Block bgBlock = te.getBlock();
+		int color = PeriodicTable.calcColor(te.getElements(), 0);
 		
-		renderer.renderStandardBlock(bgBlock, x, y, z);
+		if (bgBlock != null)
+		{
+			renderer.renderStandardBlock(bgBlock, x, y, z);
+		}
+		if (color != -1)
+		{
+			Tessellator.instance.setColorOpaque_I(color);
+		}
 		renderer.renderStandardBlock(block, x, y, z);
 		
 		return true;

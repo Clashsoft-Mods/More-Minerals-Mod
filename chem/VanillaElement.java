@@ -1,26 +1,15 @@
 package clashsoft.mods.moreminerals.chem;
 
+import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
+
 public class VanillaElement extends Element
 {
-	public static final VanillaElement	Coal		= new VanillaElement(0, "Coal", "C2");
-	public static final VanillaElement	Diamond		= new VanillaElement(1, "Diamond", "C128");
-	public static final VanillaElement	Redstone	= new VanillaElement(2, "Redstone", "?");
-	public static final VanillaElement	Lapislazuli	= new VanillaElement(3, "Lapis Lazuli", "?").setIconName("lapis");
-	public static final VanillaElement	Emerald		= new VanillaElement(4, "Emerald", "?");
-	public static final VanillaElement	Quartz		= new VanillaElement(5, "Quartz", "SiO2");
-	
-	private String						iconName;
+	public static final String[]	VANILLA_ORES	= { "coal", "diamond", "redstone", "lapis", "emerald", "quartz" };
 	
 	public VanillaElement(int number, String name, String symbol)
 	{
-		super(PeriodicTable.VANILLA_LOW + number, name, symbol, -1, -1, ElementClass.SPECIAL);
-		this.iconName = name.toLowerCase();
-	}
-	
-	private VanillaElement setIconName(String iconName)
-	{
-		this.iconName = iconName;
-		return this;
+		super(number, name, symbol, -1, -1, ElementClass.VANILLA);
 	}
 	
 	@Override
@@ -30,12 +19,22 @@ public class VanillaElement extends Element
 	}
 	
 	@Override
+	public boolean isAvailable(Block block)
+	{
+		return block != Blocks.stone;
+	}
+	
+	@Override
 	public String getTextureName(int var)
 	{
+		int index = this.getNumber() - PeriodicTable.VANILLA_LOW;
 		if (var == 0)
-			return this.iconName + "_ore";
-		else if (var == 1)
-			return this.iconName + "_block";
-		return super.getTextureName(var);
+		{
+			return "moreminerals:" + VANILLA_ORES[index] + "_overlay";
+		}
+		else
+		{
+			return VANILLA_ORES[index] + "_block";
+		}
 	}
 }

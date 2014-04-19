@@ -32,13 +32,13 @@ public class GenCondition implements IGenCondition
 	
 	public static IGenCondition parse(String string)
 	{
+		if (string.isEmpty() || string.equals("{}"))
+		{
+			return NEVER;
+		}
+		
 		if (string.charAt(0) == '{')
 		{
-			if (string.equals("{}"))
-			{
-				return NEVER;
-			}
-			
 			GenCondition gc = new GenCondition();
 			String[] args = string.substring(1, string.length() - 1).split("&");
 			
