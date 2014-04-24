@@ -1,0 +1,42 @@
+1.6.4-4
+
+* Update to Clashsoft API 1.6.4-5
+
+1.6.4-3
+
++ Added automatic updates
+
+1.6.4-2
+
++ Added update checking
+
+1.6.4-1
+
+! Update to 1.6.4
+
+1.6.2-4.1
+
+* Minor changes
+
+1.6.2-4
+
+* Fixed some bugs
+
+1.6.2-3
+
+* Update to latest Clashsoft API
+
+1.6.2-2
+
+* Fixed crash
+
+1.6.2-1
+
+! Update to 1.6.2
+
+1.5.2-1
+
++ Added 28 ores
++ Added Ingots, Dusts and Nuggets
++ Added Tools
++ Added Ore Crusher
