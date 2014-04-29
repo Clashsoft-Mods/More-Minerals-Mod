@@ -1,3 +1,9 @@
+1.7.2-1.0.0
+
+! Update to 1.7.2
++ Added a new Element system
+* Rewritten Mod
+
 1.6.4-4
 
 * Update to Clashsoft API 1.6.4-5
