@@ -5,7 +5,7 @@ import java.util.List;
 import clashsoft.cslib.minecraft.util.CSResourceHelper;
 import clashsoft.mods.moreminerals.MoreMineralsMod;
 import clashsoft.mods.moreminerals.chem.PeriodicTable;
-import clashsoft.mods.moreminerals.client.render.block.OresItemRenderer;
+import clashsoft.mods.moreminerals.client.render.block.RenderItemOres;
 import clashsoft.mods.moreminerals.client.render.block.RenderBlockOres;
 import clashsoft.mods.moreminerals.common.MMMProxy;
 import cpw.mods.fml.client.registry.RenderingRegistry;
@@ -28,7 +28,7 @@ public class MMMClientProxy extends MMMProxy
 		List<String> lines = CSResourceHelper.readAllLines(new ResourceLocation("moreminerals", "elements.txt"));
 		PeriodicTable.load(lines);
 		
-		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(MoreMineralsMod.ores), new OresItemRenderer());
+		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(MoreMineralsMod.ores), new RenderItemOres());
 	}
 	
 	@Override

@@ -10,7 +10,7 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
 
-public class OresItemRenderer implements IItemRenderer
+public class RenderItemOres implements IItemRenderer
 {
 	public static RenderBlocks	renderBlock	= new RenderBlocks();
 	
@@ -27,10 +27,7 @@ public class OresItemRenderer implements IItemRenderer
 		Block block = ores.getBlock(stack);
 		int color = ores.getColorFromItemStack(stack, 0);
 		
-		GL11.glScalef(0.9990234375F, 0.9990234375F, 0.9990234375F);
-		renderBlock.renderBlockAsItem(block, 0, 1F);
-		GL11.glScalef(1.0009775171065494F, 1.0009775171065494F, 1.0009775171065494F);
-		
+		//renderBlock.renderBlockAsItem(block, 0, 1F);
 		if (color != -1)
 		{
 			Tessellator.instance.setColorOpaque_I(color);
