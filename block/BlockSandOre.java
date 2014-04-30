@@ -5,19 +5,25 @@ import java.util.Random;
 import clashsoft.mods.moreminerals.MoreMineralsMod;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockFalling;
+import net.minecraft.block.BlockSand;
 import net.minecraft.block.material.Material;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.item.EntityFallingSand;
+import net.minecraft.entity.item.EntityFallingBlock;
+import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 
 public class BlockSandOre extends BlockDirtOre
 {
-	/** Do blocks fall instantly to where they stop or do they fall over time */
-	public static boolean	fallInstantly	= false;
-	
-	public BlockSandOre(int par1, Material par2Material, String[] par3, String[] par4, boolean par5, int par6, CreativeTabs[] par7)
+	public BlockSandOre(String[] names, String[] iconNames)
 	{
-		super(par1, par2Material, par3, par4, par5, par6, par7);
+		super(names, iconNames);
+		this.setCreativeTab(MoreMineralsMod.sandOresTab);
+	}
+	
+	@Override
+	public Block getBlock(int metadata)
+	{
+		return Blocks.sand;
 	}
 	
 	@Override
@@ -27,133 +33,80 @@ public class BlockSandOre extends BlockDirtOre
 	}
 	
 	@Override
-	/**
-	 * Determines the damage on the item the block drops. Used in cloth and wood.
-	 */
 	public int damageDropped(int par1)
 	{
-		if (this.blockID == MoreMineralsMod.sandOres_ID1)
+		if (this == MoreMineralsMod.sandOres1)
 			return par1;
-		else if (this.blockID == MoreMineralsMod.sandOres_ID2)
+		else if (this == MoreMineralsMod.sandOres2)
 			return par1 + 16;
-		else if (this.blockID == MoreMineralsMod.sandOres_ID3)
+		else if (this == MoreMineralsMod.sandOres3)
 			return par1 + 32;
-		else if (this.blockID == MoreMineralsMod.sandOres_ID4)
+		else if (this == MoreMineralsMod.sandOres4)
 			return par1 + 48;
-		else if (this.blockID == MoreMineralsMod.sandOres_ID5)
+		else if (this == MoreMineralsMod.sandOres5)
 			return par1 + 64;
-		else if (this.blockID == MoreMineralsMod.sandOres_ID6)
+		else if (this == MoreMineralsMod.sandOres6)
 			return par1 + 80;
-		else if (this.blockID == MoreMineralsMod.sandOres_ID7)
+		else if (this == MoreMineralsMod.sandOres7)
 			return par1 + 96;
-		else if (this.blockID == MoreMineralsMod.sandOres_ID8)
+		else if (this == MoreMineralsMod.sandOres8)
 			return par1 + 112;
 		return 0;
 	}
 	
-	/**
-	 * Called whenever the block is added into the world. Args: world, x, y, z
-	 */
 	@Override
-	public void onBlockAdded(World par1World, int par2, int par3, int par4)
+	public void onBlockAdded(World world, int x, int y, int z)
 	{
-		par1World.scheduleBlockUpdate(par2, par3, par4, this.blockID, this.tickRate(par1World));
+		world.scheduleBlockUpdate(x, y, z, this, this.tickRate(world));
 	}
 	
-	/**
-	 * Lets the block know when one of its neighbor changes. Doesn't know which
-	 * neighbor changed (coordinates passed are their own) Args: x, y, z,
-	 * neighbor blockID
-	 */
+	
 	@Override
-	public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5)
+	public void onNeighborBlockChange(World world, int x, int y, int z, Block neighborBlock)
 	{
-		par1World.scheduleBlockUpdate(par2, par3, par4, this.blockID, this.tickRate(par1World));
+		this.onBlockAdded(world, x, y, z);
 	}
 	
-	/**
-	 * Ticks the block if it's been scheduled
-	 */
 	@Override
-	public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random)
+	public void updateTick(World world, int x, int y, int z, Random random)
 	{
-		if (!par1World.isRemote)
+		if (!world.isRemote)
 		{
-			this.tryToFall(par1World, par2, par3, par4);
+			this.tryToFall(world, x, y, z);
 		}
 	}
 	
-	/**
-	 * If there is space to fall below will start this block falling
-	 */
-	private void tryToFall(World par1World, int par2, int par3, int par4)
+	protected void tryToFall(World world, int x, int y, int z)
 	{
-		if (canFallBelow(par1World, par2, par3 - 1, par4) && par3 >= 0)
+		if (BlockFalling.func_149831_e(world, x, y - 1, z) && y >= 0)
 		{
 			byte b0 = 32;
 			
-			if (!fallInstantly && par1World.checkChunksExist(par2 - b0, par3 - b0, par4 - b0, par2 + b0, par3 + b0, par4 + b0))
+			if (!BlockFalling.fallInstantly && world.checkChunksExist(x - b0, y - b0, z - b0, x + b0, y + b0, z + b0))
 			{
-				if (!par1World.isRemote)
-				{
-					EntityFallingSand entityfallingsand = new EntityFallingSand(par1World, par2 + 0.5F, par3 + 0.5F, par4 + 0.5F, this.blockID, par1World.getBlockMetadata(par2, par3, par4));
-					this.onStartFalling(entityfallingsand);
-					par1World.spawnEntityInWorld(entityfallingsand);
-				}
+					EntityFallingBlock entity = new EntityFallingBlock(world, x + 0.5F, y + 0.5F, z + 0.5F, this, world.getBlockMetadata(x, y, z));
+					world.spawnEntityInWorld(entity);
 			}
 			else
 			{
-				par1World.setBlockToAir(par2, par3, par4);
+				world.setBlockToAir(x, y, z);
 				
-				while (canFallBelow(par1World, par2, par3 - 1, par4) && par3 > 0)
+				while (BlockFalling.func_149831_e(world, x, y - 1, z) && y > 0)
 				{
-					--par3;
+					--y;
 				}
 				
-				if (par3 > 0)
+				if (y > 0)
 				{
-					par1World.setBlock(par2, par3, par4, this.blockID);
+					world.setBlock(x, y, z, this);
 				}
 			}
 		}
 	}
 	
-	/**
-	 * Called when the falling block entity for this block is created
-	 */
-	protected void onStartFalling(EntityFallingSand par1EntityFallingSand)
-	{
-	}
-	
-	/**
-	 * How many world ticks before ticking
-	 */
 	@Override
-	public int tickRate(World par1World)
+	public int tickRate(World world)
 	{
 		return 2;
 	}
-	
-	/**
-	 * Checks to see if the sand can fall into the block below it
-	 */
-	public static boolean canFallBelow(World par0World, int par1, int par2, int par3)
-	{
-		int l = par0World.getBlockId(par1, par2, par3);
-		
-		if (l == 0)
-		{
-			return true;
-		}
-		else if (l == Block.fire.blockID)
-		{
-			return true;
-		}
-		else
-		{
-			Material material = Block.blocksList[l].blockMaterial;
-			return material == Material.water ? true : material == Material.lava;
-		}
-	}
-	
 }

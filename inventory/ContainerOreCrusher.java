@@ -1,6 +1,7 @@
 package clashsoft.mods.moreminerals.inventory;
 
-import clashsoft.mods.moreminerals.orecrusher.OreCrusherRecipes;
+import clashsoft.cslib.minecraft.inventory.SlotOutput;
+import clashsoft.mods.moreminerals.orecrusher.CrusherRecipes;
 import clashsoft.mods.moreminerals.tileentity.TileEntityOreCrusher;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -10,50 +11,46 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
-import net.minecraft.inventory.SlotFurnace;
 import net.minecraft.item.ItemStack;
 
 public class ContainerOreCrusher extends Container
 {
 	private TileEntityOreCrusher	crusher;
-	private int						lastCookTime		= 0;
+	private int						lastCrushingTime		= 0;
 	private int						lastBurnTime		= 0;
-	private int						lastItemBurnTime	= 0;
+	private int						lastMaxBurnTime	= 0;
 	
-	public ContainerOreCrusher(InventoryPlayer par1InventoryPlayer, TileEntityOreCrusher par2TileEntityOreCrusher)
+	public ContainerOreCrusher(InventoryPlayer inventory, TileEntityOreCrusher crusher)
 	{
-		this.crusher = par2TileEntityOreCrusher;
-		this.addSlotToContainer(new Slot(par2TileEntityOreCrusher, 0, 56, 17));
-		this.addSlotToContainer(new Slot(par2TileEntityOreCrusher, 1, 56, 53));
-		this.addSlotToContainer(new SlotFurnace(par1InventoryPlayer.player, par2TileEntityOreCrusher, 2, 116, 35));
+		this.crusher = crusher;
+		this.addSlotToContainer(new Slot(crusher, 0, 56, 17));
+		this.addSlotToContainer(new Slot(crusher, 1, 56, 53));
+		this.addSlotToContainer(new SlotOutput(crusher, 2, 116, 35));
 		int i;
 		
 		for (i = 0; i < 3; ++i)
 		{
 			for (int j = 0; j < 9; ++j)
 			{
-				this.addSlotToContainer(new Slot(par1InventoryPlayer, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
+				this.addSlotToContainer(new Slot(inventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
 			}
 		}
 		
 		for (i = 0; i < 9; ++i)
 		{
-			this.addSlotToContainer(new Slot(par1InventoryPlayer, i, 8 + i * 18, 142));
+			this.addSlotToContainer(new Slot(inventory, i, 8 + i * 18, 142));
 		}
 	}
 	
 	@Override
-	public void addCraftingToCrafters(ICrafting par1ICrafting)
+	public void addCraftingToCrafters(ICrafting crafting)
 	{
-		super.addCraftingToCrafters(par1ICrafting);
-		par1ICrafting.sendProgressBarUpdate(this, 0, this.crusher.furnaceCookTime);
-		par1ICrafting.sendProgressBarUpdate(this, 1, this.crusher.furnaceBurnTime);
-		par1ICrafting.sendProgressBarUpdate(this, 2, this.crusher.currentItemBurnTime);
+		super.addCraftingToCrafters(crafting);
+		crafting.sendProgressBarUpdate(this, 0, this.crusher.crushingTime);
+		crafting.sendProgressBarUpdate(this, 1, this.crusher.burnTime);
+		crafting.sendProgressBarUpdate(this, 2, this.crusher.maxBurnTime);
 	}
 	
-	/**
-	 * Looks for changes made in the container, sends them to every listener.
-	 */
 	@Override
 	public void detectAndSendChanges()
 	{
@@ -63,69 +60,65 @@ public class ContainerOreCrusher extends Container
 		{
 			ICrafting icrafting = (ICrafting) this.crafters.get(i);
 			
-			if (this.lastCookTime != this.crusher.furnaceCookTime)
+			if (this.lastCrushingTime != this.crusher.crushingTime)
 			{
-				icrafting.sendProgressBarUpdate(this, 0, this.crusher.furnaceCookTime);
+				icrafting.sendProgressBarUpdate(this, 0, this.crusher.crushingTime);
 			}
 			
-			if (this.lastBurnTime != this.crusher.furnaceBurnTime)
+			if (this.lastBurnTime != this.crusher.burnTime)
 			{
-				icrafting.sendProgressBarUpdate(this, 1, this.crusher.furnaceBurnTime);
+				icrafting.sendProgressBarUpdate(this, 1, this.crusher.burnTime);
 			}
 			
-			if (this.lastItemBurnTime != this.crusher.currentItemBurnTime)
+			if (this.lastMaxBurnTime != this.crusher.maxBurnTime)
 			{
-				icrafting.sendProgressBarUpdate(this, 2, this.crusher.currentItemBurnTime);
+				icrafting.sendProgressBarUpdate(this, 2, this.crusher.maxBurnTime);
 			}
 		}
 		
-		this.lastCookTime = this.crusher.furnaceCookTime;
-		this.lastBurnTime = this.crusher.furnaceBurnTime;
-		this.lastItemBurnTime = this.crusher.currentItemBurnTime;
+		this.lastCrushingTime = this.crusher.crushingTime;
+		this.lastBurnTime = this.crusher.burnTime;
+		this.lastMaxBurnTime = this.crusher.maxBurnTime;
 	}
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void updateProgressBar(int par1, int par2)
+	public void updateProgressBar(int ID, int time)
 	{
-		if (par1 == 0)
+		if (ID == 0)
 		{
-			this.crusher.furnaceCookTime = par2;
+			this.crusher.crushingTime = time;
 		}
 		
-		if (par1 == 1)
+		if (ID == 1)
 		{
-			this.crusher.furnaceBurnTime = par2;
+			this.crusher.burnTime = time;
 		}
 		
-		if (par1 == 2)
+		if (ID == 2)
 		{
-			this.crusher.currentItemBurnTime = par2;
+			this.crusher.maxBurnTime = time;
 		}
 	}
 	
 	@Override
-	public boolean canInteractWith(EntityPlayer par1EntityPlayer)
+	public boolean canInteractWith(EntityPlayer player)
 	{
-		return this.crusher.isUseableByPlayer(par1EntityPlayer);
+		return this.crusher.isUseableByPlayer(player);
 	}
 	
-	/**
-	 * Called when a player shift-clicks on a slot. You must override this or
-	 * you will crash when someone does that.
-	 */
 	@Override
-	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2)
+	public ItemStack transferStackInSlot(EntityPlayer player, int slotID)
 	{
 		ItemStack itemstack = null;
-		Slot slot = (Slot) this.inventorySlots.get(par2);
+		Slot slot = (Slot) this.inventorySlots.get(slotID);
 		
 		if (slot != null && slot.getHasStack())
 		{
 			ItemStack itemstack1 = slot.getStack();
 			itemstack = itemstack1.copy();
 			
-			if (par2 == 2)
+			if (slotID == 2)
 			{
 				if (!this.mergeItemStack(itemstack1, 3, 39, true))
 				{
@@ -134,9 +127,9 @@ public class ContainerOreCrusher extends Container
 				
 				slot.onSlotChange(itemstack1, itemstack);
 			}
-			else if (par2 != 1 && par2 != 0)
+			else if (slotID != 1 && slotID != 0)
 			{
-				if (OreCrusherRecipes.crushing().getCrushingResult(itemstack1) != null)
+				if (CrusherRecipes.instance.getResult(itemstack1) != null)
 				{
 					if (!this.mergeItemStack(itemstack1, 0, 1, false))
 					{
@@ -150,14 +143,14 @@ public class ContainerOreCrusher extends Container
 						return null;
 					}
 				}
-				else if (par2 >= 3 && par2 < 30)
+				else if (slotID >= 3 && slotID < 30)
 				{
 					if (!this.mergeItemStack(itemstack1, 30, 39, false))
 					{
 						return null;
 					}
 				}
-				else if (par2 >= 30 && par2 < 39 && !this.mergeItemStack(itemstack1, 3, 30, false))
+				else if (slotID >= 30 && slotID < 39 && !this.mergeItemStack(itemstack1, 3, 30, false))
 				{
 					return null;
 				}
@@ -181,7 +174,7 @@ public class ContainerOreCrusher extends Container
 				return null;
 			}
 			
-			slot.onPickupFromSlot(par1EntityPlayer, itemstack1);
+			slot.onPickupFromSlot(player, itemstack1);
 		}
 		
 		return itemstack;

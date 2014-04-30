@@ -2,18 +2,29 @@ package clashsoft.mods.moreminerals.block;
 
 import java.util.Random;
 
-import clashsoft.cslib.minecraft.CustomBlock;
+import clashsoft.cslib.minecraft.block.CustomBlock;
 import clashsoft.mods.moreminerals.MoreMineralsMod;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.world.World;
 
-public class BlockDirtOre extends CustomBlock
+public class BlockDirtOre extends CustomBlock implements IBlockOre
 {
-	public BlockDirtOre(int par1, Material par2Material, String[] par3, String[] par4, boolean par5, int par6, CreativeTabs[] par7)
+	public BlockDirtOre(String[] names, String[] iconNames)
 	{
-		super(par1, par2Material, par3, par4, par5, par6, par7);
+		super(Material.ground, names, iconNames, null);
+		this.setStepSound(soundTypeGravel);
+		this.setCreativeTab(MoreMineralsMod.dirtOresTab);
+	}
+	
+	@Override
+	public Block getBlock(int metadata)
+	{
+		return Blocks.dirt;
 	}
 	
 	@Override
@@ -23,39 +34,34 @@ public class BlockDirtOre extends CustomBlock
 	}
 	
 	@Override
-	public int idDropped(int par1, Random par2Random, int par3)
+	public Item getItem(World world, int x, int y, int z)
 	{
-		return MoreMineralsMod.nuggets.itemID;
+		return MoreMineralsMod.nuggets;
 	}
 	
 	@Override
-	public int damageDropped(int par1)
+	public int damageDropped(int metadata)
 	{
-		if (this.blockID == MoreMineralsMod.dirtOres_ID1)
-			return par1;
-		else if (this.blockID == MoreMineralsMod.dirtOres_ID2)
-			return par1 + 16;
-		else if (this.blockID == MoreMineralsMod.dirtOres_ID3)
-			return par1 + 32;
-		else if (this.blockID == MoreMineralsMod.dirtOres_ID4)
-			return par1 + 48;
-		else if (this.blockID == MoreMineralsMod.dirtOres_ID5)
-			return par1 + 64;
-		else if (this.blockID == MoreMineralsMod.dirtOres_ID6)
-			return par1 + 80;
-		else if (this.blockID == MoreMineralsMod.dirtOres_ID7)
-			return par1 + 96;
-		else if (this.blockID == MoreMineralsMod.dirtOres_ID8)
-			return par1 + 112;
-		return 0;
+		if (this == MoreMineralsMod.dirtOres2)
+			return metadata + 16;
+		else if (this == MoreMineralsMod.dirtOres3)
+			return metadata + 32;
+		else if (this == MoreMineralsMod.dirtOres4)
+			return metadata + 48;
+		else if (this == MoreMineralsMod.dirtOres5)
+			return metadata + 64;
+		else if (this == MoreMineralsMod.dirtOres6)
+			return metadata + 80;
+		else if (this == MoreMineralsMod.dirtOres7)
+			return metadata + 96;
+		else if (this == MoreMineralsMod.dirtOres8)
+			return metadata + 112;
+		return metadata;
 	}
 	
-	/**
-	 * Get the block's damage value (for use with pick block).
-	 */
 	@Override
-	public int getDamageValue(World par1World, int par2, int par3, int par4)
+	public int getDamageValue(World world, int x, int y, int z)
 	{
-		return par1World.getBlockMetadata(par2, par3, par4);
+		return world.getBlockMetadata(x, y, z);
 	}
 }

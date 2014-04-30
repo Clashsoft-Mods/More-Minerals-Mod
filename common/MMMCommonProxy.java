@@ -16,10 +16,9 @@ public class MMMCommonProxy implements IGuiHandler
 	@Override
 	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
 	{
-		TileEntity te = world.getBlockTileEntity(x, y, z);
-		if (te instanceof TileEntityOreCrusher || ID == MoreMineralsMod.OreCrusher_TEID)
+		if (ID == MoreMineralsMod.oreCrusherTEID)
 		{
-			return new ContainerOreCrusher(player.inventory, (TileEntityOreCrusher) te);
+			return new ContainerOreCrusher(player.inventory, (TileEntityOreCrusher) world.getTileEntity(x, y, z));
 		}
 		return null;
 	}
@@ -27,9 +26,9 @@ public class MMMCommonProxy implements IGuiHandler
 	@Override
 	public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
 	{
-		if (ID == MoreMineralsMod.OreCrusher_TEID)
+		if (ID == MoreMineralsMod.oreCrusherTEID)
 		{
-			return new GuiOreCrusher(player.inventory, (TileEntityOreCrusher) world.getBlockTileEntity(x, y, z));
+			return new GuiOreCrusher(player.inventory, (TileEntityOreCrusher) world.getTileEntity(x, y, z));
 		}
 		return null;
 	}
