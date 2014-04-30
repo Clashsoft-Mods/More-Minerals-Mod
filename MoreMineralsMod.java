@@ -50,13 +50,13 @@ public class MoreMineralsMod
 	@SidedProxy(clientSide = "clashsoft.mods.moreminerals.client.MMMClientProxy", serverSide = "clashsoft.mods.moreminerals.common.MMMCommonProxy")
 	public static MMMCommonProxy	proxy;
 	
-	public static CustomCreativeTab	stoneOresTab	= new CustomCreativeTab("MM_stoneores");
-	public static CustomCreativeTab	netherOresTab	= new CustomCreativeTab("MM_netherores");
-	public static CustomCreativeTab	endOresTab		= new CustomCreativeTab("MM_endores");
-	public static CustomCreativeTab	dirtOresTab		= new CustomCreativeTab("MM_dirtores");
-	public static CustomCreativeTab	sandOresTab		= new CustomCreativeTab("MM_sandores");
-	public static CustomCreativeTab	rawMaterialsTab	= new CustomCreativeTab("MM_rawmaterials");
-	public static CustomCreativeTab	toolsTab		= new CustomCreativeTab("MM_tools");
+	public static CustomCreativeTab	stoneOresTab	= new CustomCreativeTab("stone_ores");
+	public static CustomCreativeTab	netherOresTab	= new CustomCreativeTab("nether_ores");
+	public static CustomCreativeTab	endOresTab		= new CustomCreativeTab("end_ores");
+	public static CustomCreativeTab	dirtOresTab		= new CustomCreativeTab("dirt_ores");
+	public static CustomCreativeTab	sandOresTab		= new CustomCreativeTab("sand_ores");
+	public static CustomCreativeTab	rawMaterialsTab	= new CustomCreativeTab("materials");
+	public static CustomCreativeTab	toolsTab		= new CustomCreativeTab("mineral_tools");
 	
 	public static int				oreCrusherTEID	= 15;
 	
@@ -81,7 +81,7 @@ public class MoreMineralsMod
 	
 	public static int[]				vanillaGen		= new int[] { 128, 16, 32, 32, 64, 32, 16, 128 };
 	
-	public static String[]			allnames		= new String[] { "Lithium", "Beryllium", "%&Boron", "%&Carbon", "%&Sodium", "Magnesium", "Aluminium", "%&Silicon", // -
+	public static String[]			names			= new String[] { "Lithium", "Beryllium", "%&Boron", "%&Carbon", "%&Sodium", "Magnesium", "Aluminium", "%&Silicon", // -
 			"%&Phosphorus", "%&Sulfur", "%&Potassium", "%&Calcium", "%&Scandium", "Titanium", "Vanadium", "Chrome", // -
 			"Manganese", "%&Iron", "%&Cobalt", "Nickel", "Copper", "%&Zinc", "%&Gallium", "%&Germanium", // -
 			"%&Arsenic", "%&Selenium", "%&Rubidium", "%&Strontium", "%&Yttrium", "%&Zirconium", "%&Niobium", "Molybdenum", // -
@@ -97,7 +97,7 @@ public class MoreMineralsMod
 			"%&", "%&", "%&", "%&", "%&", "%&", "%&", "%&", // -
 			"%&", "%&", "%&", "%&", "%&", "%&", "%&", "%&", // -
 			"%&", "%&", "%&", "%&", "%&", "%&", "%&", "%&", };
-	public static String[][]		splitnames		= CSArrays.split(allnames, 16);
+	public static String[][]		splitnames		= CSArrays.split(names, 16);
 	public static String[]			names1			= splitnames[0];
 	public static String[]			names2			= splitnames[1];
 	public static String[]			names3			= splitnames[2];
@@ -106,10 +106,10 @@ public class MoreMineralsMod
 	public static String[]			names6			= splitnames[5];
 	public static String[]			names7			= splitnames[6];
 	public static String[]			names8			= splitnames[7];
-	public static String[]			gemnames		= new String[] { "Amethyst", "Ruby", "Sapphire", "Topaz", "Spinel", "Opal" };
-	public static String[]			vanillanames	= new String[] { "Coal", "Diamond", "Emerald", "Gold", "Iron", "Lapislazuli", "Redstone", "Quartz" };
+	public static String[]			gemNames		= new String[] { "Amethyst", "Ruby", "Sapphire", "Topaz", "Spinel", "Opal" };
+	public static String[]			vanillaNames	= new String[] { "Coal", "Diamond", "Emerald", "Gold", "Iron", "Lapislazuli", "Redstone", "Quartz" };
 	
-	public static String[]			alloverlays		= CSString.caseAll(allnames, 0);
+	public static String[]			alloverlays		= CSString.caseAll(names, 0);
 	public static String[]			overlays1		= CSString.caseAll(names1, 0);
 	public static String[]			overlays2		= CSString.caseAll(names2, 0);
 	public static String[]			overlays3		= CSString.caseAll(names3, 0);
@@ -118,10 +118,10 @@ public class MoreMineralsMod
 	public static String[]			overlays6		= CSString.caseAll(names6, 0);
 	public static String[]			overlays7		= CSString.caseAll(names7, 0);
 	public static String[]			overlays8		= CSString.caseAll(names8, 0);
-	public static String[]			gemoverlays		= CSString.caseAll(gemnames, 0);
-	public static String[]			vanillaoverlays	= CSString.caseAll(vanillanames, 0);
+	public static String[]			gemoverlays		= CSString.caseAll(gemNames, 0);
+	public static String[]			vanillaoverlays	= CSString.caseAll(vanillaNames, 0);
 	
-	private static int[]			gemids			= new int[] { CSArrays.indexOf(allnames, "Amethyst"), CSArrays.indexOf(allnames, "Ruby"), CSArrays.indexOf(allnames, "Sapphire"), CSArrays.indexOf(allnames, "Topaz"), CSArrays.indexOf(allnames, "Spinel"), CSArrays.indexOf(allnames, "Opal") };
+	private static int[]			gemids			= new int[] { CSArrays.indexOf(names, "Amethyst"), CSArrays.indexOf(names, "Ruby"), CSArrays.indexOf(names, "Sapphire"), CSArrays.indexOf(names, "Topaz"), CSArrays.indexOf(names, "Spinel"), CSArrays.indexOf(names, "Opal") };
 	
 	public static CustomBlock		vanillaNetherEndOres;
 	public static CustomBlock		vanillaDirtSandOres;
@@ -213,11 +213,11 @@ public class MoreMineralsMod
 		Configuration config = new Configuration(event.getSuggestedConfigurationFile());
 		config.load();
 		
-		overworldGen = config.get("Generation", "Overworld Max Height", overworldGen, "Ores: [" + Arrays.toString(allnames) + "] Note: %& = not implemented, 0 = does not generate").getIntList();
-		netherGen = config.get("Generation", "Nether Max Height", netherGen, "Nether Ores: [" + Arrays.toString(allnames) + "] Note: %& = not implemented, 0 = does not generate").getIntList();
-		endGen = config.get("Generation", "End Max Height", endGen, "End Ores: [" + Arrays.toString(allnames) + "] Note: %& = not implemented, 0 = does not generate").getIntList();
-		dirtGen = config.get("Generation", "Dirt Max Height", dirtGen, "Dirt Ores: [" + Arrays.toString(allnames) + "] Note: %& = not implemented, 0 = does not generate").getIntList();
-		sandGen = config.get("Generation", "Sand Max Height", sandGen, "Sand Ores: [" + Arrays.toString(allnames) + "] Note: %& = not implemented, 0 = does not generate").getIntList();
+		overworldGen = config.get("Generation", "Overworld Max Height", overworldGen, "Ores: [" + Arrays.toString(names) + "] Note: %& = not implemented, 0 = does not generate").getIntList();
+		netherGen = config.get("Generation", "Nether Max Height", netherGen, "Nether Ores: [" + Arrays.toString(names) + "] Note: %& = not implemented, 0 = does not generate").getIntList();
+		endGen = config.get("Generation", "End Max Height", endGen, "End Ores: [" + Arrays.toString(names) + "] Note: %& = not implemented, 0 = does not generate").getIntList();
+		dirtGen = config.get("Generation", "Dirt Max Height", dirtGen, "Dirt Ores: [" + Arrays.toString(names) + "] Note: %& = not implemented, 0 = does not generate").getIntList();
+		sandGen = config.get("Generation", "Sand Max Height", sandGen, "Sand Ores: [" + Arrays.toString(names) + "] Note: %& = not implemented, 0 = does not generate").getIntList();
 		
 		oreCrusherTEID = config.get("Tile Entity IDs", "Ore Crusher Tile Entity ID", 15).getInt();
 		
@@ -228,18 +228,18 @@ public class MoreMineralsMod
 	public void load(FMLInitializationEvent event)
 	{
 		CSLog.info("[MoreMineralsMod] Loading More Minerals Mod");
-		CSLog.info("[MoreMineralsMod] " + allnames.length + " Materials added");
+		CSLog.info("[MoreMineralsMod] " + names.length + " Materials added");
 		
-		vanillaItems = (CustomItem) new CustomItem(CSArrays.concat(CSString.concatAll(vanillanames, "", " Ingot"), CSString.concatAll(vanillanames, "", " Dust"), CSString.concatAll(vanillanames, "", " Nugget")), CSArrays.concat(CSArrays.concat(CSString.concatAll(vanillaoverlays, "ingot", ""), CSString.concatAll(vanillaoverlays, "dust", "")), CSString.concatAll(vanillaoverlays, "nugget", ""))).setMetadataEnabled(false, 3, 4, 13, 17).setUnlocalizedName("MM_VanillaSpecialItems").setCreativeTab(rawMaterialsTab);
+		vanillaItems = (CustomItem) new CustomItem(CSArrays.concat(CSString.concatAll(vanillaNames, "", " Ingot"), CSString.concatAll(vanillaNames, "", " Dust"), CSString.concatAll(vanillaNames, "", " Nugget")), CSArrays.concat(CSArrays.concat(CSString.concatAll(vanillaoverlays, "ingot", ""), CSString.concatAll(vanillaoverlays, "dust", "")), CSString.concatAll(vanillaoverlays, "nugget", ""))).setMetadataEnabled(false, 3, 4, 13, 17).setUnlocalizedName("MM_VanillaSpecialItems").setCreativeTab(rawMaterialsTab);
 		
 		vanillaIngots = new ItemStack[] { new ItemStack(vanillaItems, 1, 0), new ItemStack(vanillaItems, 1, 1), new ItemStack(vanillaItems, 1, 2), new ItemStack(Items.gold_ingot), new ItemStack(Items.iron_ingot), new ItemStack(vanillaItems, 1, 5), new ItemStack(vanillaItems, 1, 6), new ItemStack(vanillaItems, 1, 7) };
 		vanillaDusts = new ItemStack[] { new ItemStack(vanillaItems, 1, 8), new ItemStack(vanillaItems, 1, 9), new ItemStack(vanillaItems, 1, 10), new ItemStack(vanillaItems, 1, 11), new ItemStack(vanillaItems, 1, 12), new ItemStack(vanillaItems, 1, 13), new ItemStack(Items.redstone), new ItemStack(vanillaItems, 1, 15) };
 		vanillaNuggets = new ItemStack[] { new ItemStack(vanillaItems, 1, 16), new ItemStack(vanillaItems, 1, 17), new ItemStack(vanillaItems, 1, 18), new ItemStack(Items.gold_nugget), new ItemStack(vanillaItems, 1, 20), new ItemStack(vanillaItems, 1, 21), new ItemStack(vanillaItems, 1, 22), new ItemStack(vanillaItems, 1, 23) };
 		
-		ingots = (CustomItem) new CustomItem(CSString.concatAll(allnames, "", " Ingot"), CSString.concatAll(alloverlays, "ingot", "")).setMetadataEnabled(false, gemids).setUnlocalizedName("MM_Ingots").setCreativeTab(rawMaterialsTab);
-		dusts = (CustomItem) new CustomItem(CSString.concatAll(allnames, "", " Dust"), CSString.concatAll(alloverlays, "dust", "")).setUnlocalizedName("MM_Dusts").setCreativeTab(rawMaterialsTab);
-		nuggets = (CustomItem) new CustomItem(CSString.concatAll(allnames, "", " Nugget"), CSString.concatAll(alloverlays, "nugget", "")).setUnlocalizedName("MM_Nuggets").setCreativeTab(rawMaterialsTab);
-		gems = (CustomItem) new CustomItem(gemnames, CSString.concatAll(gemoverlays, "gem", "")).setUnlocalizedName("MM_Gems").setCreativeTab(rawMaterialsTab);
+		ingots = (CustomItem) new CustomItem(CSString.concatAll(names, "", " Ingot"), CSString.concatAll(alloverlays, "ingot", "")).setMetadataEnabled(false, gemids).setUnlocalizedName("MM_Ingots").setCreativeTab(rawMaterialsTab);
+		dusts = (CustomItem) new CustomItem(CSString.concatAll(names, "", " Dust"), CSString.concatAll(alloverlays, "dust", "")).setUnlocalizedName("MM_Dusts").setCreativeTab(rawMaterialsTab);
+		nuggets = (CustomItem) new CustomItem(CSString.concatAll(names, "", " Nugget"), CSString.concatAll(alloverlays, "nugget", "")).setUnlocalizedName("MM_Nuggets").setCreativeTab(rawMaterialsTab);
+		gems = (CustomItem) new CustomItem(gemNames, CSString.concatAll(gemoverlays, "gem", "")).setUnlocalizedName("MM_Gems").setCreativeTab(rawMaterialsTab);
 		
 		dataSword = (ItemDataSword) new ItemDataSword(ToolMaterial.IRON).setCreativeTab(toolsTab).setUnlocalizedName("MM_Swords");
 		dataSpade = (ItemDataSpade) new ItemDataSpade(ToolMaterial.IRON).setCreativeTab(toolsTab).setUnlocalizedName("MM_Spades");
@@ -252,9 +252,9 @@ public class MoreMineralsMod
 		proxy.registerBlockRenderers();
 		proxy.registerItemRenderers();
 		
-		String[] vanillaNames = CSArrays.concat(CSString.concatAll(vanillanames, "Nether ", " Ore"), CSString.concatAll(vanillanames, "End ", " Ore"));
-		String[] vanillaNames2 = CSArrays.concat(CSString.concatAll(vanillanames, "Dirt-Based ", " Ore"), CSString.concatAll(vanillanames, "Sand-Based ", " Ore"));
-		vanillaNetherEndOres = (CustomBlock) new CustomBlock(Material.rock, vanillaNames, CSString.concatAll(CSArrays.concat(vanillaoverlays, vanillaoverlays), "", "overlay"), new CreativeTabs[] { netherOresTab, netherOresTab, netherOresTab, netherOresTab, netherOresTab, netherOresTab, netherOresTab, endOresTab, endOresTab, endOresTab, endOresTab, endOresTab, endOresTab, endOresTab, endOresTab }).setBlockName("MM_VanillaSpecialOres").setHardness(2.15F);
+		String[] vanillaNames1 = CSArrays.concat(CSString.concatAll(vanillaNames, "Nether ", " Ore"), CSString.concatAll(vanillaNames, "End ", " Ore"));
+		String[] vanillaNames2 = CSArrays.concat(CSString.concatAll(vanillaNames, "Dirt-Based ", " Ore"), CSString.concatAll(vanillaNames, "Sand-Based ", " Ore"));
+		vanillaNetherEndOres = (CustomBlock) new CustomBlock(Material.rock, vanillaNames1, CSString.concatAll(CSArrays.concat(vanillaoverlays, vanillaoverlays), "", "overlay"), new CreativeTabs[] { netherOresTab, netherOresTab, netherOresTab, netherOresTab, netherOresTab, netherOresTab, netherOresTab, endOresTab, endOresTab, endOresTab, endOresTab, endOresTab, endOresTab, endOresTab, endOresTab }).setBlockName("MM_VanillaSpecialOres").setHardness(2.15F);
 		vanillaDirtSandOres = (CustomBlock) new BlockVanillaSpecialOre(vanillaNames2, CSString.concatAll(CSArrays.concat(vanillaoverlays, vanillaoverlays), "", "overlay")).setBlockName("MM_VanillaSpecialOres2").setHardness(1.7F);
 		
 		stoneOres1 = (CustomBlock) new BlockStoneOre(CSString.concatAll(names1, "", " Ore"), CSString.concatAll(overlays1, "", "overlay")).setHardness(2.3F);
@@ -338,12 +338,12 @@ public class MoreMineralsMod
 		addOreDictionaryEntrys();
 		setHarvestLevelsAndHardnessess();
 		
-		int indexOf = CSArrays.indexOf(allnames, "Magnesium");
-		int indexOf2 = CSArrays.indexOf(allnames, "Uranium");
-		int indexOf3 = CSArrays.indexOf(allnames, "Ruby");
-		int indexOf4 = CSArrays.indexOf(allnames, "Iridium");
-		int indexOf5 = CSArrays.indexOf(allnames, "Beryllium");
-		int indexOf6 = CSArrays.indexOf(allnames, "Aluminium");
+		int indexOf = CSArrays.indexOf(names, "Magnesium");
+		int indexOf2 = CSArrays.indexOf(names, "Uranium");
+		int indexOf3 = CSArrays.indexOf(names, "Ruby");
+		int indexOf4 = CSArrays.indexOf(names, "Iridium");
+		int indexOf5 = CSArrays.indexOf(names, "Beryllium");
+		int indexOf6 = CSArrays.indexOf(names, "Aluminium");
 		stoneOresTab.setIconItemStack(new ItemStack(OreHelper.getOreFromMetadata(indexOf, "stone"), 1, indexOf % 16));
 		netherOresTab.setIconItemStack(new ItemStack(OreHelper.getOreFromMetadata(indexOf2, "nether"), 1, indexOf2 % 16));
 		endOresTab.setIconItemStack(new ItemStack(OreHelper.getOreFromMetadata(indexOf3, "end"), 1, indexOf3 % 16));
@@ -385,7 +385,7 @@ public class MoreMineralsMod
 		float sandBase = Blocks.sand.getBlockHardness(null, 0, 0, 0);
 		float storageBase = Blocks.iron_block.getBlockHardness(null, 0, 0, 0);
 		
-		for (int i = 0; i < allnames.length; i++)
+		for (int i = 0; i < names.length; i++)
 		{
 			int j = i & 15;
 			int gentype = overworldGen[i];
@@ -407,7 +407,7 @@ public class MoreMineralsMod
 			OreHelper.getOreFromMetadata(i, "dirt").setHardness(j, dirtHardness).setHarvestLevel("shovel", 1, j);
 			OreHelper.getOreFromMetadata(i, "sand").setHardness(j, sandHardness).setHarvestLevel("pickaxe", 1, j);
 		}
-		for (int i = 0; i < vanillanames.length; i++)
+		for (int i = 0; i < vanillaNames.length; i++)
 		{
 			int level = 2;
 			if (i == 0)
@@ -445,10 +445,10 @@ public class MoreMineralsMod
 	public void addOreDictionaryEntrys()
 	{
 		// Type 1 Ores
-		for (int i = 0; i < allnames.length; i++)
+		for (int i = 0; i < names.length; i++)
 		{
 			int j = i & 15;
-			String s = allnames[i];
+			String s = names[i];
 			CSCrafting.registerOre("ore" + s, new ItemStack(OreHelper.getOreFromMetadata(i, "stone"), 1, j));
 			CSCrafting.registerOre("oreNether" + s, new ItemStack(OreHelper.getOreFromMetadata(i, "nether"), 1, j));
 			CSCrafting.registerOre("oreEnd" + s, new ItemStack(OreHelper.getOreFromMetadata(i, "end"), 1, j));
@@ -465,20 +465,20 @@ public class MoreMineralsMod
 		for (int i = 0; i < gemids.length; i++)
 		{
 			int gemid = gemids[i];
-			CSCrafting.registerOre("gem" + allnames[gemid], new ItemStack(gems, 1, gemid));
+			CSCrafting.registerOre("gem" + names[gemid], new ItemStack(gems, 1, gemid));
 		}
 		
 		// Vanilla Special Ores
-		for (int i = 0; i < vanillanames.length; i++)
+		for (int i = 0; i < vanillaNames.length; i++)
 		{
-			CSCrafting.registerOre("oreNether" + vanillanames[i], new ItemStack(vanillaNetherEndOres, 1, i));
-			CSCrafting.registerOre("oreEnd" + vanillanames[i], new ItemStack(vanillaNetherEndOres, 1, i + 8));
-			CSCrafting.registerOre("oreDirt" + vanillanames[i], new ItemStack(vanillaDirtSandOres, 1, i));
-			CSCrafting.registerOre("oreSand" + vanillanames[i], new ItemStack(vanillaDirtSandOres, 1, i + 8));
+			CSCrafting.registerOre("oreNether" + vanillaNames[i], new ItemStack(vanillaNetherEndOres, 1, i));
+			CSCrafting.registerOre("oreEnd" + vanillaNames[i], new ItemStack(vanillaNetherEndOres, 1, i + 8));
+			CSCrafting.registerOre("oreDirt" + vanillaNames[i], new ItemStack(vanillaDirtSandOres, 1, i));
+			CSCrafting.registerOre("oreSand" + vanillaNames[i], new ItemStack(vanillaDirtSandOres, 1, i + 8));
 			
-			CSCrafting.registerOre("ingot" + vanillanames[i], vanillaIngots[i]);
-			CSCrafting.registerOre("dust" + vanillanames[i], vanillaDusts[i]);
-			CSCrafting.registerOre("nugget" + vanillanames[i], vanillaNuggets[i]);
+			CSCrafting.registerOre("ingot" + vanillaNames[i], vanillaIngots[i]);
+			CSCrafting.registerOre("dust" + vanillaNames[i], vanillaDusts[i]);
+			CSCrafting.registerOre("nugget" + vanillaNames[i], vanillaNuggets[i]);
 		}
 	}
 	
@@ -486,13 +486,13 @@ public class MoreMineralsMod
 	{
 		GameRegistry.addRecipe(new RepairDataTools());
 		
-		GameRegistry.addShapedRecipe(new ItemStack(oreCrusher, 1, 3), new Object[] { "tct", "cTc", "tct", 't', new ItemStack(ingots, 1, CSArrays.indexOf(allnames, "Tin")), 'c', new ItemStack(ingots, 1, CSArrays.indexOf(allnames, "Chrome")), 'T', new ItemStack(ingots, 1, CSArrays.indexOf(allnames, "Titanium")), });
+		GameRegistry.addShapedRecipe(new ItemStack(oreCrusher, 1, 3), new Object[] { "tct", "cTc", "tct", 't', new ItemStack(ingots, 1, CSArrays.indexOf(names, "Tin")), 'c', new ItemStack(ingots, 1, CSArrays.indexOf(names, "Chrome")), 'T', new ItemStack(ingots, 1, CSArrays.indexOf(names, "Titanium")), });
 		
-		for (int i = 0; i < allnames.length; i++)
+		for (int i = 0; i < names.length; i++)
 		{
 			
 		}
-		for (int i = 0; i < vanillanames.length; i++)
+		for (int i = 0; i < vanillaNames.length; i++)
 		{
 			
 		}
@@ -507,25 +507,25 @@ public class MoreMineralsMod
 		{
 			ItemStack toolStack = new ItemStack(tools[i]);
 			
-			CSCrafting.addToolRecipe(ItemDataTool.setToolMaterial(toolStack, adamantite), new ItemStack(ingots, 1, CSArrays.indexOf(allnames, "Adamantite")), i);
-			CSCrafting.addToolRecipe(ItemDataTool.setToolMaterial(toolStack, cobalt), new ItemStack(ingots, 1, CSArrays.indexOf(allnames, "Cobalt")), i);
-			CSCrafting.addToolRecipe(ItemDataTool.setToolMaterial(toolStack, demonite), new ItemStack(ingots, 1, CSArrays.indexOf(allnames, "Demonite")), i);
-			CSCrafting.addToolRecipe(ItemDataTool.setToolMaterial(toolStack, mythril), new ItemStack(ingots, 1, CSArrays.indexOf(allnames, "Mythril")), i);
-			CSCrafting.addToolRecipe(ItemDataTool.setToolMaterial(toolStack, aluminium), new ItemStack(ingots, 1, CSArrays.indexOf(allnames, "Aluminium")), i);
-			CSCrafting.addToolRecipe(ItemDataTool.setToolMaterial(toolStack, chrome), new ItemStack(ingots, 1, CSArrays.indexOf(allnames, "Chrome")), i);
-			CSCrafting.addToolRecipe(ItemDataTool.setToolMaterial(toolStack, copper), new ItemStack(ingots, 1, CSArrays.indexOf(allnames, "Copper")), i);
-			CSCrafting.addToolRecipe(ItemDataTool.setToolMaterial(toolStack, silver), new ItemStack(ingots, 1, CSArrays.indexOf(allnames, "Silver")), i);
-			CSCrafting.addToolRecipe(ItemDataTool.setToolMaterial(toolStack, tin), new ItemStack(ingots, 1, CSArrays.indexOf(allnames, "Tin")), i);
-			CSCrafting.addToolRecipe(ItemDataTool.setToolMaterial(toolStack, titanium), new ItemStack(ingots, 1, CSArrays.indexOf(allnames, "Titanium")), i);
+			CSCrafting.addToolRecipe(ItemDataTool.setToolMaterial(toolStack, adamantite), new ItemStack(ingots, 1, CSArrays.indexOf(names, "Adamantite")), i);
+			CSCrafting.addToolRecipe(ItemDataTool.setToolMaterial(toolStack, cobalt), new ItemStack(ingots, 1, CSArrays.indexOf(names, "Cobalt")), i);
+			CSCrafting.addToolRecipe(ItemDataTool.setToolMaterial(toolStack, demonite), new ItemStack(ingots, 1, CSArrays.indexOf(names, "Demonite")), i);
+			CSCrafting.addToolRecipe(ItemDataTool.setToolMaterial(toolStack, mythril), new ItemStack(ingots, 1, CSArrays.indexOf(names, "Mythril")), i);
+			CSCrafting.addToolRecipe(ItemDataTool.setToolMaterial(toolStack, aluminium), new ItemStack(ingots, 1, CSArrays.indexOf(names, "Aluminium")), i);
+			CSCrafting.addToolRecipe(ItemDataTool.setToolMaterial(toolStack, chrome), new ItemStack(ingots, 1, CSArrays.indexOf(names, "Chrome")), i);
+			CSCrafting.addToolRecipe(ItemDataTool.setToolMaterial(toolStack, copper), new ItemStack(ingots, 1, CSArrays.indexOf(names, "Copper")), i);
+			CSCrafting.addToolRecipe(ItemDataTool.setToolMaterial(toolStack, silver), new ItemStack(ingots, 1, CSArrays.indexOf(names, "Silver")), i);
+			CSCrafting.addToolRecipe(ItemDataTool.setToolMaterial(toolStack, tin), new ItemStack(ingots, 1, CSArrays.indexOf(names, "Tin")), i);
+			CSCrafting.addToolRecipe(ItemDataTool.setToolMaterial(toolStack, titanium), new ItemStack(ingots, 1, CSArrays.indexOf(names, "Titanium")), i);
 			CSCrafting.addToolRecipe(ItemDataTool.setToolMaterial(toolStack, emerald), new ItemStack(Items.emerald), i);
-			CSCrafting.addToolRecipe(ItemDataTool.setToolMaterial(toolStack, ruby), new ItemStack(gems, 1, CSArrays.indexOf(gemnames, "Ruby")), i);
-			CSCrafting.addToolRecipe(ItemDataTool.setToolMaterial(toolStack, sapphire), new ItemStack(gems, 1, CSArrays.indexOf(gemnames, "Sapphire")), i);
+			CSCrafting.addToolRecipe(ItemDataTool.setToolMaterial(toolStack, ruby), new ItemStack(gems, 1, CSArrays.indexOf(gemNames, "Ruby")), i);
+			CSCrafting.addToolRecipe(ItemDataTool.setToolMaterial(toolStack, sapphire), new ItemStack(gems, 1, CSArrays.indexOf(gemNames, "Sapphire")), i);
 		}
 	}
 	
 	public void addFurnaceRecipes()
 	{
-		for (int i = 0; i < allnames.length; i++)
+		for (int i = 0; i < names.length; i++)
 		{
 			int j = i & 15;
 			int gemIndex = CSArrays.indexOf(gemids, i);
@@ -544,7 +544,7 @@ public class MoreMineralsMod
 			CSCrafting.addFurnaceRecipe(new ItemStack(dusts, 1, i), is, 0.001F);
 		}
 		
-		for (int i = 0; i < vanillanames.length; i++)
+		for (int i = 0; i < vanillaNames.length; i++)
 		{
 			CSCrafting.addFurnaceRecipe(vanillaDusts[i], vanillaIngots[i], 0.1F);
 			
@@ -563,7 +563,7 @@ public class MoreMineralsMod
 	
 	public void addCrusherRecipes()
 	{
-		for (int i = 0; i < allnames.length; i++)
+		for (int i = 0; i < names.length; i++)
 		{
 			int j = i & 15;
 			int gemIndex = CSArrays.indexOf(gemids, i);
@@ -576,7 +576,7 @@ public class MoreMineralsMod
 			CrusherRecipes.addCrusherRecipe(stack, new ItemStack(dusts, 1, i), 0F);
 		}
 		
-		for (int i = 0; i < vanillanames.length; i++)
+		for (int i = 0; i < vanillaNames.length; i++)
 		{
 			ItemStack stack = vanillaDusts[i].copy();
 			CrusherRecipes.addCrusherRecipe(vanillaIngots[i], stack, 0F);
