@@ -1,0 +1,8 @@
+item.ingot.name=Ingot
+item.nugget.name=Nugget
+item.dust.name=Dust
+
+material.alloy=Alloy
+
+tile.ores.name=%s-Based %s Ore
+tile.ores.stone.name=%s Ore

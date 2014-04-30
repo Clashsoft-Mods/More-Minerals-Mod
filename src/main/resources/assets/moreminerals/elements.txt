@@ -1,0 +1,164 @@
+# Format:
+# number:name(symbol);[period,group];class;{orecolor,[blockcolor],itemcolor};gen
+#
+# Valid classes are NON_METAL, NOBLE_GAS, ALKALI_METAL, ALKALINE_EARTH_METAL, METALLOID, HALOGEN, TRANSITION_METAL, POOR_METAL, LANTHANIDE, ACTINIDE, GEM and SPECIAL
+# Classes are not case-sensitive
+#
+# Generation args:
+#
+# number -> number = max height
+# Example: 128 -> ore will spawn at y < 128
+#
+# {h<max} -> ore will spawn below y max
+# {h>min} -> ore will spawn above y min
+# Example: {h<64} -> ore will spawn at y < 64
+#          {h>16} -> ore will spawn at y > 16
+#
+# {b=biome} -> biome has to be "biome"
+# {b!=biome} -> biome must not be "biome"
+# Example: {b=Forest} -> biome will spawn in a forest on any height
+#          {b!=Ocean} -> ore will not spawn in an ocean biome
+#
+# {h>min&h<max} -> ore will spawn below y max AND above y min
+# Example: {h>16&h<32} -> ore will spawn between y 16 and y 32
+#          {h>16&b=Desert} -> ore will spawn in a desert biome above y 16
+#          {h<32&b!=Jungle} -> ore will spawn below y 32, but not in jungles
+
+1:Hydrogen(H);[1,1];NON_METAL;{};{}
+2:Helium(He);[1,18];NOBLE_GAS;{};{}
+3:Lithium(Li);[2,1];ALKALI_METAL;{};{}
+4:Beryllium(Be);[2,2];ALKALINE_EARTH_METAL;{0x};{}
+5:Boron(B);[2,13];METALLOID;{};{}
+6:Carbon(C);[2,14];NON_METAL;{};{}
+7:Nitrogen(N);[2,15];NON_METAL;{};{}
+8:Oxygen(O);[2,16];NON_METAL;{};{}
+9:Fluorine(F);[2,17];HALOGEN;{};{}
+10:Neon(Ne);[2,18];NOBLE_GAS;{};{}
+11:Sodium(Na);[3,1];ALKALI_METAL;{};{}
+12:Magnesium(Mg);[3,2];ALKALINE_EARTH_METAL;{};{}
+13:Aluminium(Al);[3,13];POOR_METAL;{};{}
+14:Silicon(Si);[3,14];METALLOID;{};{}
+15:Phosphorus(P);[3,15];NON_METAL;{};{}
+16:Sulfur(S);[3,16];NON_METAL;{};{}
+17:Chlorine(Cl);[3,17];HALOGEN;{};{}
+18:Argon(Ar);[3,18];NOBLE_GAS;{};{}
+19:Potassium(K);[4,1];ALKALI_METAL;{};{}
+20:Calcium(Ca);[4,2];ALKALINE_EARTH_METAL;{};{}
+21:Scandium(Sc);[4,3];TRANSITION_METAL;{};{}
+22:Titanium(Ti);[4,4];TRANSITION_METAL;{};{}
+23:Vanadium(V);[4,5];TRANSITION_METAL;{};{}
+24:Chrome(Cr);[4,6];TRANSITION_METAL;{};{}
+25:Manganese(Mn);[4,7];TRANSITION_METAL;{};{}
+26:Iron(Fe);[4,8];TRANSITION_METAL;{};{}
+27:Cobalt(Co);[4,9];TRANSITION_METAL;{};{}
+28:Nickel(Ni);[4,10];TRANSITION_METAL;{};{}
+29:Copper(Cu);[4,11];TRANSITION_METAL;{};{}
+30:Zinc(Zn);[4,12];TRANSITION_METAL;{};{}
+31:Gallium(Ga);[4,13];POOR_METAL;{};{}
+32:Germanium(Ge);[4,14];METALLOID;{};{}
+33:Arsenic(As);[4,15];METALLOID;{};{}
+34:Selenium(Se);[4,16];NON_METAL;{};{}
+35:Bromine(Br);[4,17];HALOGEN;{};{}
+36:Krypton(Kr);[4,18];NOBLE_GAS;{};{}
+37:Rubidium(Rb);[5,1];ALKALI_METAL;{};{}
+38:Strontium(Sr);[5,2];ALKALINE_EARTH_METAL;{};{}
+39:Yttrium(Y);[5,3];TRANSITION_METAL;{};{}
+40:Zirconium(Zr);[5,4];TRANSITION_METAL;{};{}
+41:Niobium(Nb);[5,5];TRANSITION_METAL;{};{}
+42:Molybdenum(Mo);[5,6];TRANSITION_METAL;{};{}
+43:Technetium(Tc);[5,7];TRANSITION_METAL;{};{}
+44:Ruthenium(Ru);[5,8];TRANSITION_METAL;{};{}
+45:Rhodium(Rh);[5,9];TRANSITION_METAL;{};{}
+46:Palladium(Pd);[5,10];TRANSITION_METAL;{};{}
+47:Silver(Ag);[5,11];TRANSITION_METAL;{};{}
+48:Cadmium(Cd);[5,12];TRANSITION_METAL;{};{}
+49:Indium(In);[5,13];POOR_METAL;{};{}
+50:Tin(Sn);[5,14];POOR_METAL;{};{}
+51:Antimony(Sb);[5,15];METALLOID;{};{}
+52:Tellurium(Te);[5,16];METALLOID;{};{}
+53:Iodine(I);[5,17];HALOGEN;{};{}
+54:Xenon(Xe);[5,18];NOBLE_GAS;{};{}
+55:Caesium(Cs);[6,1];ALKALI_METAL;{};{}
+56:Barium(Ba);[6,2];ALKALINE_EARTH_METAL;{};{}
+57:Lanthanum(La);[6,0];LANTHANIDE;{};{}
+58:Cerium(Ce);[6,0];LANTHANIDE;{};{}
+59:Praseodymium(Pr);[6,0];LANTHANIDE;{};{}
+60:Neodymium(Nd);[6,0];LANTHANIDE;{};{}
+61:Promethium(Pm);[6,0];LANTHANIDE;{};{}
+62:Samarium(Sm);[6,0];LANTHANIDE;{};{}
+63:Europium(Eu);[6,0];LANTHANIDE;{};{}
+64:Gadolinium(Gd);[6,0];LANTHANIDE;{};{}
+65:Terbium(Tb);[6,0];LANTHANIDE;{};{}
+66:Dysprosium(Dy);[6,0];LANTHANIDE;{};{}
+67:Holmium(Ho);[6,0];LANTHANIDE;{};{}
+68:Erbium(Er);[6,0];LANTHANIDE;{};{}
+69:Thulium(Tm);[6,0];LANTHANIDE;{};{}
+70:Ytterbium(Yb);[6,0];LANTHANIDE;{};{}
+71:Lutetium(Lu);[6,3];LANTHANIDE;{};{}
+72:Hafnium(Hf);[6,4];TRANSITION_METAL;{};{}
+73:Tantalum(Ta);[6,5];TRANSITION_METAL;{};{}
+74:Tungsten(W);[6,6];TRANSITION_METAL;{};{}
+75:Rhenium(Re);[6,7];TRANSITION_METAL;{};{}
+76:Osmium(Os);[6,8];TRANSITION_METAL;{};{}
+77:Iridium(Ir);[6,9];TRANSITION_METAL;{};{}
+78:Platinum(Pt);[6,10];TRANSITION_METAL;{};{}
+79:Gold(Au);[6,11];TRANSITION_METAL;{};{}
+80:Mercury(Hg);[6,12];TRANSITION_METAL;{};{}
+81:Thallium(Tl);[6,13];POOR_METAL;{};{}
+82:Lead(Pb);[6,14];POOR_METAL;{};{}
+83:Bismuth(Bi);[6,15];POOR_METAL;{};{}
+84:Polonium(Po);[6,16];METALLOID;{};{}
+85:Astatine(At);[6,17];HALOGEN;{};{}
+86:Radon(Rn);[6,18];NOBLE_GAS;{};{}
+87:Francium(Fr);[7,1];ALKALI_METAL;{};{}
+88:Radium(Ra);[7,2];ALKALINE_EARTH_METAL;{};{}
+89:Actinium(Ac);[7,0];ACTINIDE;{};{}
+90:Thorium(Th);[7,0];ACTINIDE;{};{}
+91:Protactinium(Pa);[7,0];ACTINIDE;{};{}
+92:Uranium(U);[7,0];ACTINIDE;{};{}
+93:Neptunium(Np);[7,0];ACTINIDE;{};{}
+94:Plutonium(Pu);[7,0];ACTINIDE;{};{}
+95:Americium(Am);[7,0];ACTINIDE;{};{}
+96:Curium(Cm);[7,0];ACTINIDE;{};{}
+97:Berkelium(Bk);[7,0];ACTINIDE;{};{}
+98:Californium(Cf);[7,0];ACTINIDE;{};{}
+99:Einsteinium(Es);[7,0];ACTINIDE;{};{}
+100:Fermium(Fm);[7,0];ACTINIDE;{};{}
+101:Mendelevium(Md);[7,0];ACTINIDE;{};{}
+102:Nobelium(No);[7,0];ACTINIDE;{};{}
+103:Lawrencium(Lr);[7,3];ACTINIDE;{};{}
+104:Rutherfordium(Rf);[7,4];TRANSITION_METAL;{};{}
+105:Dubnium(Db);[7,5];TRANSITION_METAL;{};{}
+106:Seaborgium(Sg);[7,6];TRANSITION_METAL;{};{}
+107:Bohrium(Bh);[7,7];TRANSITION_METAL;{};{}
+108:Hassium(Hs);[7,8];TRANSITION_METAL;{};{}
+109:Meitnerium(Mt);[7,9];TRANSITION_METAL;{};{}
+110:Darmstadtium(Ds);[7,10];TRANSITION_METAL;{};{}
+111:Roentgenium(Rg);[7,11];TRANSITION_METAL;{};{}
+112:Ununbium(Uub);[7,12];TRANSITION_METAL;{};{}
+113:Ununtrium(Uut);[7,13];POOR_METAL;{};{}
+114:Ununquadium(Uuq);[7,14];POOR_METAL;{};{}
+115:Ununpentium(Uup);[7,15];POOR_METAL;{};{}
+116:Ununhexium(Uuh);[7,16];POOR_METAL;{};{}
+117:Ununseptium(Uus);[7,17];HALOGEN;{};{}
+118:Ununoctium(Uuo);[7,18];NOBLE_GAS;{};{}
+
+128:Coal(C);;VANILLA;{};{y<128}
+129:Diamond(C128);;VANILLA;{};{y<16}
+130:Redstone();;VANILLA;{};{y<16}
+131:Lapis Lazuli();;VANILLA;{};{y<32}
+132:Emerald();;VANILLA;{};{y<32&biome=HugeMountains}
+133:Quartz(SiO2);;VANILLA;{};{y<64}
+
+144:Amethyst();{};GEM;;{y<24}
+145:Ruby();;GEM;{};{y<24}
+146:Sapphire();{};GEM;;{y<24}
+147:Topaz();;GEM;{};{y<24}
+148:Spinel();;GEM;{};{y<16}
+149:Opal();;GEM;{};{y<16}
+
+192:Vibranium(Vb);;METALLOID;{};{y<8&biome=Desert}
+193:Adamantite(FeVb);;METALLOID;{};{y<12}
+194:Cobalt(Co);;METALLOID;{};{y<12}
+195:Mythril();;METALLOID;{};{y<12}
+196:Demonite();;METALLOID;{};{y<16}
