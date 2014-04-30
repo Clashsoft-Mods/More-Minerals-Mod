@@ -2,6 +2,7 @@ package clashsoft.mods.moreminerals;
 
 import java.util.Arrays;
 
+import clashsoft.cslib.minecraft.ClashsoftMod;
 import clashsoft.cslib.minecraft.block.CSBlocks;
 import clashsoft.cslib.minecraft.block.CustomBlock;
 import clashsoft.cslib.minecraft.crafting.CSCrafting;
@@ -12,11 +13,12 @@ import clashsoft.cslib.minecraft.item.CustomItem;
 import clashsoft.cslib.minecraft.item.block.ItemCustomBlock;
 import clashsoft.cslib.minecraft.item.datatools.*;
 import clashsoft.cslib.minecraft.update.CSUpdate;
+import clashsoft.cslib.minecraft.util.CSConfig;
 import clashsoft.cslib.util.CSArrays;
 import clashsoft.cslib.util.CSLog;
 import clashsoft.cslib.util.CSString;
 import clashsoft.mods.moreminerals.block.*;
-import clashsoft.mods.moreminerals.common.MMMCommonProxy;
+import clashsoft.mods.moreminerals.common.MMMProxy;
 import clashsoft.mods.moreminerals.orecrusher.CrusherRecipes;
 import clashsoft.mods.moreminerals.tileentity.TileEntityOreCrusher;
 import clashsoft.mods.moreminerals.world.gen.MMMOreGenerator;
@@ -25,6 +27,7 @@ import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -38,17 +41,19 @@ import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.config.Configuration;
 
-@Mod(modid = "MoreMineralsMod", name = "More Minerals Mod", version = MoreMineralsMod.VERSION)
-public class MoreMineralsMod
+@Mod(modid = MoreMineralsMod.MODID, name = MoreMineralsMod.NAME, version = MoreMineralsMod.VERSION)
+public class MoreMineralsMod extends ClashsoftMod
 {
-	public static final int			REVISION		= 5;
-	public static final String		VERSION			= CSUpdate.CURRENT_VERSION + "-" + REVISION;
+	public static final String		MODID			= "moreminerals";
+	public static final String		NAME			= "More Minerals Mod";
+	public static final String		ACRONYM			= "mmm";
+	public static final String		VERSION			= CSUpdate.CURRENT_VERSION + "-1.0.0-dev";
 	
 	@Instance("MoreMineralsMod")
 	public static MoreMineralsMod	INSTANCE;
 	
-	@SidedProxy(clientSide = "clashsoft.mods.moreminerals.client.MMMClientProxy", serverSide = "clashsoft.mods.moreminerals.common.MMMCommonProxy")
-	public static MMMCommonProxy	proxy;
+	@SidedProxy(clientSide = "clashsoft.mods.moreminerals.client.MMMClientProxy", serverSide = "clashsoft.mods.moreminerals.common.MMMProxy")
+	public static MMMProxy	proxy;
 	
 	public static CustomCreativeTab	stoneOresTab	= new CustomCreativeTab("stone_ores");
 	public static CustomCreativeTab	netherOresTab	= new CustomCreativeTab("nether_ores");
@@ -125,54 +130,12 @@ public class MoreMineralsMod
 	
 	public static CustomBlock		vanillaNetherEndOres;
 	public static CustomBlock		vanillaDirtSandOres;
-	public static CustomBlock		stoneOres1;
-	public static CustomBlock		stoneOres2;
-	public static CustomBlock		stoneOres3;
-	public static CustomBlock		stoneOres4;
-	public static CustomBlock		stoneOres5;
-	public static CustomBlock		stoneOres6;
-	public static CustomBlock		stoneOres7;
-	public static CustomBlock		stoneOres8;
-	public static CustomBlock		netherOres1;
-	public static CustomBlock		netherOres2;
-	public static CustomBlock		netherOres3;
-	public static CustomBlock		netherOres4;
-	public static CustomBlock		netherOres5;
-	public static CustomBlock		netherOres6;
-	public static CustomBlock		netherOres7;
-	public static CustomBlock		netherOres8;
-	public static CustomBlock		endOres1;
-	public static CustomBlock		endOres2;
-	public static CustomBlock		endOres3;
-	public static CustomBlock		endOres4;
-	public static CustomBlock		endOres5;
-	public static CustomBlock		endOres6;
-	public static CustomBlock		endOres7;
-	public static CustomBlock		endOres8;
-	public static CustomBlock		dirtOres1;
-	public static CustomBlock		dirtOres2;
-	public static CustomBlock		dirtOres3;
-	public static CustomBlock		dirtOres4;
-	public static CustomBlock		dirtOres5;
-	public static CustomBlock		dirtOres6;
-	public static CustomBlock		dirtOres7;
-	public static CustomBlock		dirtOres8;
-	public static CustomBlock		sandOres1;
-	public static CustomBlock		sandOres2;
-	public static CustomBlock		sandOres3;
-	public static CustomBlock		sandOres4;
-	public static CustomBlock		sandOres5;
-	public static CustomBlock		sandOres6;
-	public static CustomBlock		sandOres7;
-	public static CustomBlock		sandOres8;
-	public static CustomBlock		storageBlocks1;
-	public static CustomBlock		storageBlocks2;
-	public static CustomBlock		storageBlocks3;
-	public static CustomBlock		storageBlocks4;
-	public static CustomBlock		storageBlocks5;
-	public static CustomBlock		storageBlocks6;
-	public static CustomBlock		storageBlocks7;
-	public static CustomBlock		storageBlocks8;
+	public static CustomBlock		stoneOres1, stoneOres2, stoneOres3, stoneOres4, stoneOres5, stoneOres6, stoneOres7, stoneOres8;
+	public static CustomBlock		netherOres1, netherOres2, netherOres3, netherOres4, netherOres5, netherOres6, netherOres7, netherOres8;
+	public static CustomBlock		endOres1, endOres2, endOres3, endOres4, endOres5, endOres6, endOres7, endOres8;
+	public static CustomBlock		dirtOres1, dirtOres2, dirtOres3, dirtOres4, dirtOres5, dirtOres6, dirtOres7, dirtOres8;
+	public static CustomBlock		sandOres1, sandOres2, sandOres3, sandOres4, sandOres5, sandOres6, sandOres7, sandOres8;
+	public static CustomBlock		storageBlocks1, storageBlocks2, storageBlocks3, storageBlocks4, storageBlocks5, storageBlocks6, storageBlocks7, storageBlocks8;
 	
 	public static BlockOreCrusher	oreCrusher;
 	public static BlockOreCrusher	oreCrusherActive;
@@ -189,47 +152,28 @@ public class MoreMineralsMod
 	public static ItemDataAxe		dataAxe;
 	public static ItemDataHoe		dataHoe;
 	
-	public static ToolMaterial		adamantite;
-	public static ToolMaterial		cobalt;
-	public static ToolMaterial		demonite;
-	public static ToolMaterial		mythril;
-	public static ToolMaterial		aluminium;
-	public static ToolMaterial		chrome;
-	public static ToolMaterial		copper;
-	public static ToolMaterial		silver;
-	public static ToolMaterial		tin;
-	public static ToolMaterial		titanium;
-	public static ToolMaterial		emerald;
-	public static ToolMaterial		ruby;
-	public static ToolMaterial		sapphire;
+	public static ToolMaterial		adamantite, cobalt, demonite, mythril, aluminium, chrome, copper, silver, tin, titanium, emerald, ruby, sapphire;
 	
 	public static ItemStack[]		vanillaIngots;
 	public static ItemStack[]		vanillaDusts;
 	public static ItemStack[]		vanillaNuggets;
 	
+	public MoreMineralsMod()
+	{
+		super(proxy, MODID, NAME, ACRONYM, VERSION);
+		this.hasConfig = true;
+	}
+	
+	@Override
+	public void readConfig()
+	{
+		oreCrusherTEID = CSConfig.getTileEntity("Ore Crusher", oreCrusherTEID);
+	}
+	
+	@Override
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
 	{
-		Configuration config = new Configuration(event.getSuggestedConfigurationFile());
-		config.load();
-		
-		overworldGen = config.get("Generation", "Overworld Max Height", overworldGen, "Ores: [" + Arrays.toString(names) + "] Note: %& = not implemented, 0 = does not generate").getIntList();
-		netherGen = config.get("Generation", "Nether Max Height", netherGen, "Nether Ores: [" + Arrays.toString(names) + "] Note: %& = not implemented, 0 = does not generate").getIntList();
-		endGen = config.get("Generation", "End Max Height", endGen, "End Ores: [" + Arrays.toString(names) + "] Note: %& = not implemented, 0 = does not generate").getIntList();
-		dirtGen = config.get("Generation", "Dirt Max Height", dirtGen, "Dirt Ores: [" + Arrays.toString(names) + "] Note: %& = not implemented, 0 = does not generate").getIntList();
-		sandGen = config.get("Generation", "Sand Max Height", sandGen, "Sand Ores: [" + Arrays.toString(names) + "] Note: %& = not implemented, 0 = does not generate").getIntList();
-		
-		oreCrusherTEID = config.get("Tile Entity IDs", "Ore Crusher Tile Entity ID", 15).getInt();
-		
-		config.save();
-	}
-	
-	@EventHandler
-	public void load(FMLInitializationEvent event)
-	{
-		CSLog.info("[MoreMineralsMod] Loading More Minerals Mod");
-		CSLog.info("[MoreMineralsMod] " + names.length + " Materials added");
-		
 		vanillaItems = (CustomItem) new CustomItem(CSArrays.concat(CSString.concatAll(vanillaNames, "", " Ingot"), CSString.concatAll(vanillaNames, "", " Dust"), CSString.concatAll(vanillaNames, "", " Nugget")), CSArrays.concat(CSArrays.concat(CSString.concatAll(vanillaoverlays, "ingot", ""), CSString.concatAll(vanillaoverlays, "dust", "")), CSString.concatAll(vanillaoverlays, "nugget", ""))).setMetadataEnabled(false, 3, 4, 13, 17).setUnlocalizedName("MM_VanillaSpecialItems").setCreativeTab(rawMaterialsTab);
 		
 		vanillaIngots = new ItemStack[] { new ItemStack(vanillaItems, 1, 0), new ItemStack(vanillaItems, 1, 1), new ItemStack(vanillaItems, 1, 2), new ItemStack(Items.gold_ingot), new ItemStack(Items.iron_ingot), new ItemStack(vanillaItems, 1, 5), new ItemStack(vanillaItems, 1, 6), new ItemStack(vanillaItems, 1, 7) };
@@ -246,11 +190,6 @@ public class MoreMineralsMod
 		dataPickaxe = (ItemDataPickaxe) new ItemDataPickaxe(ToolMaterial.IRON).setCreativeTab(toolsTab).setUnlocalizedName("MM_Pickaxes");
 		dataAxe = (ItemDataAxe) new ItemDataAxe(ToolMaterial.IRON).setCreativeTab(toolsTab).setUnlocalizedName("MM_Axes");
 		dataHoe = (ItemDataHoe) new ItemDataHoe(ToolMaterial.IRON).setCreativeTab(toolsTab).setUnlocalizedName("MM_Hoes");
-		
-		setupToolMaterials(new DataToolSet(dataSword, dataSpade, dataPickaxe, dataAxe, dataHoe));
-		
-		proxy.registerBlockRenderers();
-		proxy.registerItemRenderers();
 		
 		String[] vanillaNames1 = CSArrays.concat(CSString.concatAll(vanillaNames, "Nether ", " Ore"), CSString.concatAll(vanillaNames, "End ", " Ore"));
 		String[] vanillaNames2 = CSArrays.concat(CSString.concatAll(vanillaNames, "Dirt-Based ", " Ore"), CSString.concatAll(vanillaNames, "Sand-Based ", " Ore"));
@@ -284,13 +223,6 @@ public class MoreMineralsMod
 		endOres7 = (CustomBlock) new BlockEndOre(CSString.concatAll(names7, "End ", " Ore"), CSString.concatAll(overlays7, "", "overlay")).setHardness(2.2F);
 		endOres8 = (CustomBlock) new BlockEndOre(CSString.concatAll(names8, "End ", " Ore"), CSString.concatAll(overlays8, "", "overlay")).setHardness(2.2F);
 		
-		for (int i = 0; i < gemids.length; i++)
-		{
-			OreHelper.getOreFromMetadata(gemids[i], "stone").setDrops(gemids[i] % 16, new ItemStack(gems, 1, i));
-			OreHelper.getOreFromMetadata(gemids[i], "nether").setDrops(gemids[i] % 16, new ItemStack(gems, 2, i));
-			OreHelper.getOreFromMetadata(gemids[i], "end").setDrops(gemids[i] % 16, new ItemStack(gems, 2, i));
-		}
-		
 		dirtOres1 = (CustomBlock) new BlockDirtOre(CSString.concatAll(names1, "Dirt-Based ", " Ore"), CSString.concatAll(overlays1, "", "overlay")).setHardness(1.7F);
 		dirtOres2 = (CustomBlock) new BlockDirtOre(CSString.concatAll(names2, "Dirt-Based ", " Ore"), CSString.concatAll(overlays2, "", "overlay")).setHardness(1.7F);
 		dirtOres3 = (CustomBlock) new BlockDirtOre(CSString.concatAll(names3, "Dirt-Based ", " Ore"), CSString.concatAll(overlays3, "", "overlay")).setHardness(1.7F);
@@ -320,6 +252,20 @@ public class MoreMineralsMod
 		
 		oreCrusher = (BlockOreCrusher) new BlockOreCrusher(false).setCreativeTab(rawMaterialsTab);
 		oreCrusherActive = (BlockOreCrusher) new BlockOreCrusher(true);
+	}
+	
+	@Override
+	@EventHandler
+	public void init(FMLInitializationEvent event)
+	{	
+		setupToolMaterials(new DataToolSet(dataSword, dataSpade, dataPickaxe, dataAxe, dataHoe));
+		
+		for (int i = 0; i < gemids.length; i++)
+		{
+			OreHelper.getOreFromMetadata(gemids[i], "stone").setDrops(gemids[i] % 16, new ItemStack(gems, 1, i));
+			OreHelper.getOreFromMetadata(gemids[i], "nether").setDrops(gemids[i] % 16, new ItemStack(gems, 2, i));
+			OreHelper.getOreFromMetadata(gemids[i], "end").setDrops(gemids[i] % 16, new ItemStack(gems, 2, i));
+		}
 		
 		Blocks.coal_ore.setCreativeTab(stoneOresTab);
 		Blocks.diamond_ore.setCreativeTab(stoneOresTab);
@@ -336,27 +282,31 @@ public class MoreMineralsMod
 		addFurnaceRecipes();
 		addCrusherRecipes();
 		addOreDictionaryEntrys();
-		setHarvestLevelsAndHardnessess();
+		setBlockInfo();
 		
-		int indexOf = CSArrays.indexOf(names, "Magnesium");
-		int indexOf2 = CSArrays.indexOf(names, "Uranium");
-		int indexOf3 = CSArrays.indexOf(names, "Ruby");
-		int indexOf4 = CSArrays.indexOf(names, "Iridium");
-		int indexOf5 = CSArrays.indexOf(names, "Beryllium");
-		int indexOf6 = CSArrays.indexOf(names, "Aluminium");
-		stoneOresTab.setIconItemStack(new ItemStack(OreHelper.getOreFromMetadata(indexOf, "stone"), 1, indexOf % 16));
-		netherOresTab.setIconItemStack(new ItemStack(OreHelper.getOreFromMetadata(indexOf2, "nether"), 1, indexOf2 % 16));
-		endOresTab.setIconItemStack(new ItemStack(OreHelper.getOreFromMetadata(indexOf3, "end"), 1, indexOf3 % 16));
-		dirtOresTab.setIconItemStack(new ItemStack(OreHelper.getOreFromMetadata(indexOf4, "dirt"), 1, indexOf4 % 16));
-		sandOresTab.setIconItemStack(new ItemStack(OreHelper.getOreFromMetadata(indexOf5, "sand"), 1, indexOf5 % 16));
-		rawMaterialsTab.setIconItemStack(new ItemStack(ingots, 1, indexOf6));
+		int magnesiumID = CSArrays.indexOf(names, "Magnesium");
+		int uraniumID = CSArrays.indexOf(names, "Uranium");
+		int rubyID = CSArrays.indexOf(names, "Ruby");
+		int iridiumID = CSArrays.indexOf(names, "Iridium");
+		int berylliumID = CSArrays.indexOf(names, "Beryllium");
+		int aluminiumID = CSArrays.indexOf(names, "Aluminium");
+		stoneOresTab.setIconItemStack(new ItemStack(OreHelper.getOreFromMetadata(magnesiumID, "stone"), 1, magnesiumID % 16));
+		netherOresTab.setIconItemStack(new ItemStack(OreHelper.getOreFromMetadata(uraniumID, "nether"), 1, uraniumID % 16));
+		endOresTab.setIconItemStack(new ItemStack(OreHelper.getOreFromMetadata(rubyID, "end"), 1, rubyID % 16));
+		dirtOresTab.setIconItemStack(new ItemStack(OreHelper.getOreFromMetadata(iridiumID, "dirt"), 1, iridiumID % 16));
+		sandOresTab.setIconItemStack(new ItemStack(OreHelper.getOreFromMetadata(berylliumID, "sand"), 1, berylliumID % 16));
+		rawMaterialsTab.setIconItemStack(new ItemStack(ingots, 1, aluminiumID));
 		toolsTab.setIconItemStack(ItemDataTool.setToolMaterial(new ItemStack(dataPickaxe), silver));
 		
 		GameRegistry.registerTileEntity(TileEntityOreCrusher.class, "OreCrusher");
 		GameRegistry.registerWorldGenerator(new MMMOreGenerator(), 1);
-		NetworkRegistry.INSTANCE.registerGuiHandler(INSTANCE, proxy);
-		
-		addLocalizations();
+	}
+	
+	@Override
+	@EventHandler
+	public void postInit(FMLPostInitializationEvent event)
+	{
+		super.postInit(event);
 	}
 	
 	private void setupToolMaterials(DataToolSet dataToolSet)
@@ -376,7 +326,7 @@ public class MoreMineralsMod
 		sapphire = CSItems.addToolMaterial("Sapphire", 3, 1200, 8F, 2.4F, 17, 0x000000, null, dataToolSet);
 	}
 	
-	private void setHarvestLevelsAndHardnessess()
+	private void setBlockInfo()
 	{
 		float stoneBase = Blocks.stone.getBlockHardness(null, 0, 0, 0);
 		float netherBase = Blocks.netherrack.getBlockHardness(null, 0, 0, 0);
@@ -421,30 +371,8 @@ public class MoreMineralsMod
 		}
 	}
 	
-	public void addLocalizations()
-	{
-		// CSLang.addLocalizationUS("itemGroup.MM_stoneores", "Minerals");
-		// CSLang.addLocalizationUS("itemGroup.MM_netherores",
-		// "Nether Minerals");
-		// CSLang.addLocalizationUS("itemGroup.MM_endores", "End Minerals");
-		// CSLang.addLocalizationUS("itemGroup.MM_dirtores",
-		// "Dirt-Based Minerals");
-		// CSLang.addLocalizationUS("itemGroup.MM_sandores",
-		// "Sand-Based Minerals");
-		// CSLang.addLocalizationUS("itemGroup.MM_rawmaterials",
-		// "Mineral Materials");
-		// CSLang.addLocalizationUS("itemGroup.MM_tools", "Mineral Tools");
-		//
-		// CSLang.addLocalizationUS("container.orecrusher", "Ore Crusher");
-		// CSLang.addLocalizationDE("container.orecrusher", "Erz Crusher");
-		//
-		// LanguageRegistry.addName(oreCrusher, "Ore Crusher");
-		// LanguageRegistry.addName(oreCrusherActive, "Ore Crusher");
-	}
-	
 	public void addOreDictionaryEntrys()
 	{
-		// Type 1 Ores
 		for (int i = 0; i < names.length; i++)
 		{
 			int j = i & 15;
@@ -461,14 +389,12 @@ public class MoreMineralsMod
 			CSCrafting.registerOre("nugget" + s, new ItemStack(nuggets, 1, i));
 		}
 		
-		// Gems
 		for (int i = 0; i < gemids.length; i++)
 		{
 			int gemid = gemids[i];
 			CSCrafting.registerOre("gem" + names[gemid], new ItemStack(gems, 1, gemid));
 		}
 		
-		// Vanilla Special Ores
 		for (int i = 0; i < vanillaNames.length; i++)
 		{
 			CSCrafting.registerOre("oreNether" + vanillaNames[i], new ItemStack(vanillaNetherEndOres, 1, i));

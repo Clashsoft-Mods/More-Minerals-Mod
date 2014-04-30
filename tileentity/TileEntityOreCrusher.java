@@ -18,6 +18,8 @@ import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityOreCrusher extends TileEntityInventory implements ISidedInventory
 {
+	public static int MAGNESIUM_META = CSArrays.indexOf(MoreMineralsMod.names, "Magnesium");
+	
 	private static final int[]	inputSlotsTop	= new int[] { 0 };
 	private static final int[]	outputSlots		= new int[] { 2, 1 };
 	private static final int[]	inputSlots		= new int[] { 1 };
@@ -193,11 +195,9 @@ public class TileEntityOreCrusher extends TileEntityInventory implements ISidedI
 			Item item = stack.getItem();
 			int metadata = stack.getItemDamage();
 			
-			boolean isMagnesiumMetadata = metadata == CSArrays.indexOf(MoreMineralsMod.allnames, "Magnesium");
-			
-			if ((item == MoreMineralsMod.ingots || item == MoreMineralsMod.dusts) && isMagnesiumMetadata)
+			if ((item == MoreMineralsMod.ingots || item == MoreMineralsMod.dusts) && metadata == MAGNESIUM_META)
 				return 1800;
-			else if (item == MoreMineralsMod.nuggets && isMagnesiumMetadata)
+			else if (item == MoreMineralsMod.nuggets && metadata == MAGNESIUM_META)
 				return 200;
 		}
 		return 0;
