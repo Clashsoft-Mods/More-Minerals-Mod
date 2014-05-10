@@ -1,11 +1,10 @@
 package clashsoft.mods.moreminerals;
 
-import java.util.Arrays;
-
 import clashsoft.cslib.minecraft.ClashsoftMod;
 import clashsoft.cslib.minecraft.block.CSBlocks;
 import clashsoft.cslib.minecraft.block.CustomBlock;
 import clashsoft.cslib.minecraft.crafting.CSCrafting;
+import clashsoft.cslib.minecraft.crafting.RepairDataTools;
 import clashsoft.cslib.minecraft.creativetab.CustomCreativeTab;
 import clashsoft.cslib.minecraft.item.CSItems;
 import clashsoft.cslib.minecraft.item.CSStacks;
@@ -15,7 +14,6 @@ import clashsoft.cslib.minecraft.item.datatools.*;
 import clashsoft.cslib.minecraft.update.CSUpdate;
 import clashsoft.cslib.minecraft.util.CSConfig;
 import clashsoft.cslib.util.CSArrays;
-import clashsoft.cslib.util.CSLog;
 import clashsoft.cslib.util.CSString;
 import clashsoft.mods.moreminerals.block.*;
 import clashsoft.mods.moreminerals.common.MMMProxy;
@@ -29,7 +27,6 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 import net.minecraft.block.material.Material;
@@ -39,7 +36,6 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.config.Configuration;
 
 @Mod(modid = MoreMineralsMod.MODID, name = MoreMineralsMod.NAME, version = MoreMineralsMod.VERSION)
 public class MoreMineralsMod extends ClashsoftMod

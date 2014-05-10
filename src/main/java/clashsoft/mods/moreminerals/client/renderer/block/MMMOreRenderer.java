@@ -1,17 +1,11 @@
 package clashsoft.mods.moreminerals.client.renderer.block;
 
-import org.lwjgl.opengl.GL11;
-
-import clashsoft.mods.moreminerals.MoreMineralsMod;
 import clashsoft.mods.moreminerals.block.IBlockOre;
-import clashsoft.mods.moreminerals.block.OreHelper;
 import clashsoft.mods.moreminerals.client.MMMClientProxy;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.init.Blocks;
 import net.minecraft.world.IBlockAccess;
 
 public class MMMOreRenderer implements ISimpleBlockRenderingHandler

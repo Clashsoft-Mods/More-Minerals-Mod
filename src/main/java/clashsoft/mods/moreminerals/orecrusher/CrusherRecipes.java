@@ -1,12 +1,6 @@
 package clashsoft.mods.moreminerals.orecrusher;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-
 import clashsoft.cslib.minecraft.crafting.ExperienceRecipeManager;
-import clashsoft.cslib.minecraft.crafting.SimpleRecipeManager;
-import clashsoft.cslib.minecraft.item.CSStacks;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
