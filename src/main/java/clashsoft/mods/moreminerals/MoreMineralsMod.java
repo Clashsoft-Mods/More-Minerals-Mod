@@ -1,11 +1,11 @@
 package clashsoft.mods.moreminerals;
 
-import clashsoft.cslib.minecraft.ClashsoftMod;
 import clashsoft.cslib.minecraft.block.CSBlocks;
 import clashsoft.cslib.minecraft.block.CustomBlock;
 import clashsoft.cslib.minecraft.crafting.CSCrafting;
 import clashsoft.cslib.minecraft.crafting.RepairDataTools;
 import clashsoft.cslib.minecraft.creativetab.CustomCreativeTab;
+import clashsoft.cslib.minecraft.init.ClashsoftMod;
 import clashsoft.cslib.minecraft.item.CSItems;
 import clashsoft.cslib.minecraft.item.CSStacks;
 import clashsoft.cslib.minecraft.item.CustomItem;
