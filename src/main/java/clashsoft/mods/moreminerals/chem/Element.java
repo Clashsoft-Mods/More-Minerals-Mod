@@ -4,8 +4,8 @@ import static clashsoft.mods.moreminerals.chem.ElementClass.SPECIAL;
 
 import java.util.Arrays;
 
+import clashsoft.cslib.math.CSMath;
 import clashsoft.cslib.util.CSString;
-import clashsoft.cslib.util.CSUtil;
 import clashsoft.mods.moreminerals.world.GenCondition;
 import clashsoft.mods.moreminerals.world.IGenCondition;
 
@@ -106,7 +106,7 @@ public class Element
 					colors = new int[len];
 					for (int j = 0; j < len; j++)
 					{
-						colors[j] = CSUtil.tryParse(colorsS[j], 16, -1);
+						colors[j] = CSMath.parseInt(colorsS[j], 16, -1);
 					}
 				}
 				catch (Exception ignored)
@@ -120,7 +120,11 @@ public class Element
 		}
 		
 		Element element;
-		if (number >= PeriodicTable.VANILLA_LOW && number < PeriodicTable.VANILLA_HIGH)
+		if (number >= 0 && number < PeriodicTable.VANILLA_LOW)
+		{
+			element = new Element(number, name, symbol, period, group, elementClass);
+		}
+		else if (number >= PeriodicTable.VANILLA_LOW && number < PeriodicTable.VANILLA_HIGH)
 		{
 			element = new VanillaElement(number, name, symbol);
 		}

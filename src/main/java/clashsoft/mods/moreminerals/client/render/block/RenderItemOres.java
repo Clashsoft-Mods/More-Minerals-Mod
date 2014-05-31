@@ -1,7 +1,5 @@
 package clashsoft.mods.moreminerals.client.render.block;
 
-import org.lwjgl.opengl.GL11;
-
 import clashsoft.mods.moreminerals.item.ItemBlockOres;
 
 import net.minecraft.block.Block;
@@ -27,7 +25,7 @@ public class RenderItemOres implements IItemRenderer
 		Block block = ores.getBlock(stack);
 		int color = ores.getColorFromItemStack(stack, 0);
 		
-		//renderBlock.renderBlockAsItem(block, 0, 1F);
+		renderBlock.renderBlockAsItem(block, 0, 1F);
 		if (color != -1)
 		{
 			Tessellator.instance.setColorOpaque_I(color);

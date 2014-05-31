@@ -3,7 +3,7 @@ package clashsoft.mods.moreminerals.world;
 import java.util.HashSet;
 import java.util.Set;
 
-import clashsoft.cslib.util.CSUtil;
+import clashsoft.cslib.math.CSMath;
 
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
@@ -46,11 +46,11 @@ public class GenCondition implements IGenCondition
 			{
 				if (arg.startsWith("h<"))
 				{
-					gc.yMax = CSUtil.tryParse(arg.substring(2), -1);
+					gc.yMax = CSMath.parseInt(arg.substring(2), -1);
 				}
 				else if (arg.startsWith("h>"))
 				{
-					gc.yMin = CSUtil.tryParse(arg.substring(2), -1);
+					gc.yMin = CSMath.parseInt(arg.substring(2), -1);
 				}
 				else if (arg.startsWith("b="))
 				{

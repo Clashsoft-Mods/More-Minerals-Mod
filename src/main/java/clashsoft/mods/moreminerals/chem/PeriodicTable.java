@@ -25,6 +25,8 @@ public class PeriodicTable
 	/** The elements. */
 	private static final Element[]	elements			= new Element[SIZE];
 	
+	public static final Element		VOID				= new Element(0, "void", "_", 0, 0, ElementClass.SPECIAL).setColors(0xFFFFFF);
+	
 	public static Element[] getElements()
 	{
 		return elements;
@@ -32,7 +34,8 @@ public class PeriodicTable
 	
 	public static Element get(int number)
 	{
-		return elements[number];
+		Element e = elements[number];
+		return e == null ? VOID : e;
 	}
 	
 	protected static void set(int number, Element element)
@@ -89,10 +92,13 @@ public class PeriodicTable
 		
 		for (Element e : elements)
 		{
-			int i = e.getColor(var);
-			r += (i >> 16) & 255;
-			g += (i >> 8) & 255;
-			b += (i >> 0) & 255;
+			if (e != null)
+			{
+				int i = e.getColor(var);
+				r += (i >> 16) & 255;
+				g += (i >> 8) & 255;
+				b += (i >> 0) & 255;
+			}
 		}
 		r /= len;
 		g /= len;

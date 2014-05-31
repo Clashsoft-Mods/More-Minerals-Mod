@@ -22,9 +22,9 @@ import net.minecraft.world.World;
 
 public class BlockOres extends BlockContainer
 {
-	public Map<String, IIcon>	icons	= new HashMap();
+	public Map<String, IIcon>	icons;
 	
-	public TileEntityOres temp;
+	public TileEntityOres		temp;
 	
 	public BlockOres()
 	{
@@ -93,6 +93,8 @@ public class BlockOres extends BlockContainer
 	@Override
 	public void registerBlockIcons(IIconRegister iconRegister)
 	{
+		this.icons = new HashMap();
+		
 		for (int i = 1; i < PeriodicTable.SIZE; i++)
 		{
 			Element e = PeriodicTable.get(i);
