@@ -14,7 +14,6 @@ import clashsoft.mods.moreminerals.tileentity.TileEntityOres;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
-import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
@@ -36,8 +35,7 @@ public class MoreMineralsMod extends ClashsoftMod
 	@Instance(MODID)
 	public static MoreMineralsMod	INSTANCE;
 	
-	@SidedProxy(clientSide = "clashsoft.mods.moreminerals.client.MMMClientProxy", serverSide = "clashsoft.mods.moreminerals.common.MMMProxy")
-	public static MMMProxy			proxy;
+	public static MMMProxy			proxy				= createProxy("clashsoft.mods.moreminerals.client.MMMClientProxy", "clashsoft.mods.moreminerals.common.MMMProxy");
 	
 	public static int[]				overworldGen		= new int[] { 12, 14, 20, 16, 24, 24, 24, 24, 16, 16 };
 	public static int[]				overworldGenVanilla	= new int[] { 128, 16, 32, 32, 64, 32, 16 };
